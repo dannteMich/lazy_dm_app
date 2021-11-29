@@ -1,9 +1,15 @@
 import logo from './logo.svg';
+import LoginView from './Login/LoginView';
+
 import './App.css';
+import 'antd/dist/antd.css';
 
 function App() {
   return (
     <div className="App">
+      <div>
+        <LoginView /> 
+      </div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
