@@ -1,7 +1,8 @@
 import './firebase/firebase'
-
 import React from 'react';
+
 import {Layout} from 'antd'
+import {Routes, Route} from 'react-router-dom'
 
 import {AuthProvider} from './contexts/AuthContext'
 
@@ -12,6 +13,7 @@ import TopMenu from './TopMenu.jsx'
 
 import './App.css';
 import 'antd/dist/antd.css';
+import SignupView from './Login/Signup';
 
 function App() {
 
@@ -23,9 +25,13 @@ function App() {
           <TopMenu />
         </Layout.Header>
         <Layout.Content>
-          <div>
-            <LoginView /> 
-          </div>
+          
+          <Routes>
+            
+            <Route path="/login" element={<LoginView />} />  
+            <Route path="/signup" element={<SignupView />} />          
+          
+          </Routes>
           
         </Layout.Content>
       </Layout>

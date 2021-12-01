@@ -16,23 +16,16 @@ export function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = useState()
     const auth = getAuth()
 
-    function signup(email, password, onSuccess=null, onError=null) {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(onSuccess || (cred => console.log(cred.user.email)))
-            .catch(onError || (e => console.log(e)))
+    function signup(email, password) {
+        return createUserWithEmailAndPassword(auth, email, password)
     }
     
-    function loginWithEmailAndPassword(email, password, onSuccess=null, onError=null) {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(onSuccess || (cred => console.log(cred.user.email)))
-            .catch(onError || (e => console.log(e)))
-            
+    function loginWithEmailAndPassword(email, password) {
+        return signInWithEmailAndPassword(auth, email, password)            
     }
 
-    function logout(onSuccess=null, onError=null) {
-        signOut(auth)
-            .then(onSuccess || (cred => console.log(cred.user.email)))
-            .catch(onError || (e => console.log(e)))
+    function logout() {
+        return signOut(auth)
     }
 
     useEffect(() => {
