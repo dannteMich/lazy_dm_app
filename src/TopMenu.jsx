@@ -8,9 +8,9 @@ function UserItem() {
     const navigate = useNavigate()
 
     if (!currentUser) {
-        return <Link to="/login">
+        return <span onClick={() => navigate("/login")}>
             Login
-        </Link>
+        </span>
     }
     
     const onLogout = () => logout().then(() => navigate("/"))

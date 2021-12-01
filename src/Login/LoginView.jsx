@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Button, Input, Typography, Form} from 'antd'
 
 import {useAuth} from '../contexts/AuthContext'
@@ -9,12 +9,13 @@ const {Title} = Typography
 
 
 function LoginView() {
-    
+    const [loading, setLoading] = useState(false)
     const {loginWithEmailAndPassword} = useAuth()
     const navigate = useNavigate()
     
     const finish = values => {
         const {email, password} = values
+        setLoading(true)
         loginWithEmailAndPassword(email, password)
             .then(() => navigate("/"))
     }
@@ -31,7 +32,7 @@ function LoginView() {
             </Form.Item>
 
             <Form.Item>
-                <Button htmlType="submit">Submit</Button>
+                <Button htmlType="submit" disabled={loading}>Submit</Button>
             </Form.Item>
 
         </Form>
