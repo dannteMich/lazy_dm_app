@@ -1,30 +1,35 @@
-import logo from './logo.svg';
+import './firebase/firebase'
+
+import React from 'react';
+import {Layout} from 'antd'
+
+import {AuthProvider} from './contexts/AuthContext'
+
+
 import LoginView from './Login/LoginView';
+// import SignupView from './Login/Signup';
+import TopMenu from './TopMenu.jsx'
 
 import './App.css';
 import 'antd/dist/antd.css';
 
 function App() {
+
+  
   return (
-    <div className="App">
-      <div>
-        <LoginView /> 
-      </div>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Layout className="App">
+        <Layout.Header>
+          <TopMenu />
+        </Layout.Header>
+        <Layout.Content>
+          <div>
+            <LoginView /> 
+          </div>
+          
+        </Layout.Content>
+      </Layout>
+    </AuthProvider>
   );
 }
 

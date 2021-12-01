@@ -7,19 +7,16 @@ import {useAuth} from '../contexts/AuthContext'
 const {Title} = Typography
 
 
+function SignupView() {
+    const {signup} = useAuth()
 
-function LoginView() {
-    
-    const {loginWithEmailAndPassword} = useAuth()
-    
-    
     const finish = values => {
         const {email, password} = values
-        loginWithEmailAndPassword(email, password)
+        signup(email, password)
     }
 
     return <div style={{maxWidth: "500px", margin: "20px auto"}}>
-        <Title>Login</Title>
+        <Title>Sign Up</Title>
         <Form onFinish={finish}>
             <Form.Item label="Email" name="email" rules={[{required: true}]}>
                 <Input />
@@ -39,4 +36,4 @@ function LoginView() {
     
 }
 
-export default LoginView
+export default SignupView
