@@ -1,5 +1,8 @@
 import React from "react";
+
+import {BrowserRouter as Router} from 'react-router-dom'
 import 'antd/dist/antd.css'
+
 
 import {NotAllowdNotice} from './ProtectedPath'
 
@@ -8,9 +11,12 @@ export default {
     component: NotAllowdNotice,
 }
 
-const Template = (args) => <NotAllowdNotice {...args} />;
+const Template = (args) => <Router>
+    <NotAllowdNotice {...args} />
+    </Router>
 
 export const Basic = Template.bind({})
 Basic.args = {
-    loginPath: "."
+    loginPath: ".",
+    signupPath: "."
 }
