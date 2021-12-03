@@ -1,7 +1,7 @@
 import React from "react";
 import {Menu} from 'antd'
 import { useAuth } from "./contexts/AuthContext";
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 function UserItem() {
     const {currentUser, logout} = useAuth()

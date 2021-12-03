@@ -7,13 +7,12 @@ import {Routes, Route} from 'react-router-dom'
 import {AuthProvider} from './contexts/AuthContext'
 
 
-import LoginView from './Login/LoginView';
-// import SignupView from './Login/Signup';
+import LoginView from './AuthComponents/LoginView';
 import TopMenu from './TopMenu.jsx'
 
 import './App.css';
 import 'antd/dist/antd.css';
-import SignupView from './Login/Signup';
+import SignupView from './AuthComponents/Signup';
 
 function App() {
 

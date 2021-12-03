@@ -1,24 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Button, Input, Typography, Form} from 'antd'
-import {useNavigate} from 'react-router-dom'
 
 import {useAuth} from '../contexts/AuthContext'
+import {useNavigate, Link} from 'react-router-dom'
 
-const {Title} = Typography
+const {Title, Paragraph} = Typography
 
 
-function SignupView() {
-    const {signup} = useAuth()
+
+function LoginView() {
+    const [loading, setLoading] = useState(false)
+    const {loginWithEmailAndPassword} = useAuth()
     const navigate = useNavigate()
-
+    
     const finish = values => {
         const {email, password} = values
-        signup(email, password)
+        setLoading(true)
+        loginWithEmailAndPassword(email, password)
             .then(() => navigate("/"))
     }
 
     return <div style={{maxWidth: "500px", margin: "20px auto"}}>
-        <Title>Sign Up</Title>
+        <Title>Login</Title>
         <Form onFinish={finish}>
             <Form.Item label="Email" name="email" rules={[{required: true}]}>
                 <Input />
@@ -28,9 +31,14 @@ function SignupView() {
                 <Input.Password />
             </Form.Item>
 
+            <Paragraph>
+                Don't have an account it? <Link to="/signup">Create an account</Link>
+            </Paragraph>
+
             <Form.Item>
-                <Button htmlType="submit">Submit</Button>
+                <Button htmlType="submit" disabled={loading}>Submit</Button>
             </Form.Item>
+            
 
         </Form>
         
@@ -38,4 +46,4 @@ function SignupView() {
     
 }
 
-export default SignupView
+export default LoginView
