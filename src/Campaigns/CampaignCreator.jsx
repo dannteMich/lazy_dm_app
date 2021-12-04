@@ -23,7 +23,11 @@ export function CampaignCreator() {
                 updated: serverTimestamp() 
             })
             .then(() => alert(`המשחק $ {name} נוצר בהצלחה`)) // TODO: navigate to Single Campaign view
-            .finally(setLoading(false))
+            .catch(e => {
+                console.log(e);
+                alert(`Error: ${JSON.stringify(e)}`)
+                setLoading(false)
+            })
     }
 
 

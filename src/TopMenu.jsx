@@ -27,7 +27,7 @@ function TopMenu() {
             <Link to="/campaigns">My Campagins</Link>
         </Menu.Item>
     ]
-    
+    // TODO: remove the MAIN button
     return <div>
         <Menu mode="horizontal" theme="dark">
             <Menu.Item key="main" onClick={() => navigate("/")}>
