@@ -1,7 +1,12 @@
 import React from "react";
+import {Row, Col} from 'antd'
+import CreateCampaignView from "./CreateCampaignView";
 
 export default function MyCampaignsView() {
-    return <div>
-        My Campaigns View
-    </div>
+    return <Row >
+        <Col span={12}>My Campaigns View</Col>
+        <Col span={12}>
+            <CreateCampaignView />
+        </Col>
+    </Row>
 }
