@@ -2,6 +2,7 @@
 
 
 import { initializeApp } from "firebase/app";
+import {getFirestore} from "firebase/firestore"
 
 // import { getAnalytics } from "firebase/analytics";
 
@@ -14,29 +15,28 @@ import { initializeApp } from "firebase/app";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-// TODO: use env.local for this
 // TODO find a way to run this always
 const firebaseConfig = {
 
-  apiKey: "AIzaSyCXFbLcLhHaIQ36xtN8Ty_z0y6uV54AOao",
+  apiKey: process.env.REACT_APP_API_KEY,
 
-  authDomain: "lazy-companion.firebaseapp.com",
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
 
-  projectId: "lazy-companion",
+  projectId: process.env.REACT_APP_PROJECT_ID,
 
-  storageBucket: "lazy-companion.appspot.com",
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
 
-  messagingSenderId: "897226292491",
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 
-  appId: "1:897226292491:web:c246b52e2b413ef07b760e",
+  appId: process.env.REACT_APP_APP_ID,
 
-  measurementId: "G-3PMMVLY3NJ"
+  measurementId: process.env.REACT_APP_MEASUEMENT_ID
 
 };
 
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore()
 
 // const analytics = getAnalytics(app);
-export default app;
