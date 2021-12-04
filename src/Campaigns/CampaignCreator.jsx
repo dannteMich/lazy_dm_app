@@ -37,31 +37,29 @@ export function CampaignCreator() {
 
 export function CreateCampaignView({ handleCreate, loading }) {
 
-    return <ConfigProvider direction="rtl">
-        <div style={{ margin: "15px 0" }}>
-            <Title level={3} >יצירת משחק חדש</Title>
-            <Form onFinish={handleCreate} style={{ margin: '15px' }}>
-                <Form.Item
-                    label="שם המשחק" name="name" required
-                    rules={[{ required: true, message: "יש לספק שם למשחק" }]}>
-                    <Input placeholder="שם קצר לתיאור המשחק" />
-                </Form.Item>
+    return <div style={{ margin: "15px 0" }}>
+        <Title level={3} >יצירת משחק חדש</Title>
+        <Form onFinish={handleCreate} style={{ margin: '15px' }}>
+            <Form.Item
+                label="שם המשחק" name="name" required
+                rules={[{ required: true, message: "יש לספק שם למשחק" }]}>
+                <Input placeholder="שם קצר לתיאור המשחק" />
+            </Form.Item>
 
-                <Form.Item label="תיאור המשחק" name="description">
-                    <Input.TextArea placeholder="כמה שורות של הסבר על העולם והמשחק" />
-                </Form.Item>
+            <Form.Item label="תיאור המשחק" name="description">
+                <Input.TextArea placeholder="כמה שורות של הסבר על העולם והמשחק" />
+            </Form.Item>
 
-                <Form.Item>
-                    <Button htmlType="submit" type="primary" style={{ minWidth: "90px" }} disabled={loading}>
-                        צור
-                    </Button>
-                </Form.Item>
+            <Form.Item>
+                <Button htmlType="submit" type="primary" style={{ minWidth: "90px" }} disabled={loading}>
+                    צור
+                </Button>
+            </Form.Item>
 
-                {loading && <Spin size="large"/>}
+            {loading && <Spin size="large"/>}
 
-            </Form>
-        </div>
-    </ConfigProvider>
+        </Form>
+    </div>
 }
 CreateCampaignView.propTypes = {
     loading: PropTypes.bool.isRequired,
