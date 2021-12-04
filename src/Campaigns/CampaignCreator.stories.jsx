@@ -4,7 +4,7 @@ import {CreateCampaignView} from "./CampaignCreator";
 
 
 export default {
-    title: 'CreateCampaignView',
+    title: 'Campaigns/CreateCampaignView',
     component: CreateCampaignView,
     argTypes: {
         handleCreate: {action: "created"}

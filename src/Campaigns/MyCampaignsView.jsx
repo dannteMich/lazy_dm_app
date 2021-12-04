@@ -30,8 +30,6 @@ export function CampaignsList() {
 
     if (error) return `Error: ${error}`
     if (!data) return "Loading..."
-
-    // return JSON.stringify(data)
     
     return data.map((d, i) => <CampaignCard key={i} name={d.name} description={d.description} />)
 
