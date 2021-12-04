@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types'
 import { addDoc, serverTimestamp, collection } from 'firebase/firestore'
 
-import { ConfigProvider, Form, Input, Button, Typography, Spin } from 'antd'
+import { Form, Input, Button, Typography, Spin } from 'antd'
 
 import { useAuth } from '../contexts/AuthContext'
 import { db } from '../firebase/firebase'
@@ -56,7 +56,9 @@ export function CreateCampaignView({ handleCreate, loading }) {
                 </Button>
             </Form.Item>
 
-            {loading && <Spin size="large"/>}
+            <div style={{textAlign: "center"}}>
+                {loading && <Spin size="large"/>}
+            </div>
 
         </Form>
     </div>

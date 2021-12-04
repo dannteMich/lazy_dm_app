@@ -11,7 +11,6 @@ import LoginView from './AuthComponents/LoginView';
 import TopMenu from './TopMenu.jsx'
 import MyCampaignsView from './Campaigns/MyCampaignsView';
 
-import './App.css';
 import 'antd/dist/antd.css';
 import SignupView from './AuthComponents/Signup';
 import ProtctedPath from './AuthComponents/ProtectedPath';

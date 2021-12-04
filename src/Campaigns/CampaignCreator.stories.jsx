@@ -1,5 +1,6 @@
 import React from "react";
 import {CreateCampaignView} from "./CampaignCreator";
+import { ConfigProvider } from "antd";
 
 
 
@@ -11,7 +12,9 @@ export default {
     }
 }
 
-const Template = (args) => <CreateCampaignView {...args} />
+const Template = (args) => <ConfigProvider direction="rtl">
+        <CreateCampaignView {...args} />
+    </ConfigProvider>
 
 export const Basic = Template.bind({})
 Basic.args = {
