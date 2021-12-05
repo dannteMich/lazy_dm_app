@@ -12,12 +12,14 @@ import CampaignCard from "./CampaignCard";
 
 export function CampaignListView({data})
 {
-    const inner = data.map((d, i) => <Col key={i} style={{margin: "10px"}}><CampaignCard 
-        
-        name={d.name} 
-        description={d.description} 
-        created={d.create && d.created.toDate()}
-    /></Col>)
+    const inner = data.map((d, i) => {
+        return <Col key={i} style={{margin: "10px"}}>
+            <CampaignCard 
+                name={d.name} 
+                description={d.description} 
+                created={d.created && d.created.toDate()}
+            />
+        </Col>})
     return <Row>
         {inner}
     </Row>
@@ -26,8 +28,8 @@ CampaignListView.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
         description: PropTypes.string,
-        created: PropTypes.instanceOf(Date),
-        updated: PropTypes.instanceOf(Date),
+        created: PropTypes.object,
+        updated: PropTypes.object,
     })).isRequired
 }
 
