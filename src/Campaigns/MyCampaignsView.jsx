@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types'
 import {getDocs, collection} from 'firebase/firestore'
 
 import {Row, Col, ConfigProvider, Button, Modal} from 'antd'
+import _ from 'lodash'
 
 import { useAuth } from '../contexts/AuthContext'
 import {db} from '../firebase/firebase'
@@ -35,15 +36,18 @@ CampaignListView.propTypes = {
 
 export function CampaignsList() {
     const {currentUser} = useAuth()
-    const [data, setData] = useState([])
+    const [data, setData] = useState()
     const [error, setError] = useState()
 
-    getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns'))
+    useEffect(() => {
+        getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns'))
         .then(querySnapshot => setData(querySnapshot.docs.map(d => d.data())))
         .catch(e => setError(e))
+    }, [currentUser])
 
     if (error) return `Error: ${error}`
     if (!data) return "Loading..."
+    if (_.isEmpty(data)) return "You don't have games yet"
     
     return <CampaignListView data={data} />
 
