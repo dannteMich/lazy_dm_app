@@ -13,15 +13,16 @@ import CampaignCard from "./CampaignCard";
 
 export function CampaignListView({data})
 {
-    const inner = data.map((d, i) => {
-        return <Col key={i} style={{margin: "10px"}}>
-            <CampaignCard 
-                name={d.name} 
-                description={d.description} 
-                created={d.created && d.created.toDate()}
-            />
+    const inner = data.map(d => {return {
+        name: d.name,
+        description: d.description, 
+        created: d.created.toDate(),
+        updated: d.updated.toDate(),
+    }}).sort((d1, d2) => d1.updated < d2.updated).map((d, i) => {
+        return <Col key={i} style={{margin: "10px", width: "500px"}}>
+            <CampaignCard {...d} />
         </Col>})
-    return <Row>
+    return <Row justify="center">
         {inner}
     </Row>
 }
