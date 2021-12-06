@@ -3,18 +3,13 @@ import PropTypes from 'prop-types'
 
 import { Card } from 'antd';
 
-export default function CampaignCard({ name, description, created }) {
-    const extra = created ?
-        `${created.getDate()}.${created.getMonth()}.${created.getFullYear()}` : 
-        "No creation date"
+export default function CampaignCard({ name, description }) {
 
-    return <Card span={{s: 12, l: 4}} title={name} extra={extra} style={{maxWidth: 700, minWidth: 300}}>
+    return <Card span={{s: 12, l: 4}} title={name} style={{maxWidth: 700, minWidth: 300}}>
         {description}
     </Card>;
 }
 CampaignCard.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
-    created: PropTypes.instanceOf(Date),
-    updated: PropTypes.instanceOf(Date),
 }

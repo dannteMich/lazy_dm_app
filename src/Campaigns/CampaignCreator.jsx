@@ -21,8 +21,6 @@ export function CampaignCreator() {
         addDoc(
             collection(db, "accounts", currentUser.uid, 'campaigns'), { 
                 name, description, 
-                created: serverTimestamp(), 
-                updated: serverTimestamp() 
             })
             .then(docRef => navigate(`/campaigns/${docRef.id}`))
             .catch(e => {

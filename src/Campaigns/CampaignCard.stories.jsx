@@ -15,6 +15,5 @@ const Template = (args) => <ConfigProvider direction="rtl">
 export const Basic = Template.bind({})
 Basic.args = {
     name: "משחק כלשהו",
-    created: new Date(),
     description: "פה זה התיאור"
 }
