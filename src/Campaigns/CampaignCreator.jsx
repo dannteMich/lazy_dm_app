@@ -6,6 +6,7 @@ import { Form, Input, Button, Typography, Spin } from 'antd'
 
 import { useAuth } from '../contexts/AuthContext'
 import { db } from '../firebase/firebase'
+import { useNavigate } from "react-router";
 
 
 const { Title } = Typography
@@ -13,6 +14,7 @@ const { Title } = Typography
 export function CampaignCreator() {
     const [loading, setLoading] = useState(false)
     const { currentUser } = useAuth()
+    const navigate = useNavigate()
 
     function createCampaign({name, description=''}) {
         setLoading(true)
@@ -22,7 +24,7 @@ export function CampaignCreator() {
                 created: serverTimestamp(), 
                 updated: serverTimestamp() 
             })
-            .then(() => alert(`המשחק $ {name} נוצר בהצלחה`)) // TODO: navigate to Single Campaign view
+            .then(docRef => navigate(`/campaigns/${docRef.id}`))
             .catch(e => {
                 console.log(e);
                 alert(`Error: ${JSON.stringify(e)}`)

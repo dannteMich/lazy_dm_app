@@ -1,7 +1,7 @@
 import './firebase/firebase'
 import React from 'react';
 
-import {Layout} from 'antd'
+import {Layout, ConfigProvider} from 'antd'
 import {Routes, Route} from 'react-router-dom'
 
 import {AuthProvider} from './contexts/AuthContext'
@@ -13,7 +13,8 @@ import MyCampaignsView from './Campaigns/MyCampaignsView';
 
 import 'antd/dist/antd.css';
 import SignupView from './AuthComponents/Signup';
-import ProtctedPath from './AuthComponents/ProtectedPath';
+import ProtctedPath from './AuthComponents/ProtectedPath'
+import SingleCampaignEditor from './Campaigns/SingleCampaignEditor';
 
 function App() {
 
@@ -25,19 +26,25 @@ function App() {
           <TopMenu />
         </Layout.Header>
         <Layout.Content style={{minHeight: "93vh"}}>
-          
-          <Routes>
-            
-            <Route path="/login" element={<LoginView />} />  
-            <Route path="/signup" element={<SignupView />} />          
-            <Route path="/campaigns" element={
-              <ProtctedPath>
-                <MyCampaignsView />
+          <ConfigProvider direction="rtl">
+            <Routes>
+              
+              <Route path="/login" element={<LoginView />} />  
+              <Route path="/signup" element={<SignupView />} />          
+              <Route path="/campaigns" element={
+                <ProtctedPath>
+                  <MyCampaignsView />
+                </ProtctedPath>  
+              }/>
+              <Route path="/campaigns/:campaignId" element={
+                <ProtctedPath>
+                  <SingleCampaignEditor />
               </ProtctedPath>  
-            }/>
-          
-            <Route path="/" element={<div>This is the main Page</div>} />
-          </Routes>
+              }/>
+            
+              <Route path="/" element={<div>This is the main Page</div>} />
+            </Routes>
+          </ConfigProvider>
           
         </Layout.Content>
       </Layout>

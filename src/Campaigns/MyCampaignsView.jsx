@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types'
-import {getDocs, collection} from 'firebase/firestore'
+import { getDocs, collection } from 'firebase/firestore'
 
-import {Row, Col, ConfigProvider, Button, Modal} from 'antd'
+import { Row, Col, Button, Modal } from 'antd'
 import _ from 'lodash'
 
 import { useAuth } from '../contexts/AuthContext'
-import {db} from '../firebase/firebase'
-import {CampaignCreator} from "./CampaignCreator";
+import { db } from '../firebase/firebase'
+import { CampaignCreator } from "./CampaignCreator";
 import CampaignCard from "./CampaignCard";
+import { Link } from "react-router-dom";
+import { LoadingSpinner } from "../common/Loading";
 
-
-export function CampaignListView({data})
-{
-    const inner = data.map(d => {return {
-        name: d.name,
-        description: d.description, 
-        created: d.created.toDate(),
-        updated: d.updated.toDate(),
-    }}).sort((d1, d2) => d1.updated < d2.updated).map((d, i) => {
-        return <Col key={i} style={{margin: "10px", width: "500px"}}>
-            <CampaignCard {...d} />
-        </Col>})
+export function CampaignListView({ data }) {
+    const inner = data.map(d => {
+        return {
+            ...d,
+            created: d.created.toDate(),
+            updated: d.updated.toDate(),
+        }
+    }).sort((d1, d2) => d1.updated < d2.updated).map((d, i) => {
+        return <Col key={i} style={{ margin: "10px", width: "500px" }}>
+            <Link to={`./${d.id}`}>
+                <CampaignCard {...d} />
+            </Link>
+        </Col>
+    })
     return <Row justify="center">
         {inner}
     </Row>
@@ -35,43 +39,50 @@ CampaignListView.propTypes = {
     })).isRequired
 }
 
-export function CampaignsList() {
-    const {currentUser} = useAuth()
-    const [data, setData] = useState()
-    const [error, setError] = useState()
-
-    useEffect(() => {
-        getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns'))
-        .then(querySnapshot => setData(querySnapshot.docs.map(d => d.data())))
-        .catch(e => setError(e))
-    }, [currentUser])
-
-    if (error) return `Error: ${error}`
-    if (!data) return "Loading..."
-    if (_.isEmpty(data)) return "You don't have games yet"
-    
-    return <CampaignListView data={data} />
+export function NoGamesYet() {
+    return <div style={{ margin: "50px" }}>
+        <p dir="rtl">עוד לא יצרת אף משחק.</p>
+        <CampaignCreator />
+    </div>
 
 }
 
 export default function MyCampaignsView() {
     const [modalVisible, setModalVisible] = useState(false)
-    
+    const { currentUser } = useAuth()
+    const [data, setData] = useState()
+    const [error, setError] = useState()
+
     const closeModal = () => setModalVisible(false)
     const openModal = () => setModalVisible(true)
 
-    return <ConfigProvider direction="rtl">
+    useEffect(() => {
+        getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns'))
+            .then(querySnapshot => setData(querySnapshot.docs.map(d => {
+                return {
+                    id: d.id,
+                    ...d.data()
+                }
+            })))
+            .catch(e => setError(e))
+    }, [currentUser])
+
+    if (error) return JSON.stringify(error)
+    if (!data) return <LoadingSpinner />
+    if (_.isEmpty(data)) return <NoGamesYet />
+
+    return <div>
         <Modal visible={modalVisible} onCancel={closeModal} footer={null}>
             <CampaignCreator />
         </Modal>
-        
+
         <Row justify="center">
             <Col>
-                <Button type="primary" style={{margin: "40px"}} size="large" onClick={openModal}>
+                <Button type="primary" style={{ margin: "40px" }} size="large" onClick={openModal}>
                     צור משחק חדש
                 </Button>
-            </Col>    
+            </Col>
         </Row>
-        <CampaignsList />
-    </ConfigProvider>
+        <CampaignListView data={data} />
+    </div>
 }
