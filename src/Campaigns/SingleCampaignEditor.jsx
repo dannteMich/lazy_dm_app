@@ -15,10 +15,10 @@ export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescr
     return <Row>
         <Col span={12}>
             <div style={{ padding: "30px" }}>
-                <Title level={2} editable={{ onChange: onNameUpdate, icon: EditNameIcon, }}>
+                <Title level={2} editable={{ onChange: onNameUpdate, icon: EditNameIcon, tooltip: "שינוי שם משחק"}}>
                     {name}
                 </Title>
-                <Paragraph editable={{ onChange: onDescriptionUpdate, autoSize: { minRows: 3 } }}>
+                <Paragraph editable={{ onChange: onDescriptionUpdate, autoSize: { minRows: 3 }, tooltip: "שינוי תאור משחק"}}>
                     {description}
                 </Paragraph>
             </div>

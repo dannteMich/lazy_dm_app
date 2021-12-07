@@ -7,7 +7,7 @@ import 'antd/dist/antd.css'
 import {NotAllowdNotice} from './ProtectedPath'
 
 export default {
-    title: 'NotAllowedPath',
+    title: 'Common/NotAllowedNotice',
     component: NotAllowdNotice,
 }
 
