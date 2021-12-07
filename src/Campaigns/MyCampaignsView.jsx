@@ -11,6 +11,7 @@ import { CampaignCreator } from "./CampaignCreator";
 import CampaignCard from "./CampaignCard";
 import { Link } from "react-router-dom";
 import { LoadingSpinner } from "../common/Loading";
+import Campaign from "./campaign";
 
 export function CampaignListView({ data }) {
     const inner = data.map((d, i) => {
@@ -49,14 +50,15 @@ export default function MyCampaignsView() {
     const openModal = () => setModalVisible(true)
 
     useEffect(() => {
-        getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns'))
-            .then(querySnapshot => setData(querySnapshot.docs.map(d => {
-                return {
-                    id: d.id,
-                    ...d.data()
-                }
-            })))
-            .catch(e => setError(e))
+        getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns')
+            .withConverter(Campaign.firestoreConvertor))
+        .then(querySnapshot => setData(querySnapshot.docs.map(d => {
+            return {
+                id: d.id,
+                ...d.data()
+            }
+        })))
+        .catch(e => setError(e))
     }, [currentUser])
 
     if (error) return JSON.stringify(error)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types'
-import { doc, getDoc, onSnapshot, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore'
 
 import { db } from '../firebase/firebase'
 import { useAuth } from "../contexts/AuthContext";
@@ -8,6 +8,7 @@ import { useParams } from "react-router";
 import { LoadingSpinner } from "../common/Loading";
 import { Row, Col, Typography } from "antd";
 import { EditTwoTone } from '@ant-design/icons'
+import Campaign from "./campaign";
 
 const { Title, Paragraph } = Typography
 export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate }) {
@@ -41,7 +42,7 @@ export default function SingleCampaignEditor() {
     const [campaign, setCampaign] = useState()
     const [error, setError] = useState()
 
-    const campaignRef = doc(db, 'accounts', currentUser.uid, 'campaigns', campaignId)
+    const campaignRef = doc(db, 'accounts', currentUser.uid, 'campaigns', campaignId).withConverter(Campaign.firestoreConvertor)
 
     useEffect(() => {
         return onSnapshot(campaignRef, d => {

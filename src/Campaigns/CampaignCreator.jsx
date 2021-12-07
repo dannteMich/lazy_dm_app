@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types'
-import { addDoc, serverTimestamp, collection } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore'
 
 import { Form, Input, Button, Typography, Spin } from 'antd'
 
 import { useAuth } from '../contexts/AuthContext'
 import { db } from '../firebase/firebase'
 import { useNavigate } from "react-router";
+import Campaign from "./campaign";
 
 
 const { Title } = Typography
@@ -19,16 +20,16 @@ export function CampaignCreator() {
     function createCampaign({name, description=''}) {
         setLoading(true)
         addDoc(
-            collection(db, "accounts", currentUser.uid, 'campaigns'), { 
-                name, description, 
-            })
-            .then(docRef => navigate(`/campaigns/${docRef.id}`))
-            .catch(e => {
-                console.log(e);
-                alert(`Error: ${JSON.stringify(e)}`)
-                
-            })
-            .finally(() => setLoading(false))
+            collection(db, "accounts", currentUser.uid, 'campaigns')
+                .withConverter(Campaign.firestoreConvertor), 
+            new Campaign(name, description))
+        .then(docRef => navigate(`/campaigns/${docRef.id}`))
+        .catch(e => {
+            console.log(e);
+            alert(`Error: ${JSON.stringify(e)}`)
+            
+        })
+        .finally(() => setLoading(false))
     }
 
 
