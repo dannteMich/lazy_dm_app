@@ -32,7 +32,6 @@ export function CampaignCreator() {
         .finally(() => setLoading(false))
     }
 
-
     return <CreateCampaignView loading={loading} handleCreate={createCampaign}/>
 }
 

@@ -14,7 +14,7 @@ export default class Session {
     }
 }
 
-export const SessionConvertor = {
+Session.firestoreConvertor = {
     toFirestore: session => {
         return {
             date: Timestamp.fromDate(session.date.toJSDate())

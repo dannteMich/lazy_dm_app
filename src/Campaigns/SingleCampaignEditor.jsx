@@ -9,6 +9,7 @@ import { LoadingSpinner } from "../common/Loading";
 import { Row, Col, Typography } from "antd";
 import { EditTwoTone } from '@ant-design/icons'
 import Campaign from "./campaign";
+import SessionCreator from "../Sessions/SessionCreator";
 
 const { Title, Paragraph } = Typography
 export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate }) {
@@ -25,7 +26,7 @@ export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescr
             </div>
         </Col>
         <Col span={12}>
-            Sessions
+            <SessionCreator />
         </Col>
     </Row>
 }
@@ -42,7 +43,8 @@ export default function SingleCampaignEditor() {
     const [campaign, setCampaign] = useState()
     const [error, setError] = useState()
 
-    const campaignRef = doc(db, 'accounts', currentUser.uid, 'campaigns', campaignId).withConverter(Campaign.firestoreConvertor)
+    const campaignRef = doc(db, 'accounts', currentUser.uid, 'campaigns', campaignId)
+        .withConverter(Campaign.firestoreConvertor)
 
     useEffect(() => {
         return onSnapshot(campaignRef, d => {
@@ -50,9 +52,7 @@ export default function SingleCampaignEditor() {
         }, e => setError(e))
     }, [campaignRef])
 
-    function updateCampaignFields(newFields) {
-        updateDoc(campaignRef, newFields)
-    }
+    const updateCampaignFields = newFields => updateDoc(campaignRef, newFields)    
 
     if (error) return JSON.stringify(error)
     if (!campaign) return <LoadingSpinner />

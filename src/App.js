@@ -15,6 +15,7 @@ import 'antd/dist/antd.css';
 import SignupView from './AuthComponents/Signup';
 import ProtctedPath from './AuthComponents/ProtectedPath'
 import SingleCampaignEditor from './Campaigns/SingleCampaignEditor';
+import { SingleSessionComponent } from './Sessions/SingleSessionEditor';
 
 function App() {
 
@@ -31,16 +32,22 @@ function App() {
               
               <Route path="/login" element={<LoginView />} />  
               <Route path="/signup" element={<SignupView />} />          
-              <Route path="/campaigns" element={
+              <Route exact path="/campaigns" element={
                 <ProtctedPath>
                   <MyCampaignsView />
                 </ProtctedPath>  
               }/>
-              <Route path="/campaigns/:campaignId" element={
+              <Route exact path="/campaigns/:campaignId" element={
                 <ProtctedPath>
                   <SingleCampaignEditor />
               </ProtctedPath>  
               }/>
+              <Route exact path="/campaigns/:campaignId/sessions/:sessionId" element={
+                <ProtctedPath>
+                  <SingleSessionComponent />
+              </ProtctedPath>  
+              }/>
+
             
               <Route path="/" element={<div>This is the main Page</div>} />
             </Routes>
