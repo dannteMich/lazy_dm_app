@@ -7,11 +7,19 @@ export function LoadingSpinner({ label, style = {}, aboveNode = null, bellowNode
         {label}
     </Typography.Title>
 
-    return <div style={{ width: "100%", textAlign: "center", margin: "100px 0", ...style }}>
-        {aboveNode}
-        {labelnode}
-        <Spin size="large" />
-        {bellowNode}
+    return <div style={{ width: "100%", textAlign: "center", margin: "90px 0", ...style }}>
+        <div style={{width: "100%"}}>
+            {aboveNode}
+        </div>
+        <div style={{width: "100%"}}>
+            {labelnode}
+        </div>
+        <div style={{width: "100%"}}>
+            <Spin size="large"  style={{margin: "15px"}}/>
+        </div>
+        <div style={{width: "100%"}}>
+            {bellowNode}
+        </div>
     </div>
 }
 LoadingSpinner.propTypes = {
