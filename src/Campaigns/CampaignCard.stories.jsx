@@ -1,6 +1,5 @@
 import React from "react";
 import CampaignCard from "./CampaignCard";
-import {ConfigProvider} from 'antd'
 
 
 export default {

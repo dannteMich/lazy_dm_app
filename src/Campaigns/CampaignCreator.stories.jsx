@@ -1,6 +1,5 @@
 import React from "react";
 import {CreateCampaignView} from "./CampaignCreator";
-import { ConfigProvider } from "antd";
 
 
 

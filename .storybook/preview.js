@@ -1,5 +1,7 @@
 import {ConfigProvider} from 'antd'
 
+import 'antd/dist/antd.css'
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

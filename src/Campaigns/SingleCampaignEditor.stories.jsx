@@ -1,7 +1,6 @@
 import React from "react";
 
 import {SingleCampaignDisplay} from './SingleCampaignEditor'
-import {ConfigProvider} from 'antd'
 
 export default {
     title: 'Campaigns/SingleCampaignDisplay',

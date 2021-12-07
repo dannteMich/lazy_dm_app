@@ -58,7 +58,7 @@ export function CreateCampaignView({ handleCreate, loading }) {
             </Form.Item>
 
             <div style={{textAlign: "center"}}>
-                {loading && <Spin size="large"/>}
+                {loading && <Spin size="large"/> /** TODO: Replace with Loading componenet */}
             </div>
 
         </Form>
