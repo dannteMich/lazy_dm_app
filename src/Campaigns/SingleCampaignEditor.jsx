@@ -63,3 +63,5 @@ export default function SingleCampaignEditor() {
         onDescriptionUpdate: (description) => updateCampaignFields({description})
     }} />
 }
+
+// TODO: allow to delete a campaign

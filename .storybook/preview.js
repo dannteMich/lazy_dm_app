@@ -1,3 +1,5 @@
+import {ConfigProvider} from 'antd'
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,3 +9,9 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [
+  (Story) => (<ConfigProvider direction="rtl">
+    <Story />
+  </ConfigProvider>),
+];

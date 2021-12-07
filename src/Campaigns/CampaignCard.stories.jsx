@@ -8,9 +8,7 @@ export default {
     component: CampaignCard,
 }
 
-const Template = (args) => <ConfigProvider direction="rtl">
-    <CampaignCard {...args} />
-</ConfigProvider>
+const Template = (args) => <CampaignCard {...args} />
 
 export const Basic = Template.bind({})
 Basic.args = {

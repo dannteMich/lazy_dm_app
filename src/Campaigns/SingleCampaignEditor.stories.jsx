@@ -12,9 +12,7 @@ export default {
     }
 }
 
-const Template = (args) => <ConfigProvider direction="rtl">
-        <SingleCampaignDisplay {...args} />
-    </ConfigProvider>
+const Template = (args) => <SingleCampaignDisplay {...args} />
 
 export const Basic = Template.bind({})
 Basic.args = {
