@@ -30,7 +30,7 @@ CampaignListView.propTypes = {
         PropTypes.instanceOf(Campaign)).isRequired
 }
 
-export function NoGamesYet() {
+export function NoCampaignsYet() {
     return <div style={{ margin: "50px" }}>
         <p dir="rtl">עוד לא יצרת אף משחק.</p>
         <CampaignCreator />
@@ -56,7 +56,7 @@ export default function MyCampaignsView() {
 
     if (error) return JSON.stringify(error)
     if (!data) return <LoadingSpinner />
-    if (_.isEmpty(data)) return <NoGamesYet />
+    if (_.isEmpty(data)) return <NoCampaignsYet />
 
     return <div>
         <Modal visible={modalVisible} onCancel={closeModal} footer={null}>
