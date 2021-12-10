@@ -20,6 +20,9 @@ Campaign.firestoreConvertor = {
     },
     fromFirestore: (snapshot, options) => {
         const {name, description} = snapshot.data(options)
-        return new Campaign(name, description)
+        const campaign = new Campaign(name, description)
+        campaign.id = snapshot.id
+        Object.defineProperty(campaign, 'id', {writable: false})
+        return campaign
     }
 }

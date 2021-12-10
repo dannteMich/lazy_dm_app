@@ -30,6 +30,7 @@ Session.firestoreConvertor = {
             data
         )
         session.id = snapshot.id
+        Object.defineProperty(session, 'id', {writable:false})
         return session
     }
 }

@@ -26,10 +26,8 @@ export function CampaignListView({ data }) {
     </Row>
 }
 CampaignListView.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string,
-    })).isRequired
+    data: PropTypes.arrayOf(
+        PropTypes.instanceOf(Campaign)).isRequired
 }
 
 export function NoGamesYet() {
@@ -52,12 +50,7 @@ export default function MyCampaignsView() {
     useEffect(() => {
         getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns')
             .withConverter(Campaign.firestoreConvertor))
-        .then(querySnapshot => setData(querySnapshot.docs.map(d => {
-            return {
-                id: d.id,
-                ...d.data()
-            }
-        })))
+        .then(querySnapshot => setData(querySnapshot.docs.map(d => d.data())))
         .catch(e => setError(e))
     }, [currentUser])
 
