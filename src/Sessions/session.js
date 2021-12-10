@@ -20,7 +20,7 @@ Session.firestoreConvertor = {
             date: Timestamp.fromDate(session.date.toJSDate())
         }
     },
-    fromFireStore: (snapshot, options) => {
+    fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options)
         return new Session(
             DateTime.fromJSDate(data.date.toDate())

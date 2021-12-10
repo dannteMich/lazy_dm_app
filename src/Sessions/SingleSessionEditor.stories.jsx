@@ -4,7 +4,7 @@ import React from 'react';
 import { SingleSessionComponent } from './SingleSessionEditor';
 
 export default {
-  title: 'Sessions/SingleSessionEditor',
+  title: 'Sessions/SingleSessionComponent',
   component: SingleSessionComponent,
   args: {},
   argTypes: {}
