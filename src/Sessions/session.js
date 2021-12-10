@@ -25,9 +25,11 @@ Session.firestoreConvertor = {
     },
     fromFirestore: (snapshot, options) => {
         const {date, ...data} = snapshot.data(options)
-        return new Session(
+        const session = new Session(
             DateTime.fromJSDate(date.toDate()),
             data
         )
+        session.id = snapshot.id
+        return session
     }
 }

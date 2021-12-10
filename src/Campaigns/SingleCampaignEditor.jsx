@@ -10,6 +10,7 @@ import { Row, Col, Typography } from "antd";
 import { EditTwoTone } from '@ant-design/icons'
 import Campaign from "./campaign";
 import SessionCreator from "../Sessions/SessionCreator";
+import SessionSelector from "../Sessions/SessionSelector";
 
 const { Title, Paragraph } = Typography
 export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate }) {
@@ -27,6 +28,7 @@ export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescr
         </Col>
         <Col span={12}>
             <SessionCreator />
+            <SessionSelector />
         </Col>
     </Row>
 }
