@@ -2,9 +2,10 @@ import {DateTime} from 'luxon'
 import {Timestamp} from 'firebase/firestore'
 
 export default class Session {
-    constructor (date, name=null) {
+    constructor (date,{ name=null, description=null}) {
         this.date = date
         this.name = name
+        this.description = description
     }
 
     toString() {
@@ -16,14 +17,17 @@ export default class Session {
 
 Session.firestoreConvertor = {
     toFirestore: session => {
+        const {date, ...data} = session
         return {
-            date: Timestamp.fromDate(session.date.toJSDate())
+            date: Timestamp.fromDate(date.toJSDate()),
+            ...data
         }
     },
     fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options)
+        const {date, ...data} = snapshot.data(options)
         return new Session(
-            DateTime.fromJSDate(data.date.toDate())
+            DateTime.fromJSDate(date.toDate()),
+            data
         )
     }
 }

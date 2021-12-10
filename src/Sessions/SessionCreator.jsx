@@ -24,7 +24,7 @@ export default function SessionCreator() {
         addDoc(collection(
             db, 'accounts', currentUser.uid, 'campaigns', campaignId, 'sessions')
                 .withConverter(Session.firestoreConvertor),
-            new Session(date, name))
+            new Session(date, {name}))
         .then(docRef => navigate(`/campaigns/${campaignId}/sessions/${docRef.id}`))
         .catch(e => {
             console.log(e);

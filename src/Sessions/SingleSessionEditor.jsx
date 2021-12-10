@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from 'prop-types'
-import { doc, getDoc, onSnapshot } from "@firebase/firestore";
+import { doc, onSnapshot } from "@firebase/firestore";
 
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
@@ -13,7 +13,9 @@ import { LoadingSpinner } from "../common/Loading";
 
 const {Title, Paragraph} = Typography
 
-export function SingleSessionComponent({name, date, description}) {
+export function SingleSessionComponent({session, updateSession=() => {}}) {
+    const {date, name, description} = session
+
     let header_string = date.toLocaleString(DateTime.DATE_SHORT)
     if (name) {
         header_string = name + " - " +header_string
@@ -35,9 +37,8 @@ export function SingleSessionComponent({name, date, description}) {
     </div>
 }
 SingleSessionComponent.propTypes = {
-    date: PropTypes.instanceOf(DateTime),
-    name: PropTypes.string,   
-    description: PropTypes.string,   
+    session: PropTypes.instanceOf(Session).isRequired,
+    updateSession: PropTypes.func
 }
 
 export default function SingleSessionEditor() {
@@ -59,6 +60,6 @@ export default function SingleSessionEditor() {
     if (error) return JSON.stringify(error)
     if (!session) return <LoadingSpinner label="טוען"/>
     
-    return <SingleSessionComponent {...session} />
+    return <SingleSessionComponent session={session} />
 
 }

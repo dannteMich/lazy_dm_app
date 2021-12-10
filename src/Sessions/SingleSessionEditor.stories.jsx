@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 
+import Session from './session';
 import { SingleSessionComponent } from './SingleSessionEditor';
 
 export default {
@@ -10,10 +11,15 @@ export default {
   argTypes: {}
 }
 
-const Template = (args) => <SingleSessionComponent {...args} />;
+const Template = (args) => {
+  const {date, ...rest} = args
+
+  return <SingleSessionComponent session={new Session(date, rest)} />
+};
 
 export const Basic = Template.bind({});
 Basic.args = {
-    name: "סשן ראשון",
-    date: DateTime.now()
+    name: "שם של מפגש",
+    date: DateTime.now(),
+    description: "תיאור של מפגש"
 };
