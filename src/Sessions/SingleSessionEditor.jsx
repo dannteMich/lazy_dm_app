@@ -11,14 +11,15 @@ import { useAuth } from "../contexts/AuthContext";
 import Session from "./session";
 import { LoadingSpinner } from "../common/Loading";
 
-const {Title, Paragraph} = Typography
+const {Title, Paragraph, Text} = Typography
 
 export function SingleSessionComponent({session, updateSession=() => {}}) {
     const {date, name, description} = session
 
-    let header_string = date.toLocaleString(DateTime.DATE_SHORT)
+    const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
+    let header_string = `מפגש ב-${date_in_format}`
     if (name) {
-        header_string = name + " - " +header_string
+        header_string += `: ${name}`
     }
     
     return <div>
@@ -27,13 +28,20 @@ export function SingleSessionComponent({session, updateSession=() => {}}) {
                 <Title level={2}>{header_string}</Title>
             </Col>
         </Row>
-        {description && <Row>
+        <Row>
             <Col>
-                <Paragraph>
+                תאריך: {date_in_format}
+                <br/>
+                שם: {name || "אין"}
+            </Col>
+        </Row>
+        <Row>
+            <Col>
+                <Paragraph editable={{onChange: v => alert(v), autoSize: true}}>
                     {description}
                 </Paragraph>
             </Col>
-        </Row>}
+        </Row>
     </div>
 }
 SingleSessionComponent.propTypes = {
