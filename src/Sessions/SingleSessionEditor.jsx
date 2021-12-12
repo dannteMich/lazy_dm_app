@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from 'prop-types'
-import { doc, onSnapshot } from "@firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "@firebase/firestore";
 
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
@@ -10,18 +10,19 @@ import { db } from "../firebase/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import Session from "./session";
 import { LoadingSpinner } from "../common/Loading";
+import UpdateDate from '../common/UpdateDate'
 
-const {Title, Paragraph, Text} = Typography
+const { Title, Paragraph } = Typography
 
-export function SingleSessionComponent({session, updateSession=() => {}}) {
-    const {date, name, description} = session
+export function SingleSessionComponent({ session, updateSession }) {
+    const { date, name, description } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
     let header_string = `מפגש ב-${date_in_format}`
     if (name) {
         header_string += `: ${name}`
     }
-    
+
     return <div>
         <Row>
             <Col>
@@ -30,14 +31,15 @@ export function SingleSessionComponent({session, updateSession=() => {}}) {
         </Row>
         <Row>
             <Col>
-                תאריך: {date_in_format}
-                <br/>
+                תאריך:
+                <UpdateDate currentDate={date} updateDate={d => updateSession({date: d.toJSDate()})} />
+                <br />
                 שם: {name || "אין"}
             </Col>
         </Row>
         <Row>
             <Col>
-                <Paragraph editable={{onChange: v => alert(v), autoSize: true}}>
+                <Paragraph editable={{ onChange: v => alert(v), autoSize: true }}>
                     {description}
                 </Paragraph>
             </Col>
@@ -55,19 +57,28 @@ export default function SingleSessionEditor() {
     const [session, setSession] = useState()
     const [error, setError] = useState()
 
-    const sessionRef = doc(db, 
-        'accounts', currentUser.uid, 
+    const getSessionRef = useCallback(() => doc(db,
+        'accounts', currentUser.uid,
         'campaigns', campaignId,
         'sessions', sessionId
-    ).withConverter(Session.firestoreConvertor)
-    
-    onSnapshot(sessionRef, 
-        doc => setSession(doc.data()), 
+    ).withConverter(Session.firestoreConvertor),
+    [currentUser, campaignId, sessionId]
+    )
+
+    useEffect(() => {
+        return onSnapshot(getSessionRef(),
+        doc => {
+            setSession(doc.data())
+        },
         e => setError(e))
+    }, [getSessionRef])
+    
 
     if (error) return JSON.stringify(error)
-    if (!session) return <LoadingSpinner label="טוען"/>
-    
-    return <SingleSessionComponent session={session} />
+    if (!session) return <LoadingSpinner label="טוען" />
+
+    return <div style={{padding: "15px"}}>
+        <SingleSessionComponent session={session} updateSession={d => updateDoc(getSessionRef(), d)} />
+    </div>
 
 }
