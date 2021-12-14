@@ -8,7 +8,9 @@ export default {
   args: {},
 }
 
-const Template = (args) => <CharactersEditor {...args} />;
+const Template = (args) => <div style={{maxWidth: 500}}>
+    <CharactersEditor {...args} />;
+</div>
 
 export const Story = Template.bind({});
 Story.args = {};

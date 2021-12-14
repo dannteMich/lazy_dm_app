@@ -17,6 +17,7 @@ export default function CharactersEditor() {
             {(fields, { add, remove }) => (
               <>
                 {fields.map(({ key, name, fieldKey, ...restField }) => (
+                  <>
                   <Space key={key} style={{ display: 'flex' }} align="baseline">
                     <Form.Item
                       {...restField}
@@ -26,16 +27,19 @@ export default function CharactersEditor() {
                     >
                       <Input placeholder="שם" />
                     </Form.Item>
+                    
+                    <Button onClick={() => remove(name)} icon={<MinusCircleOutlined />} type="text"/>
+                </Space>
                     <Form.Item
                       {...restField}
                       name={[name, 'description']}
                       fieldKey={[fieldKey, 'description']}
                       rules={[{ required: true, message: 'נדרש תיאור' }]}
                     >
-                      <Input.TextArea autosize placeholder="תיאור" />
+                      <Input.TextArea  placeholder="תיאור" />
                     </Form.Item>
-                    <Button onClick={() => remove(name)} icon={<MinusCircleOutlined />} type="text"/>
-                  </Space>
+                    </>
+                  
                 ))}
                 <Form.Item>
                   <Button type="dashed" onClick={() => add()} block >
