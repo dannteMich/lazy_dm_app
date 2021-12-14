@@ -11,8 +11,9 @@ import { useAuth } from "../contexts/AuthContext";
 import Session from "./session";
 import { LoadingSpinner } from "../common/Loading";
 import UpdateDate from '../common/UpdateDate'
+import UpdateOrEmpty from "../common/UpdateOrEmpty";
 
-const { Title, Paragraph } = Typography
+const { Title } = Typography
 
 export function SingleSessionComponent({ session, updateSession }) {
     const { date, name, description } = session
@@ -33,15 +34,28 @@ export function SingleSessionComponent({ session, updateSession }) {
             <Col>
                 תאריך:
                 <UpdateDate currentDate={date} updateDate={d => updateSession({date: d.toJSDate()})} />
-                <br />
-                שם: {name || "אין"}
             </Col>
         </Row>
-        <Row>
-            <Col>
-                <Paragraph editable={{ onChange: v => alert(v), autoSize: true }}>
-                    {description}
-                </Paragraph>
+        <Row gutter={16}>
+            <Col flex="0">שם:</Col>
+            <Col flex="1">
+                <UpdateOrEmpty 
+                    value={name}
+                    updateValue={name => updateSession({name})}
+                    createLabel="צור שם"
+                    emptyLabel="כרגע אין שם"
+                />
+            </Col>
+        </Row>
+        <Row gutter={16}>
+            <Col flex="0">תיאור:</Col>
+            <Col flex="1">
+                <UpdateOrEmpty 
+                    value={description} 
+                    updateValue={d => updateSession({description: d})}
+                    createLabel="צור תיאור"
+                    emptyLabel="כרגע אין תיאור"
+                />
             </Col>
         </Row>
     </div>
