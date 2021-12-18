@@ -4,7 +4,7 @@ import { doc, onSnapshot, updateDoc } from "@firebase/firestore";
 
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
-import { Col, Row, Typography } from "antd";
+import { Col, Collapse, Row, Typography } from "antd";
 
 import { db } from "../firebase/firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -12,11 +12,12 @@ import Session from "./session";
 import { LoadingSpinner } from "../common/Loading";
 import UpdateDate from '../common/UpdateDate'
 import UpdateOrEmpty from "../common/UpdateOrEmpty";
+import NPCsEditor from "./NpcsEditor";
 
 const { Title } = Typography
 
 export function SingleSessionComponent({ session, updateSession }) {
-    const { date, name, description } = session
+    const { date, name, description, npcs } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
     let header_string = `מפגש ב-${date_in_format}`
@@ -56,6 +57,15 @@ export function SingleSessionComponent({ session, updateSession }) {
                     createLabel="צור תיאור"
                     emptyLabel="כרגע אין תיאור"
                 />
+            </Col>
+        </Row>
+        <Row style={{margin: "20px 0"}}>
+            <Col span={24}>
+                <Collapse ghost>
+                    <Collapse.Panel header="דמויות">
+                        <NPCsEditor initialNpcs={npcs} onNpcsUpdate={npcs => updateSession({npcs})}/>
+                    </Collapse.Panel>
+                </Collapse>
             </Col>
         </Row>
     </div>
