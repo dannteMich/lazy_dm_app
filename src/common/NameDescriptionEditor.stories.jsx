@@ -7,7 +7,7 @@ export default {
   component: NameDescriptionEditor,
   args: {},
   argTypes: {
-    onNpcsUpdate: {action: "new npcs"}
+    onDataUpdate: {action: "new npcs"}
   }
 }
 

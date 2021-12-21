@@ -17,7 +17,7 @@ import NameDescriptionEditor from "../common/NameDescriptionEditor";
 const { Title } = Typography
 
 export function SingleSessionComponent({ session, updateSession }) {
-    const { date, name, description, npcs } = session
+    const { date, name, description, npcs, locations, scenes } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
     let header_string = `מפגש ב-${date_in_format}`
@@ -62,10 +62,27 @@ export function SingleSessionComponent({ session, updateSession }) {
         <Row style={{margin: "20px 0"}}>
             <Col span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header="דמויות">
+                    <Collapse.Panel header={<b>דמויות</b>}>
                         <NameDescriptionEditor 
                             initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
                             placeHolders={["שם לדמות", "תיאור לדמות"]}
+                            additionButtonCaption="הוספת דמות"
+                        />
+                    </Collapse.Panel>
+                    
+                    <Collapse.Panel header={<b>מקומות</b>}>
+                        <NameDescriptionEditor 
+                            initialData={locations} onDataUpdate={locations => updateSession({locations})}
+                            placeHolders={["שם המקום", "תיאור המקום"]}
+                            additionButtonCaption="הוספת מיקום"
+                        />
+                    </Collapse.Panel>
+
+                    <Collapse.Panel header={<b>סצנות</b>}>
+                        <NameDescriptionEditor 
+                            initialData={scenes} onDataUpdate={scenes => updateSession({scenes})}
+                            placeHolders={["שם הסצינה", "פירוט קצר ודגשים"]}
+                            additionButtonCaption="הוספת סצינה"
                         />
                     </Collapse.Panel>
                 </Collapse>

@@ -9,6 +9,7 @@ export default function NameDescriptionEditor({
     initialData = [], onDataUpdate, 
     labels = ["שם:", "תיאור:"],
     placeHolders = ["", ""],
+    additionButtonCaption = "הוספה"
   }) {
   const [data, setData] = useState(initialData)
 
@@ -40,6 +41,8 @@ export default function NameDescriptionEditor({
       onDataUpdate(data)
     }
   }
+
+  const buttons_disabled = _.isEqual(initialData,data)
 
   return <div style={{ width: "100%" }}>
     <Space direction="vertical" size="small" style={{ width: "100%" }}>
@@ -74,18 +77,21 @@ export default function NameDescriptionEditor({
 
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <Button type="dashed" onClick={() => setData(data.concat([{}]))} style={{ width: "100%" }}>
+          <Button type="dashed" onClick={() => setData(data.concat([{}]))} style={{ width: "100%", backgroundColor: "rgba(255,255,255,0.4)" }} >
             <PlusOutlined />
-            צור NPC נוסף
+            {additionButtonCaption}
             <PlusOutlined />
           </Button>
         </Col>
       </Row>
       <Row>
         <Col flex="0">
-          <Button type="primary" onClick={tryToUpdateData}>
-            עדכון
+          <Space>
+          <Button type="primary" onClick={tryToUpdateData} disabled={buttons_disabled}>
+            שמירת שינויים
           </Button>
+          <Button onClick={() => setData(initialData)} disabled={buttons_disabled}>ביטול שינויים</Button>
+          </Space>
         </Col>
       </Row>
     </Space>
@@ -98,5 +104,7 @@ NameDescriptionEditor.propTypes = {
     description: PropTypes.string
   })),
   lables: PropTypes.arrayOf(PropTypes.string),
+  placeHolders: PropTypes.arrayOf(PropTypes.string),
+  additionButtonCaption: PropTypes.string,
   
 }
