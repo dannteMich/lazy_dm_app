@@ -5,8 +5,12 @@ import { Input, Button, Space, Row, Col } from 'antd'
 import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import _ from "lodash";
 
-export default function NPCsEditor({ initialNpcs = [], onNpcsUpdate }) {
-  const [npcs, setNpcs] = useState(initialNpcs)
+export default function NameDescriptionEditor({ 
+    initialData = [], onDataUpdate, 
+    labels = ["שם:", "תיאור:"],
+    placeHolders = ["", ""],
+  }) {
+  const [data, setData] = useState(initialData)
 
   const removeFromArrayByIndex = (arr, i) => {
     let temp = arr.slice()
@@ -14,55 +18,55 @@ export default function NPCsEditor({ initialNpcs = [], onNpcsUpdate }) {
     return temp
   }
 
-  const updateNpc = (newNpc, i) => {
-    const tempNpcs = npcs.slice()
-    tempNpcs[i] = newNpc
-    setNpcs(tempNpcs)
+  const updateEntry = (newEntry, i) => {
+    const tempData = data.slice()
+    tempData[i] = newEntry
+    setData(tempData)
   }
 
   const updateName = (newName, i) => {
-    return updateNpc({ ...npcs[i], name: newName }, i)
+    return updateEntry({ ...data[i], name: newName }, i)
   }
 
   const updateDescription = (newDescription, i) => {
-    return updateNpc({ ...npcs[i], description: newDescription }, i)
+    return updateEntry({ ...data[i], description: newDescription }, i)
   }
 
 
-  const tryToUpdateNpcs = () => {
-    if (npcs.some(n => _.isEmpty(n.name))) {
-      alert("יש לספק שם לכל הדמויות")
+  const tryToUpdateData = () => {
+    if (data.some(n => _.isEmpty(n.name))) {
+      alert("יש לספק את השדה הראשון של כל רשומה")
     } else {
-      onNpcsUpdate(npcs)
+      onDataUpdate(data)
     }
   }
 
   return <div style={{ width: "100%" }}>
     <Space direction="vertical" size="small" style={{ width: "100%" }}>
-      {npcs.map((npc, i) => <Row key={i} gutter={16}>
+      {data.map((entry, i) => <Row key={i} gutter={16}>
         <Col>
           <Button
             type="text"
             icon={<MinusCircleOutlined />}
-            onClick={() => setNpcs(removeFromArrayByIndex(npcs, i))}
+            onClick={() => setData(removeFromArrayByIndex(data, i))}
           />
         </Col>
         <Col>
           <Input
             maxLength={240}
             onChange={e => updateName(e.target.value, i)}
-            placeholder="שם לדמות"
-            addonBefore="שם:"
-            value={npc.name || ''}
+            placeholder={placeHolders[0]}
+            addonBefore={labels[0]}
+            value={entry.name || ''}
           />
         </Col>
         <Col flex="1">
           <Input
             allowClear
             onChange={e => updateDescription(e.target.value, i)}
-            placeholder="תיאור לדמות"
-            addonBefore="תיאור:"
-            value={npc.description || ''}
+            placeholder={placeHolders[1]}
+            addonBefore={labels[1]}
+            value={entry.description || ''}
           />
         </Col>
 
@@ -70,7 +74,7 @@ export default function NPCsEditor({ initialNpcs = [], onNpcsUpdate }) {
 
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <Button type="dashed" onClick={() => setNpcs(npcs.concat([{}]))} style={{ width: "100%" }}>
+          <Button type="dashed" onClick={() => setData(data.concat([{}]))} style={{ width: "100%" }}>
             <PlusOutlined />
             צור NPC נוסף
             <PlusOutlined />
@@ -79,7 +83,7 @@ export default function NPCsEditor({ initialNpcs = [], onNpcsUpdate }) {
       </Row>
       <Row>
         <Col flex="0">
-          <Button type="primary" onClick={tryToUpdateNpcs}>
+          <Button type="primary" onClick={tryToUpdateData}>
             עדכון
           </Button>
         </Col>
@@ -87,10 +91,12 @@ export default function NPCsEditor({ initialNpcs = [], onNpcsUpdate }) {
     </Space>
   </div>
 }
-NPCsEditor.propTypes = {
+NameDescriptionEditor.propTypes = {
   onNpcsUpdate: PropTypes.func.isRequired,
   initialNpcs: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string
-  }))
+  })),
+  lables: PropTypes.arrayOf(PropTypes.string),
+  
 }

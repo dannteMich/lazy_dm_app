@@ -12,7 +12,7 @@ import Session from "./session";
 import { LoadingSpinner } from "../common/Loading";
 import UpdateDate from '../common/UpdateDate'
 import UpdateOrEmpty from "../common/UpdateOrEmpty";
-import NPCsEditor from "./NpcsEditor";
+import NameDescriptionEditor from "../common/NameDescriptionEditor";
 
 const { Title } = Typography
 
@@ -63,7 +63,10 @@ export function SingleSessionComponent({ session, updateSession }) {
             <Col span={24}>
                 <Collapse ghost>
                     <Collapse.Panel header="דמויות">
-                        <NPCsEditor initialNpcs={npcs} onNpcsUpdate={npcs => updateSession({npcs})}/>
+                        <NameDescriptionEditor 
+                            initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
+                            placeHolders={["שם לדמות", "תיאור לדמות"]}
+                        />
                     </Collapse.Panel>
                 </Collapse>
             </Col>

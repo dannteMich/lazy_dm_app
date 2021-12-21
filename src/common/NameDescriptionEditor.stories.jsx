@@ -1,10 +1,10 @@
 import React from 'react';
 
-import NPCsEditor from './NpcsEditor';
+import NameDescriptionEditor from './NameDescriptionEditor';
 
 export default {
-  title: 'Sessions/Editors/NPCsEditor',
-  component: NPCsEditor,
+  title: 'Common/NameDescriptionEditor',
+  component: NameDescriptionEditor,
   args: {},
   argTypes: {
     onNpcsUpdate: {action: "new npcs"}
@@ -12,12 +12,12 @@ export default {
 }
 
 const Template = (args) => <div style={{maxWidth: 500}}>
-    <NPCsEditor {...args} />
+    <NameDescriptionEditor {...args} />
 </div>
 
 export const Story = Template.bind({});
 Story.args = {
-  initialNpcs: [
+  initialData: [
     {
       name: "שם ראשון",
       description: "תיאור ראשון",
@@ -30,5 +30,6 @@ Story.args = {
       name: "שם שלישי",
       description: "תיאור שלישי",
     },
-  ]
+  ],
+  labels: ["שדה 1:", "שדה 2:"],
 };
