@@ -41,7 +41,7 @@ export default function NameDescriptionEditor({
       onDataUpdate(data)
     }
   }
-
+  // TODO: add save on delete
   const buttons_disabled = _.isEqual(initialData,data)
 
   return <div style={{ width: "100%" }}>

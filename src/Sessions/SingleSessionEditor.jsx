@@ -17,7 +17,7 @@ import NameDescriptionEditor from "../common/NameDescriptionEditor";
 const { Title } = Typography
 
 export function SingleSessionComponent({ session, updateSession }) {
-    const { date, name, description, npcs, locations, scenes } = session
+    const { date, name, description, npcs, locations, scenes, encounters } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
     let header_string = `מפגש ב-${date_in_format}`
@@ -62,7 +62,7 @@ export function SingleSessionComponent({ session, updateSession }) {
         <Row style={{margin: "20px 0"}}>
             <Col span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>דמויות</b>}>
+                    <Collapse.Panel header={<b>דמויות</b>} style={{backgroundColor: "#f4cccc", margin: "2px 0"}}>
                         <NameDescriptionEditor 
                             initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
                             placeHolders={["שם לדמות", "תיאור לדמות"]}
@@ -70,7 +70,7 @@ export function SingleSessionComponent({ session, updateSession }) {
                         />
                     </Collapse.Panel>
                     
-                    <Collapse.Panel header={<b>מקומות</b>}>
+                    <Collapse.Panel header={<b>מקומות</b>} style={{backgroundColor: "#cfe2f3", margin: "2px 0"}}>
                         <NameDescriptionEditor 
                             initialData={locations} onDataUpdate={locations => updateSession({locations})}
                             placeHolders={["שם המקום", "תיאור המקום"]}
@@ -78,11 +78,19 @@ export function SingleSessionComponent({ session, updateSession }) {
                         />
                     </Collapse.Panel>
 
-                    <Collapse.Panel header={<b>סצנות</b>}>
+                    <Collapse.Panel header={<b>סצנות</b>} style={{backgroundColor: "#d9ead3", margin: "2px 0"}}>
                         <NameDescriptionEditor 
                             initialData={scenes} onDataUpdate={scenes => updateSession({scenes})}
                             placeHolders={["שם הסצינה", "פירוט קצר ודגשים"]}
                             additionButtonCaption="הוספת סצינה"
+                        />
+                    </Collapse.Panel>
+
+                    <Collapse.Panel header={<b>Random Encounters</b>} style={{backgroundColor: "#ffffff", margin: "2px 0"}}>
+                        <NameDescriptionEditor 
+                            initialData={encounters} onDataUpdate={encounters => updateSession({encounters})}
+                            labels={["תוצאת קוביה:", "אירוע:"]}
+                            placeHolders={["טווח בקוביה", "פירוט האירוע"]}
                         />
                     </Collapse.Panel>
                 </Collapse>
