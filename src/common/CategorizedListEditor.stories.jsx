@@ -6,7 +6,9 @@ export default {
   title: 'Common/CategorizedListEditor',
   component: CategorizedListEditor,
   args: {},
-  argTypes: {},
+  argTypes: {
+    onDataUpdate: {action: "updated data"}
+  },
 }
 
 const Template = (args) => <CategorizedListEditor {...args} />;
