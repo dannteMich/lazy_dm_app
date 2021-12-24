@@ -15,7 +15,7 @@ import SessionCreator from './SessionCreator'
 export function SessionList({sessions}) {
     const {campaignId} = useParams()
     return <div>
-        {sessions.map(session => {
+        {sessions.sort((s1, s2) => s1.date < s2.date).map(session => {
             return <div key={session.id}>
                 <Link to={`/campaigns/${campaignId}/sessions/${session.id}`}>
                     {session.toString()}
@@ -62,7 +62,7 @@ export default function SessionSelector() {
         <Row justify="center">
             <Col>
                 <Button type="primary" style={{ margin: "40px" }} size="large" onClick={() => setModalVisible(true)}>
-                    צור משחק חדש
+                    צור סשן חדש
                 </Button>
             </Col>
         </Row>
