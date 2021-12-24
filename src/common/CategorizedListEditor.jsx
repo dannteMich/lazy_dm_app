@@ -61,7 +61,7 @@ export default function CategorizedListEditor({
     const buttons_disabled = _.isEqual(data, initialData)
     
     return <Space direction="vertical" size="middle" style={{width: "100%", ...style}}>
-        {data.map(({items, category}, i) => <Row gutter={24}>
+        {data.map(({items, category}, i) => <Row gutter={24} key={i}>
             <Col flex={0}>
                 <Row>
                     <Col>
@@ -84,7 +84,7 @@ export default function CategorizedListEditor({
             </Col>
             <Col flex={1}>
                 <Space direction="vertical" style={{width: "100%"}}>
-                    {items.map((item, j) => <Row>
+                    {items.map((item, j) => <Row key={j}>
                         <Col>
                             <Button
                                 type="text" tabIndex="-1"
@@ -102,7 +102,7 @@ export default function CategorizedListEditor({
                     </Row>)}
                     <Row>
                         <Col>
-                            <Button type="dashed" onClick={() => addElementToCategory(i)} style={{ width: "100%", backgroundColor: "rgba(255,255,255,0.4)" }} >
+                            <Button type="dashed" onClick={() => addElementToCategory(i)} style={{ width: "100%", backgroundColor: "rgba(255,255,255,0.4)", right: "32px", padding: "0 35px"}} >
                                 הוסף פריט
                                 <PlusOutlined />
                             </Button>
@@ -114,7 +114,7 @@ export default function CategorizedListEditor({
         
         <Row>
             <Col>
-                <Button type="dashed" onClick={addCategory} style={{backgroundColor: "rgba(255,255,255,0.4)" }} >
+                <Button type="dashed" onClick={addCategory} style={{backgroundColor: "rgba(255,255,255,0.4)", right: "32px", padding: "0 25px" }} >
                     הוספת קטגוריה
                     <PlusOutlined />
                 </Button>

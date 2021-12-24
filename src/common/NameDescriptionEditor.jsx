@@ -98,8 +98,8 @@ export default function NameDescriptionEditor({
   </Space>
 }
 NameDescriptionEditor.propTypes = {
-  onNpcsUpdate: PropTypes.func.isRequired,
-  initialNpcs: PropTypes.arrayOf(PropTypes.shape({
+  onDataUpdate: PropTypes.func.isRequired,
+  initialData: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string
   })),

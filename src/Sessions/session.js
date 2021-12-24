@@ -2,7 +2,7 @@ import {DateTime} from 'luxon'
 import {Timestamp} from 'firebase/firestore'
 
 export default class Session {
-    constructor (date,{ name=null, description=null, npcs=[], locations=[], scenes=[], encounters=[]}) {
+    constructor (date,{ name=null, description=null, npcs=[], locations=[], scenes=[], encounters=[], names=[]}) {
         this.date = date
         this.name = name
         this.description = description
@@ -10,6 +10,7 @@ export default class Session {
         this.locations = locations
         this.scenes = scenes
         this.encounters = encounters
+        this.names = names
     }
 
     toString() {
