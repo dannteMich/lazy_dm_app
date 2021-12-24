@@ -7,33 +7,49 @@ import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 export default function CategorizedListEditor({ 
     initialData=[], onDataUpdate,
-    style={} 
+    placeHolders=["קטגוריה", "פריט"],
+    style={}
 }) {
     const [data, setData] = useState(initialData)
 
     const updateCategory = (i, newName) => {
-        data[i].category = newName
-        setData(data.slice())
+        const newData = _.cloneDeep(data)
+        newData[i].category = newName
+        setData(newData)
     }
     const updateItem = (i, j, newElement) => {
-        data[i].items[j] = newElement
-        setData(data.slice())
+        const newData = _.cloneDeep(data)
+        newData[i].items[j] = newElement
+        setData(newData)
     }
     const addElementToCategory = i => {
-        data[i].items.push('')
-        setData(data.slice())
+        const newData = _.cloneDeep(data)
+        newData[i].items.push('')
+        setData(newData)
     }
     const removeElementFromCategory = (i, j) => {
-        data[i].items.splice(j, 1)
-        setData(data.slice())
+        const newData = _.cloneDeep(data)
+        newData[i].items.splice(j, 1)
+        setData(newData)
     }
     const addCategory = () => {
-        data.push({
+        const newData = _.cloneDeep(data)
+        newData.push({
             category: '',
             items: []
         })
-        setData(data.slice())
+        setData(newData)
     }
+    const removeCategory = i => {
+        if (!_.isEmpty(data[i].items)) {
+            alert("Can't delete non empty category")
+            return
+        }
+        const newData = _.cloneDeep(data)
+        newData.splice(i, 1)
+        setData(newData)
+    }
+
     const tryToUpdate = () => {
         const categories = data.map(e => e.category)    
         if ((new Set(categories)).size !== categories.length) {
@@ -42,13 +58,24 @@ export default function CategorizedListEditor({
         onDataUpdate(data)  
     }
 
-    const buttons_disabled = false // TODO: This is still not wirking
-    // TODO: add option to delete a category
+    const buttons_disabled = _.isEqual(data, initialData)
     
     return <Space direction="vertical" size="middle" style={{width: "100%", ...style}}>
         {data.map(({items, category}, i) => <Row gutter={24}>
             <Col flex={0}>
-                <Input value={category} onChange={e => updateCategory(i, e.target.value)} placeholder="קטוגריה"/>
+                <Row>
+                    <Col>
+                        <Button
+                            type="text"
+                            icon={<MinusCircleOutlined />}
+                            onClick={() => removeCategory(i)}
+                            disabled={!_.isEmpty(data[i].items)}
+                        />
+                    </Col>
+                    <Col>
+                        <Input value={category} onChange={e => updateCategory(i, e.target.value)} placeholder={placeHolders[0]}/>
+                    </Col>
+                </Row>
             </Col>
             <Col flex={1}>
                 <Space direction="vertical" style={{width: "100%"}}>
@@ -61,7 +88,7 @@ export default function CategorizedListEditor({
                             />
                         </Col>
                         <Col flex="1">
-                            <Input value={item} onChange={e => updateItem(i, j, e.target.value)} placeholder="פריט"/>
+                            <Input value={item} onChange={e => updateItem(i, j, e.target.value)} placeholder={placeHolders[1]}/>
                         </Col>
                     </Row>)}
                     <Row>
@@ -75,6 +102,7 @@ export default function CategorizedListEditor({
                 </Space>
             </Col>
         </Row>)}
+        
         <Row>
             <Col>
                 <Button type="dashed" onClick={addCategory} style={{backgroundColor: "rgba(255,255,255,0.4)" }} >
@@ -83,6 +111,7 @@ export default function CategorizedListEditor({
                 </Button>
             </Col>
         </Row>
+        
         <Row>
         <Col flex="0">
           <Space>
@@ -91,7 +120,6 @@ export default function CategorizedListEditor({
           </Button>
           <Button onClick={() => setData(initialData)} disabled={buttons_disabled}>
               ביטול שינויים
-              {/* TODO: this is not working currenly */}
             </Button>
           </Space>
         </Col>
