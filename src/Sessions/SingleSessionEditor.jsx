@@ -17,8 +17,10 @@ import CategorizedListEditor from "../common/CategorizedListEditor";
 
 const { Title } = Typography
 
+const PANEL_MARGIN = "4px 0"
+
 export function SingleSessionComponent({ session, updateSession }) {
-    const { date, name, description, npcs, locations, scenes, encounters, names } = session
+    const { date, name, description, npcs, locations, scenes, encounters, names, clues } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
     let header_string = `מפגש ב-${date_in_format}`
@@ -38,7 +40,7 @@ export function SingleSessionComponent({ session, updateSession }) {
                 <UpdateDate currentDate={date} updateDate={d => updateSession({date: d.toJSDate()})} />
             </Col>
         </Row>
-        <Row gutter={16}>
+        <Row gutter={8}>
             <Col flex="0">שם:</Col>
             <Col flex="1">
                 <UpdateOrEmpty 
@@ -49,7 +51,7 @@ export function SingleSessionComponent({ session, updateSession }) {
                 />
             </Col>
         </Row>
-        <Row gutter={16}>
+        <Row gutter={8}>
             <Col flex="0">תיאור:</Col>
             <Col flex="1">
                 <UpdateOrEmpty 
@@ -60,47 +62,75 @@ export function SingleSessionComponent({ session, updateSession }) {
                 />
             </Col>
         </Row>
-        <Row style={{margin: "20px 0"}}>
-            <Col span={24}>
+        <br/>
+        <Row gutter={8}>
+            <Col span={12}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>דמויות</b>} style={{backgroundColor: "#f4cccc", margin: "4px 0"}}>
+                    <Collapse.Panel header={<b>דמויות</b>} style={{backgroundColor: "#f4cccc", margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
                             placeHolders={["שם לדמות", "תיאור לדמות"]}
                             additionButtonCaption="הוספת דמות"
                         />
                     </Collapse.Panel>
-                    
-                    <Collapse.Panel header={<b>מקומות</b>} style={{backgroundColor: "#cfe2f3", margin: "4px 0"}}>
+                </Collapse>
+            </Col>
+            <Col span={12}>
+                <Collapse ghost>
+                    <Collapse.Panel header={<b>מקומות</b>} style={{backgroundColor: "#cfe2f3", margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={locations} onDataUpdate={locations => updateSession({locations})}
                             placeHolders={["שם המקום", "תיאור המקום"]}
                             additionButtonCaption="הוספת מיקום"
                         />
                     </Collapse.Panel>
-
-                    <Collapse.Panel header={<b>סצנות</b>} style={{backgroundColor: "#d9ead3", margin: "4px 0"}}>
+                </Collapse>
+            </Col>
+        </Row>
+        <Row>
+            <Col span={24}>
+                <Collapse ghost>
+                    <Collapse.Panel header={<b>סצנות</b>} style={{backgroundColor: "#d9ead3", margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={scenes} onDataUpdate={scenes => updateSession({scenes})}
                             placeHolders={["שם הסצינה", "פירוט קצר ודגשים"]}
                             additionButtonCaption="הוספת סצינה"
                         />
+                    </Collapse.Panel>                   
+                </Collapse>
+            </Col>
+        </Row>
+        <Row>
+            <Col span={24}>
+                <Collapse ghost>
+                    <Collapse.Panel header={<b>רמזים ומידע</b>} style={{backgroundColor: "#ffffff", margin: PANEL_MARGIN}}>
+                        <CategorizedListEditor 
+                            initialData={clues}
+                            onDataUpdate={clues => updateSession({clues})}
+                        />    
                     </Collapse.Panel>
-
-                    <Collapse.Panel header={<b>Random Encounters</b>} style={{backgroundColor: "#ffffff", margin: "4px 0"}}>
+                </Collapse>
+            </Col>
+        </Row>
+        <Row gutter={8}>
+            <Col span={12}>
+                <Collapse ghost>
+                    <Collapse.Panel header={<b>Random Encounters</b>} style={{backgroundColor: "#D8D8D8", margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={encounters} onDataUpdate={encounters => updateSession({encounters})}
                             labels={["תוצאת קוביה:", "אירוע:"]}
                             placeHolders={["טווח בקוביה", "פירוט האירוע"]}
                         />
                     </Collapse.Panel>
-
-                    <Collapse.Panel header={<b>שמות</b>} style={{backgroundColor: "#d9d2e9", margin: "4px 0"}}>
+                </Collapse>
+            </Col>
+            <Col span={12}>
+                <Collapse ghost>
+                    <Collapse.Panel header={<b>שמות</b>} style={{backgroundColor: "#d9d2e9", margin: PANEL_MARGIN}}>
                         <CategorizedListEditor 
                             initialData={names}
                             onDataUpdate={names => updateSession({names})}
-                        />
-                        
+                        />    
                     </Collapse.Panel>
                 </Collapse>
             </Col>

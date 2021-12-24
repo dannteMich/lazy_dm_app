@@ -114,7 +114,7 @@ export default function CategorizedListEditor({
         
         <Row>
             <Col>
-                <Button type="dashed" onClick={addCategory} style={{backgroundColor: "rgba(255,255,255,0.4)", right: "32px", padding: "0 25px" }} >
+                <Button type="dashed" onClick={addCategory} style={{backgroundColor: "rgba(255,255,255,0.4)", right: "32px", padding: "0 24px" }} >
                     הוספת קטגוריה
                     <PlusOutlined />
                 </Button>

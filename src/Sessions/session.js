@@ -1,8 +1,13 @@
 import {DateTime} from 'luxon'
 import {Timestamp} from 'firebase/firestore'
 
+const DEFAULT_CLUES = [{
+    category: "כללי",
+    items: []
+}]
+
 export default class Session {
-    constructor (date,{ name=null, description=null, npcs=[], locations=[], scenes=[], encounters=[], names=[]}) {
+    constructor (date,{ name=null, description=null, npcs=[], locations=[], scenes=[], encounters=[], names=[], clues=DEFAULT_CLUES}) {
         this.date = date
         this.name = name
         this.description = description
@@ -11,6 +16,7 @@ export default class Session {
         this.scenes = scenes
         this.encounters = encounters
         this.names = names
+        this.clues = clues
     }
 
     toString() {
