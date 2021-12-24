@@ -66,14 +66,19 @@ export default function CategorizedListEditor({
                 <Row>
                     <Col>
                         <Button
-                            type="text"
+                            type="text" tabIndex="-1"
                             icon={<MinusCircleOutlined />}
                             onClick={() => removeCategory(i)}
                             disabled={!_.isEmpty(data[i].items)}
                         />
                     </Col>
                     <Col>
-                        <Input value={category} onChange={e => updateCategory(i, e.target.value)} placeholder={placeHolders[0]}/>
+                        <Input 
+                            value={category} 
+                            onChange={e => updateCategory(i, e.target.value)} 
+                            placeholder={placeHolders[0]}
+                            autoFocus
+                        />
                     </Col>
                 </Row>
             </Col>
@@ -82,13 +87,17 @@ export default function CategorizedListEditor({
                     {items.map((item, j) => <Row>
                         <Col>
                             <Button
-                                type="text"
+                                type="text" tabIndex="-1"
                                 icon={<MinusCircleOutlined />}
                                 onClick={() => removeElementFromCategory(i, j)}
                             />
                         </Col>
                         <Col flex="1">
-                            <Input value={item} onChange={e => updateItem(i, j, e.target.value)} placeholder={placeHolders[1]}/>
+                            <Input 
+                                value={item} autoFocus allowClear
+                                onChange={e => updateItem(i, j, e.target.value)} 
+                                placeholder={placeHolders[1]}
+                            />
                         </Col>
                     </Row>)}
                     <Row>

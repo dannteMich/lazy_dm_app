@@ -41,62 +41,61 @@ export default function NameDescriptionEditor({
       onDataUpdate(data)
     }
   }
-  // TODO: add save on delete
+  // TODO: add save on delete?
   // TODO: make this more flexiable with key names
   const buttons_disabled = _.isEqual(initialData,data)
 
-  return <div style={{ width: "100%" }}>
-    <Space direction="vertical" size="small" style={{ width: "100%" }}>
-      {data.map((entry, i) => <Row key={i} gutter={16}>
-        <Col>
-          <Button
-            type="text"
-            icon={<MinusCircleOutlined />}
-            onClick={() => setData(removeFromArrayByIndex(data, i))}
-          />
-        </Col>
-        <Col>
-          <Input
-            maxLength={240}
-            onChange={e => updateName(e.target.value, i)}
-            placeholder={placeHolders[0]}
-            addonBefore={labels[0]}
-            value={entry.name || ''}
-          />
-        </Col>
-        <Col flex="1">
-          <Input
-            allowClear
-            onChange={e => updateDescription(e.target.value, i)}
-            placeholder={placeHolders[1]}
-            addonBefore={labels[1]}
-            value={entry.description || ''}
-          />
-        </Col>
+  return <Space direction="vertical" size="small" style={{ width: "100%" }}>
+    {data.map((entry, i) => <Row key={i} gutter={16}>
+      <Col>
+        <Button
+          type="text" tabIndex="-1"
+          icon={<MinusCircleOutlined />}
+          onClick={() => setData(removeFromArrayByIndex(data, i))}
+        />
+      </Col>
+      <Col>
+        <Input
+          maxLength={240}
+          onChange={e => updateName(e.target.value, i)}
+          placeholder={placeHolders[0]}
+          addonBefore={labels[0]}
+          value={entry.name || ''}
+          autoFocus
+        />
+      </Col>
+      <Col flex="1">
+        <Input
+          allowClear
+          onChange={e => updateDescription(e.target.value, i)}
+          placeholder={placeHolders[1]}
+          addonBefore={labels[1]}
+          value={entry.description || ''}
+        />
+      </Col>
 
-      </Row>)}
+    </Row>)}
 
-      <Row gutter={[24, 24]}>
-        <Col span={24}>
-          <Button type="dashed" onClick={() => setData(data.concat([{}]))} style={{ width: "100%", backgroundColor: "rgba(255,255,255,0.4)" }} >
-            <PlusOutlined />
-            {additionButtonCaption}
-            <PlusOutlined />
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col flex="0">
-          <Space>
-          <Button type="primary" onClick={tryToUpdateData} disabled={buttons_disabled}>
-            שמירת שינויים
-          </Button>
-          <Button onClick={() => setData(initialData)} disabled={buttons_disabled}>ביטול שינויים</Button>
-          </Space>
-        </Col>
-      </Row>
-    </Space>
-  </div>
+    <Row gutter={[24, 24]}>
+      <Col span={24}>
+        <Button type="dashed" onClick={() => setData(data.concat([{}]))} style={{ width: "100%", backgroundColor: "rgba(255,255,255,0.4)" }} >
+          <PlusOutlined />
+          {additionButtonCaption}
+          <PlusOutlined />
+        </Button>
+      </Col>
+    </Row>
+    <Row>
+      <Col flex="0">
+        <Space>
+        <Button type="primary" onClick={tryToUpdateData} disabled={buttons_disabled}>
+          שמירת שינויים
+        </Button>
+        <Button onClick={() => setData(initialData)} disabled={buttons_disabled}>ביטול שינויים</Button>
+        </Space>
+      </Col>
+    </Row>
+  </Space>
 }
 NameDescriptionEditor.propTypes = {
   onNpcsUpdate: PropTypes.func.isRequired,
