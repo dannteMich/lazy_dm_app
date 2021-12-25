@@ -14,6 +14,7 @@ import UpdateDate from '../common/UpdateDate'
 import UpdateOrEmpty from "../common/UpdateOrEmpty";
 import NameDescriptionEditor from "../common/NameDescriptionEditor";
 import CategorizedListEditor from "../common/CategorizedListEditor";
+import {SECTION_COLORS} from '../common/consts'
 
 const { Title } = Typography
 
@@ -66,7 +67,7 @@ export function SingleSessionComponent({ session, updateSession }) {
         <Row gutter={8}>
             <Col xl={12} span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>דמויות</b>} style={{backgroundColor: "#f4cccc", margin: PANEL_MARGIN}}>
+                    <Collapse.Panel header={<b>דמויות</b>} style={{backgroundColor: SECTION_COLORS.npcs, margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
                             placeHolders={["שם לדמות", "תיאור לדמות"]}
@@ -77,7 +78,7 @@ export function SingleSessionComponent({ session, updateSession }) {
             </Col>
             <Col xl={12} span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>מקומות</b>} style={{backgroundColor: "#cfe2f3", margin: PANEL_MARGIN}}>
+                    <Collapse.Panel header={<b>מקומות</b>} style={{backgroundColor: SECTION_COLORS.locations, margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={locations} onDataUpdate={locations => updateSession({locations})}
                             placeHolders={["שם המקום", "תיאור המקום"]}
@@ -90,7 +91,7 @@ export function SingleSessionComponent({ session, updateSession }) {
         <Row>
             <Col span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>סצנות</b>} style={{backgroundColor: "#d9ead3", margin: PANEL_MARGIN}}>
+                    <Collapse.Panel header={<b>סצנות</b>} style={{backgroundColor: SECTION_COLORS.scenes, margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={scenes} onDataUpdate={scenes => updateSession({scenes})}
                             placeHolders={["שם הסצינה", "פירוט קצר ודגשים"]}
@@ -103,7 +104,7 @@ export function SingleSessionComponent({ session, updateSession }) {
         <Row>
             <Col span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>רמזים ומידע</b>} style={{backgroundColor: "#ffffff", margin: PANEL_MARGIN}}>
+                    <Collapse.Panel header={<b>רמזים ומידע</b>} style={{backgroundColor: SECTION_COLORS.clues, margin: PANEL_MARGIN}}>
                         <CategorizedListEditor 
                             initialData={clues}
                             onDataUpdate={clues => updateSession({clues})}
@@ -115,7 +116,7 @@ export function SingleSessionComponent({ session, updateSession }) {
         <Row gutter={8}>
             <Col xl={12} span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>Random Encounters</b>} style={{backgroundColor: "#D8D8D8", margin: PANEL_MARGIN}}>
+                    <Collapse.Panel header={<b>Random Encounters</b>} style={{backgroundColor: SECTION_COLORS.encounters, margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
                             initialData={encounters} onDataUpdate={encounters => updateSession({encounters})}
                             labels={["תוצאת קוביה:", "אירוע:"]}
@@ -126,7 +127,7 @@ export function SingleSessionComponent({ session, updateSession }) {
             </Col>
             <Col xl={12} span={24}>
                 <Collapse ghost>
-                    <Collapse.Panel header={<b>שמות</b>} style={{backgroundColor: "#d9d2e9", margin: PANEL_MARGIN}}>
+                    <Collapse.Panel header={<b>שמות</b>} style={{backgroundColor: SECTION_COLORS.names, margin: PANEL_MARGIN}}>
                         <CategorizedListEditor 
                             initialData={names}
                             onDataUpdate={names => updateSession({names})}

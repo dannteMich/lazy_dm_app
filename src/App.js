@@ -16,6 +16,7 @@ import SignupView from './AuthComponents/Signup';
 import ProtctedPath from './AuthComponents/ProtectedPath'
 import SingleCampaignEditor from './Campaigns/SingleCampaignEditor';
 import SingleSessionEditor from './Sessions/SingleSessionEditor';
+import SessionViewer from './Sessions/SessionViewer';
 
 function App() {
 
@@ -45,6 +46,11 @@ function App() {
               <Route exact path="/campaigns/:campaignId/sessions/:sessionId" element={
                 <ProtctedPath>
                   <SingleSessionEditor />
+              </ProtctedPath>  
+              }/>
+              <Route exact path="/campaigns/:campaignId/sessions/:sessionId/view" element={
+                <ProtctedPath>
+                  <SessionViewer />
               </ProtctedPath>  
               }/>
 

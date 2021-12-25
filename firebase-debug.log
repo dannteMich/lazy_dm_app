@@ -692,3 +692,168 @@ You're about to initialize a Firebase project in this directory:
 [info] 
 [info] Project Console: https://console.firebase.google.com/project/lazy-companion/overview
 [info] Hosting URL: https://lazy-companion.web.app
+[debug] [2021-12-25T20:23:21.320Z] ----------------------------------------------------------------------
+[debug] [2021-12-25T20:23:21.322Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dannt\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2021-12-25T20:23:21.323Z] CLI Version:   10.0.1
+[debug] [2021-12-25T20:23:21.323Z] Platform:      win32
+[debug] [2021-12-25T20:23:21.323Z] Node Version:  v14.17.4
+[debug] [2021-12-25T20:23:21.324Z] Time:          Sat Dec 25 2021 22:23:21 GMT+0200 (Israel Standard Time)
+[debug] [2021-12-25T20:23:21.324Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-25T20:23:21.327Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-12-25T20:23:21.405Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-25T20:23:21.407Z] > authorizing via signed-in user (dannte@gmail.com)
+[debug] [2021-12-25T20:23:21.408Z] [iam] checking project lazy-companion for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2021-12-25T20:23:21.410Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-25T20:23:21.411Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-25T20:23:21.664Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Sat, 25 Dec 2021 20:23:21 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:21.677Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/lazy-companion:testIamPermissions  
+ {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2021-12-25T20:23:22.022Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-12-25T20:23:22.022Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2021-12-25T20:23:22.560Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:22 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=614","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:22.562Z] > refreshing access token with scopes: []
+[debug] [2021-12-25T20:23:22.563Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-25T20:23:22.777Z] <<< HTTP RESPONSE 200 {"date":"Sat, 25 Dec 2021 20:23:22 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:22.789Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/lazy-companion [none]
+[debug] [2021-12-25T20:23:23.158Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/lazy-companion 200
+[debug] [2021-12-25T20:23:23.159Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/lazy-companion {"projectId":"lazy-companion","projectNumber":"897226292491","displayName":"lazy-companion","name":"projects/lazy-companion","resources":{"hostingSite":"lazy-companion","realtimeDatabaseInstance":"lazy-companion-default-rtdb","storageBucket":"lazy-companion.appspot.com","locationId":"europe-west"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'lazy-companion'...
+[info] 
+[info] i  deploying storage, firestore, hosting 
+[debug] [2021-12-25T20:23:23.162Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-25T20:23:23.163Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-25T20:23:23.387Z] <<< HTTP RESPONSE 200 {"date":"Sat, 25 Dec 2021 20:23:23 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:23.397Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/lazy-companion  
+ 
+[debug] [2021-12-25T20:23:23.872Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:23 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  firebase.storage: checking storage.rules for compilation errors... 
+[debug] [2021-12-25T20:23:23.875Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/lazy-companion:test  
+ {"source":{"files":[{"name":"storage.rules","content":"rules_version = '2';\nservice firebase.storage {\n  match /b/{bucket}/o {\n    match /{allPaths=**} {\n      allow read, write: if request.auth!=null;\n    }\n  }\n}\n"}]}}
+[debug] [2021-12-25T20:23:24.869Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  firebase.storage: rules file storage.rules compiled successfully 
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2021-12-25T20:23:24.873Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/lazy-companion:test  
+ {"source":{"files":[{"name":"firestore.rules","content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if\n          request.time < timestamp.date(2022, 1, 1);\n    }\n  }\n}"}]}}
+[debug] [2021-12-25T20:23:25.677Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:25 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2021-12-25T20:23:25.683Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/lazy-companion/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2021-12-25T20:23:27.435Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:27.438Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/lazy-companion/releases?pageSize=10&pageToken=  
+ 
+[debug] [2021-12-25T20:23:28.247Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:28.250Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/lazy-companion/rulesets/fc75842f-ca86-4f53-880f-d1140f3630d9  
+ 
+[debug] [2021-12-25T20:23:29.059Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  storage: latest version of storage.rules already up to date, skipping upload... 
+[debug] [2021-12-25T20:23:29.063Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/lazy-companion/releases?pageSize=10&pageToken=  
+ 
+[debug] [2021-12-25T20:23:29.064Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/lazy-companion/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2021-12-25T20:23:29.482Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:29.484Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/lazy-companion/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2021-12-25T20:23:29.876Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:29.878Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/lazy-companion/rulesets/7e8e1c72-6197-48f9-9d0d-b440ad14ad74  
+ 
+[debug] [2021-12-25T20:23:29.917Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  firestore: deployed indexes in firestore.indexes.json successfully 
+[debug] [2021-12-25T20:23:30.267Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  firestore: latest version of firestore.rules already up to date, skipping upload... 
+[info] i  hosting[lazy-companion]: beginning deploy... 
+[info] i  hosting[lazy-companion]: found 20 files in build 
+[debug] [2021-12-25T20:23:31.025Z] > refreshing access token with scopes: []
+[debug] [2021-12-25T20:23:31.026Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-25T20:23:31.029Z] [hosting] hash cache [YnVpbGQ] stored for 20 files
+[debug] [2021-12-25T20:23:31.029Z] [hosting][hash queue][FINAL] {"max":739,"min":3,"avg":60.05,"active":0,"complete":20,"success":20,"errored":0,"retried":0,"total":20,"elapsed":747}
+[debug] [2021-12-25T20:23:31.277Z] <<< HTTP RESPONSE 200 {"date":"Sat, 25 Dec 2021 20:23:31 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:31.289Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/sites/lazy-companion/versions/c8e20298320f8572:populateFiles [none]
+[debug] [2021-12-25T20:23:31.289Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/lazy-companion/versions/c8e20298320f8572:populateFiles {"files":{"/logo192.png":"3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b","/logo512.png":"ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331","/manifest.json":"aff3449bdc238776f5d6d967f19ec491b36aed5fb7f23ccff6500736fd58494a","/robots.txt":"bfe106a3fb878dc83461c86818bf74fc1bdc7f28538ba613cd3e775516ce8b49","/asset-manifest.json":"3dce19e47c43acff705bb025b9bc93b7f0f534183491c391e7824cd1906804ec","/index.html":"6f9a64533c8c3c4df7d98f4d900e90a9faa09f1987919f748bd72503d285c3bf","/static/css/main.6dea0f05.chunk.css":"c499cef8b35c8caab7450541cedc21daa38efe1be0cc8e177b8e1ed3fe3a21ce","/static/css/main.6dea0f05.chunk.css.map":"3ab83225cf1664f4cc84e22963e3d093c935fb6a5634f1dcf099a70ffc58d1b8","/static/js/2.f18ed0c6.chunk.js.LICENSE.txt":"5a4a240ddc7f35efb5ea81b7ff086220259b75136fe6cd30075fad22a5378f7c","/static/js/3.0588006d.chunk.js":"92aefcb395c0759cd9a0ae021266e856bcd08194c18a9e7a5820bbb4247af117","/static/js/3.0588006d.chunk.js.map":"a8712e80d67ffe6291a3d25a14699a77b6944587ba82f9d1838533857ec04a67","/static/js/main.96504814.chunk.js":"a690a03867be67af08387141de73b3e74ccf23885d0d54c4486a373805f761bd","/static/js/runtime-main.f92334de.js":"d9ca2ebabaab5ecfe6cfc6ee0c37b463c5a4f4f0e15b819bef5b7b2de5eb19d8","/static/js/runtime-main.f92334de.js.map":"2c6f6829e9c46dee625c81f5b007ff7b184290fd32f689009e5d538bc42c917f","/static/js/main.96504814.chunk.js.map":"c2b93cb4ed227b1202df8c45e37b7c3bee733098f022051e048836c93c74407e","/favicon.ico":"f2304efeecee51df9dbee441e6fe56574239a830aa0d7360fe5c6ff2e8713316","/static/css/2.2b8316e7.chunk.css":"ba37dee3a0332e03583cd067dbb80b6ecc141fb3488c983a2d258aae953dad8b","/static/js/2.f18ed0c6.chunk.js":"848d259ef546ca672f27ce07d31f91c4dc4f32518457faae63916b338971ccf1","/static/css/2.2b8316e7.chunk.css.map":"62e0c84ad98fa022549c0e972a26766738a360c4718395e91cbcb8811db4caaf","/static/js/2.f18ed0c6.chunk.js.map":"cbe8096639bba5e0a45903aa887c00e46019f3bcef6fe9413395edde97d2d640"}}
+[debug] [2021-12-25T20:23:32.391Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/sites/lazy-companion/versions/c8e20298320f8572:populateFiles 200
+[debug] [2021-12-25T20:23:32.391Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/lazy-companion/versions/c8e20298320f8572:populateFiles {"uploadRequiredHashes":["a690a03867be67af08387141de73b3e74ccf23885d0d54c4486a373805f761bd","6f9a64533c8c3c4df7d98f4d900e90a9faa09f1987919f748bd72503d285c3bf","f2304efeecee51df9dbee441e6fe56574239a830aa0d7360fe5c6ff2e8713316","3dce19e47c43acff705bb025b9bc93b7f0f534183491c391e7824cd1906804ec","c2b93cb4ed227b1202df8c45e37b7c3bee733098f022051e048836c93c74407e"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files"}
+[debug] [2021-12-25T20:23:32.395Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/a690a03867be67af08387141de73b3e74ccf23885d0d54c4486a373805f761bd [none]
+[debug] [2021-12-25T20:23:32.395Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/a690a03867be67af08387141de73b3e74ccf23885d0d54c4486a373805f761bd [stream]
+[debug] [2021-12-25T20:23:32.398Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/6f9a64533c8c3c4df7d98f4d900e90a9faa09f1987919f748bd72503d285c3bf [none]
+[debug] [2021-12-25T20:23:32.398Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/6f9a64533c8c3c4df7d98f4d900e90a9faa09f1987919f748bd72503d285c3bf [stream]
+[debug] [2021-12-25T20:23:32.400Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/f2304efeecee51df9dbee441e6fe56574239a830aa0d7360fe5c6ff2e8713316 [none]
+[debug] [2021-12-25T20:23:32.400Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/f2304efeecee51df9dbee441e6fe56574239a830aa0d7360fe5c6ff2e8713316 [stream]
+[debug] [2021-12-25T20:23:32.401Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/3dce19e47c43acff705bb025b9bc93b7f0f534183491c391e7824cd1906804ec [none]
+[debug] [2021-12-25T20:23:32.402Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/3dce19e47c43acff705bb025b9bc93b7f0f534183491c391e7824cd1906804ec [stream]
+[debug] [2021-12-25T20:23:32.403Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/c2b93cb4ed227b1202df8c45e37b7c3bee733098f022051e048836c93c74407e [none]
+[debug] [2021-12-25T20:23:32.403Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/c2b93cb4ed227b1202df8c45e37b7c3bee733098f022051e048836c93c74407e [stream]
+[debug] [2021-12-25T20:23:32.404Z] [hosting][populate queue][FINAL] {"max":1370,"min":1370,"avg":1370,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1379}
+[debug] [2021-12-25T20:23:32.405Z] [hosting] uploads queued: 5
+[debug] [2021-12-25T20:23:33.813Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/6f9a64533c8c3c4df7d98f4d900e90a9faa09f1987919f748bd72503d285c3bf 200
+[debug] [2021-12-25T20:23:33.814Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/6f9a64533c8c3c4df7d98f4d900e90a9faa09f1987919f748bd72503d285c3bf [stream]
+[debug] [2021-12-25T20:23:33.847Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/a690a03867be67af08387141de73b3e74ccf23885d0d54c4486a373805f761bd 200
+[debug] [2021-12-25T20:23:33.847Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/a690a03867be67af08387141de73b3e74ccf23885d0d54c4486a373805f761bd [stream]
+[debug] [2021-12-25T20:23:33.870Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/c2b93cb4ed227b1202df8c45e37b7c3bee733098f022051e048836c93c74407e 200
+[debug] [2021-12-25T20:23:33.870Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/c2b93cb4ed227b1202df8c45e37b7c3bee733098f022051e048836c93c74407e [stream]
+[debug] [2021-12-25T20:23:33.884Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/f2304efeecee51df9dbee441e6fe56574239a830aa0d7360fe5c6ff2e8713316 200
+[debug] [2021-12-25T20:23:33.885Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/f2304efeecee51df9dbee441e6fe56574239a830aa0d7360fe5c6ff2e8713316 [stream]
+[debug] [2021-12-25T20:23:33.888Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/3dce19e47c43acff705bb025b9bc93b7f0f534183491c391e7824cd1906804ec 200
+[debug] [2021-12-25T20:23:33.889Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lazy-companion/versions/c8e20298320f8572/files/3dce19e47c43acff705bb025b9bc93b7f0f534183491c391e7824cd1906804ec [stream]
+[debug] [2021-12-25T20:23:33.889Z] [hosting][upload queue][FINAL] {"max":1495,"min":1421,"avg":1468,"active":0,"complete":5,"success":5,"errored":0,"retried":0,"total":5,"elapsed":1497}
+[info] +  hosting[lazy-companion]: file upload complete 
+[debug] [2021-12-25T20:23:33.890Z] [hosting] deploy completed after 3620ms
+[debug] [2021-12-25T20:23:33.892Z] [rules] releasing firebase.storage/lazy-companion.appspot.com with ruleset projects/lazy-companion/rulesets/fc75842f-ca86-4f53-880f-d1140f3630d9
+[debug] [2021-12-25T20:23:33.893Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-25T20:23:33.894Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-25T20:23:34.131Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Sat, 25 Dec 2021 20:23:34 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:34.143Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/lazy-companion/releases/firebase.storage/lazy-companion.appspot.com  
+ {"release":{"name":"projects/lazy-companion/releases/firebase.storage/lazy-companion.appspot.com","rulesetName":"projects/lazy-companion/rulesets/fc75842f-ca86-4f53-880f-d1140f3630d9"}}
+[debug] [2021-12-25T20:23:35.177Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:35 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:35.178Z] [rules] updated release projects/lazy-companion/releases/firebase.storage/lazy-companion.appspot.com
+[info] +  storage: released rules storage.rules to firebase.storage 
+[debug] [2021-12-25T20:23:35.180Z] [rules] releasing cloud.firestore with ruleset projects/lazy-companion/rulesets/7e8e1c72-6197-48f9-9d0d-b440ad14ad74
+[debug] [2021-12-25T20:23:35.180Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/lazy-companion/releases/cloud.firestore  
+ {"release":{"name":"projects/lazy-companion/releases/cloud.firestore","rulesetName":"projects/lazy-companion/rulesets/7e8e1c72-6197-48f9-9d0d-b440ad14ad74"}}
+[debug] [2021-12-25T20:23:36.212Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:36.213Z] [rules] updated release projects/lazy-companion/releases/cloud.firestore
+[info] +  firestore: released rules firestore.rules to cloud.firestore 
+[debug] [2021-12-25T20:23:36.214Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "lazy-companion"
+    },
+    "site": "lazy-companion",
+    "version": "sites/lazy-companion/versions/c8e20298320f8572"
+  }
+]
+[info] i  hosting[lazy-companion]: finalizing version... 
+[debug] [2021-12-25T20:23:36.220Z] >>> HTTP REQUEST PATCH https://firebasehosting.googleapis.com/v1beta1/sites/lazy-companion/versions/c8e20298320f8572?updateMask=status  
+ {"status":"FINALIZED"}
+[debug] [2021-12-25T20:23:37.360Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:37 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:37.361Z] [hosting] finalized version for lazy-companion: {"name":"sites/lazy-companion/versions/c8e20298320f8572","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2021-12-25T20:23:26.688066Z","createUser":{"email":"Dannte@gmail.com"},"finalizeTime":"2021-12-25T20:23:37.214252Z","finalizeUser":{"email":"Dannte@gmail.com"}}
+[info] +  hosting[lazy-companion]: version finalized 
+[info] i  hosting[lazy-companion]: releasing new version... 
+[debug] [2021-12-25T20:23:37.363Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/lazy-companion/releases?version_name=sites/lazy-companion/versions/c8e20298320f8572  
+ {"message":null}
+[debug] [2021-12-25T20:23:38.418Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 25 Dec 2021 20:23:38 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-25T20:23:38.419Z] [hosting] release: {"name":"sites/lazy-companion/releases/1640463817593512","version":{"name":"sites/lazy-companion/versions/c8e20298320f8572","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2021-12-25T20:23:26.688066Z","createUser":{"email":"Dannte@gmail.com"},"finalizeTime":"2021-12-25T20:23:37.214252Z","finalizeUser":{"email":"Dannte@gmail.com"}},"type":"DEPLOY","releaseTime":"2021-12-25T20:23:37.593512118Z","releaseUser":{"email":"Dannte@gmail.com"}}
+[info] +  hosting[lazy-companion]: release complete 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/lazy-companion/overview
+[info] Hosting URL: https://lazy-companion.web.app
