@@ -64,7 +64,7 @@ export function SingleSessionComponent({ session, updateSession }) {
         </Row>
         <br/>
         <Row gutter={8}>
-            <Col span={12}>
+            <Col xl={12} span={24}>
                 <Collapse ghost>
                     <Collapse.Panel header={<b>דמויות</b>} style={{backgroundColor: "#f4cccc", margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
@@ -75,7 +75,7 @@ export function SingleSessionComponent({ session, updateSession }) {
                     </Collapse.Panel>
                 </Collapse>
             </Col>
-            <Col span={12}>
+            <Col xl={12} span={24}>
                 <Collapse ghost>
                     <Collapse.Panel header={<b>מקומות</b>} style={{backgroundColor: "#cfe2f3", margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
@@ -113,7 +113,7 @@ export function SingleSessionComponent({ session, updateSession }) {
             </Col>
         </Row>
         <Row gutter={8}>
-            <Col span={12}>
+            <Col xl={12} span={24}>
                 <Collapse ghost>
                     <Collapse.Panel header={<b>Random Encounters</b>} style={{backgroundColor: "#D8D8D8", margin: PANEL_MARGIN}}>
                         <NameDescriptionEditor 
@@ -124,7 +124,7 @@ export function SingleSessionComponent({ session, updateSession }) {
                     </Collapse.Panel>
                 </Collapse>
             </Col>
-            <Col span={12}>
+            <Col xl={12} span={24}>
                 <Collapse ghost>
                     <Collapse.Panel header={<b>שמות</b>} style={{backgroundColor: "#d9d2e9", margin: PANEL_MARGIN}}>
                         <CategorizedListEditor 
