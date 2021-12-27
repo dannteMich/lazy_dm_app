@@ -15,6 +15,7 @@ import UpdateOrEmpty from "../common/UpdateOrEmpty";
 import NameDescriptionEditor from "../common/NameDescriptionEditor";
 import CategorizedListEditor from "../common/CategorizedListEditor";
 import {SECTION_COLORS} from '../common/consts'
+import { Link } from "react-router-dom";
 
 const { Title } = Typography
 
@@ -61,6 +62,11 @@ export function SingleSessionComponent({ session, updateSession }) {
                     createLabel="צור תיאור"
                     emptyLabel="כרגע אין תיאור"
                 />
+            </Col>
+        </Row>
+        <Row>
+            <Col>
+                <Link to="./view">צפייה</Link>
             </Col>
         </Row>
         <br/>
