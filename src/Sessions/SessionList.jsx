@@ -27,9 +27,13 @@ export function SessionList({ sessions }) {
         </div>;
     })
 
-    const cards_with_deviders = padArray(cards, () => <div style={{display: "flex", height: "60px", padding: "4px"}}>
+    const cards_with_deviders = padArray(cards, i => <div key={i} style={{display: "flex", height: "60px", padding: "4px"}}>
         <div style={{flex: "1"}} />
-        
+        <div style={{
+            backgroundColor: "#D0D0D0",
+            borderRadius: "10px",
+            minWidth: "5px"
+        }}></div>
         <div style={{flex: "1"}} />
 
     </div>)
