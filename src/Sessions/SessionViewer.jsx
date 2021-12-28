@@ -63,7 +63,7 @@ export function SessionViewerComponent({session}) {
             </Col>
         </Row>
         
-        <Row gutter={16}>
+        <Row gutter={[16, 16]}>
             <Col span={12}>
                 <SessionPairDescription 
                     title="דמויות" data={session.npcs} 
@@ -76,9 +76,6 @@ export function SessionViewerComponent({session}) {
                     style={{backgroundColor: SECTION_COLORS.locations}}
                 />
             </Col>
-        </Row>
-
-        <Row gutter={16}>
             <Col span={12}>
                 <SessionPairDescription 
                     title="סצנות" data={session.scenes} 
@@ -91,9 +88,6 @@ export function SessionViewerComponent({session}) {
                     style={{backgroundColor: SECTION_COLORS.encounters}}
                 />
             </Col>
-        </Row>
-
-        <Row gutter={16}>
             <Col span={12}>
                 <SessionPairDescription 
                     title="שמות" data={names_data} 
@@ -109,7 +103,7 @@ export function SessionViewerComponent({session}) {
                     dataSource={clues_data}
                     renderItem={item => <List.Item>
                         {item}
-                </List.Item>}
+                    </List.Item>}
                 />
             </Col>
         </Row>
@@ -148,5 +142,5 @@ export default function SessionViewer() {
     
     return <div style={{padding: "15px"}}>
         <SessionViewerComponent session={session}/>
- 1   </div>
+    </div>
 }
