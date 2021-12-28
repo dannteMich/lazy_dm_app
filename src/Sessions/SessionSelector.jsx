@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types'
 import { getDocs, collection } from "@firebase/firestore";
 
-import {useParams, Link } from 'react-router-dom'
+import {useParams } from 'react-router-dom'
 import _ from "lodash";
 import { Modal, Row, Col, Button } from "antd";
 
@@ -11,22 +10,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase/firebase";
 import Session from "./session";
 import SessionCreator from './SessionCreator'
-
-export function SessionList({sessions}) {
-    const {campaignId} = useParams()
-    return <div>
-        {sessions.sort((s1, s2) => s1.date < s2.date).map(session => {
-            return <div key={session.id}>
-                <Link to={`/campaigns/${campaignId}/sessions/${session.id}`}>
-                    {session.toString()}
-                </Link>
-            </div>
-        })}
-    </div>
-}
-SessionList.propTypes = {
-    sessions: PropTypes.arrayOf(PropTypes.instanceOf(Session)).isRequired,
-}
+import { SessionList } from "./SessionList";
 
 export function NoSessionsYet() {
     return <div style={{ margin: "50px" }}>

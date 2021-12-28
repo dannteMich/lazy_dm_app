@@ -21,6 +21,20 @@ const { Title } = Typography
 
 const PANEL_MARGIN = "4px 0"
 
+export function SingleCollapsable({children, ghost=false, defaultActive=true, header=null, style={}}) {
+    return <Collapse ghost={ghost} defaultActiveKey={defaultActive ? 0 : null}>
+        <Collapse.Panel header={header} style={{margin: PANEL_MARGIN, borderRadius: "4px", ...style}}>
+            {children}
+        </Collapse.Panel>
+    </Collapse>
+}
+SingleCollapsable.propTypes = {
+    ghost: PropTypes.bool,
+    defaultActive: PropTypes.bool,
+    header: PropTypes.node,
+    style: PropTypes.object
+}
+
 export function SingleSessionComponent({ session, updateSession }) {
     const { date, name, description, npcs, locations, scenes, encounters, names, clues } = session
 
@@ -72,74 +86,63 @@ export function SingleSessionComponent({ session, updateSession }) {
         <br/>
         <Row gutter={8}>
             <Col xl={12} span={24}>
-                <Collapse ghost>
-                    <Collapse.Panel header={<b>דמויות</b>} style={{backgroundColor: SECTION_COLORS.npcs, margin: PANEL_MARGIN}}>
-                        <NameDescriptionEditor 
-                            initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
-                            placeHolders={["שם לדמות", "תיאור לדמות"]}
-                            additionButtonCaption="הוספת דמות"
-                        />
-                    </Collapse.Panel>
-                </Collapse>
+                <SingleCollapsable ghost header={<b>דמויות</b>} style={{backgroundColor: SECTION_COLORS.npcs}}>
+                    <NameDescriptionEditor 
+                        initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
+                        placeHolders={["שם לדמות", "תיאור לדמות"]}
+                        additionButtonCaption="הוספת דמות"
+                    />
+                </SingleCollapsable>
+                
             </Col>
             <Col xl={12} span={24}>
-                <Collapse ghost>
-                    <Collapse.Panel header={<b>מקומות</b>} style={{backgroundColor: SECTION_COLORS.locations, margin: PANEL_MARGIN}}>
-                        <NameDescriptionEditor 
-                            initialData={locations} onDataUpdate={locations => updateSession({locations})}
-                            placeHolders={["שם המקום", "תיאור המקום"]}
-                            additionButtonCaption="הוספת מיקום"
-                        />
-                    </Collapse.Panel>
-                </Collapse>
+                <SingleCollapsable ghost header={<b>מקומות</b>} style={{backgroundColor: SECTION_COLORS.locations}}>
+                    <NameDescriptionEditor 
+                        initialData={locations} onDataUpdate={locations => updateSession({locations})}
+                        placeHolders={["שם המקום", "תיאור המקום"]}
+                        additionButtonCaption="הוספת מיקום"
+                    />
+                </SingleCollapsable>
             </Col>
         </Row>
         <Row>
             <Col span={24}>
-                <Collapse ghost>
-                    <Collapse.Panel header={<b>סצנות</b>} style={{backgroundColor: SECTION_COLORS.scenes, margin: PANEL_MARGIN}}>
-                        <NameDescriptionEditor 
-                            initialData={scenes} onDataUpdate={scenes => updateSession({scenes})}
-                            placeHolders={["שם הסצינה", "פירוט קצר ודגשים"]}
-                            additionButtonCaption="הוספת סצינה"
-                        />
-                    </Collapse.Panel>                   
-                </Collapse>
+                <SingleCollapsable ghost header={<b>סצנות</b>} style={{backgroundColor: SECTION_COLORS.scenes}}>
+                    <NameDescriptionEditor 
+                        initialData={scenes} onDataUpdate={scenes => updateSession({scenes})}
+                        placeHolders={["שם הסצינה", "פירוט קצר ודגשים"]}
+                        additionButtonCaption="הוספת סצינה"
+                    />
+                </SingleCollapsable>
             </Col>
         </Row>
         <Row>
             <Col span={24}>
-                <Collapse ghost>
-                    <Collapse.Panel header={<b>רמזים ומידע</b>} style={{backgroundColor: SECTION_COLORS.clues, margin: PANEL_MARGIN}}>
-                        <CategorizedListEditor 
-                            initialData={clues}
-                            onDataUpdate={clues => updateSession({clues})}
-                        />    
-                    </Collapse.Panel>
-                </Collapse>
+            <SingleCollapsable ghost header={<b>רמזים ומידע</b>} style={{backgroundColor: SECTION_COLORS.clues, border: "solid 1px #c0c0c0"}}>
+                <CategorizedListEditor 
+                    initialData={clues}
+                    onDataUpdate={clues => updateSession({clues})}
+                />    
+            </SingleCollapsable>
             </Col>
         </Row>
         <Row gutter={8}>
-            <Col xl={12} span={24}>
-                <Collapse ghost>
-                    <Collapse.Panel header={<b>Random Encounters</b>} style={{backgroundColor: SECTION_COLORS.encounters, margin: PANEL_MARGIN}}>
-                        <NameDescriptionEditor 
-                            initialData={encounters} onDataUpdate={encounters => updateSession({encounters})}
-                            labels={["תוצאת קוביה:", "אירוע:"]}
-                            placeHolders={["טווח בקוביה", "פירוט האירוע"]}
-                        />
-                    </Collapse.Panel>
-                </Collapse>
+            <Col xl={12} span={24}>    
+                <SingleCollapsable ghost header={<b>Random Encounters</b>} style={{backgroundColor: SECTION_COLORS.encounters}}>
+                    <NameDescriptionEditor 
+                        initialData={encounters} onDataUpdate={encounters => updateSession({encounters})}
+                        labels={["תוצאת קוביה:", "אירוע:"]}
+                        placeHolders={["טווח בקוביה", "פירוט האירוע"]}
+                    />
+                </SingleCollapsable>
             </Col>
             <Col xl={12} span={24}>
-                <Collapse ghost>
-                    <Collapse.Panel header={<b>שמות</b>} style={{backgroundColor: SECTION_COLORS.names, margin: PANEL_MARGIN}}>
-                        <CategorizedListEditor 
-                            initialData={names}
-                            onDataUpdate={names => updateSession({names})}
-                        />    
-                    </Collapse.Panel>
-                </Collapse>
+                <SingleCollapsable ghost header={<b>שמות</b>} style={{backgroundColor: SECTION_COLORS.names}}>
+                    <CategorizedListEditor 
+                        initialData={names}
+                        onDataUpdate={names => updateSession({names})}
+                    />    
+                </SingleCollapsable>
             </Col>
         </Row>
     </div>

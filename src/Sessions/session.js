@@ -21,8 +21,11 @@ export default class Session {
 
     toString() {
         const name = this.name || ''
-        const formatted_date = this.date.toLocaleString(DateTime.DATE_SHORT)
-        return `${name}: session to play at ${formatted_date}`
+        return `${name}: session to play at ${this.getDateString()}`
+    }
+
+    getDateString() {
+        return this.date.toLocaleString(DateTime.DATE_SHORT)
     }
 }
 
