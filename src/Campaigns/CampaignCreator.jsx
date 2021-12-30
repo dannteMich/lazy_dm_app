@@ -20,7 +20,7 @@ export function CampaignCreator() {
     function createCampaign({name, description=''}) {
         setLoading(true)
         addDoc(
-            collection(db, "accounts", currentUser.uid, 'campaigns')
+            collection(db, "accounts", currentUser.email, 'campaigns')
                 .withConverter(Campaign.firestoreConvertor), 
             new Campaign(name, description))
         .then(docRef => navigate(`/campaigns/${docRef.id}`))

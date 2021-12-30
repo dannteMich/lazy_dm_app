@@ -15,7 +15,7 @@ const { Title, Paragraph } = Typography
 export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate }) {
     const EditNameIcon = <span style={{ fontSize: "medium" }}><EditTwoTone /></span>
     return <Row>
-        <Col span={12}>
+        <Col span={24} lg={12}>
             <div style={{ padding: "30px" }}>
                 <Title level={2} editable={{ onChange: onNameUpdate, icon: EditNameIcon, tooltip: "שינוי שם משחק"}}>
                     {name}
@@ -25,7 +25,7 @@ export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescr
                 </Paragraph>
             </div>
         </Col>
-        <Col span={12}>
+        <Col span={24} lg={12}>
             <SessionSelector />
         </Col>
     </Row>
@@ -43,7 +43,7 @@ export default function SingleCampaignEditor() {
     const [campaign, setCampaign] = useState()
     const [error, setError] = useState()
 
-    const campaignRef = doc(db, 'accounts', currentUser.uid, 'campaigns', campaignId)
+    const campaignRef = doc(db, 'accounts', currentUser.email, 'campaigns', campaignId)
         .withConverter(Campaign.firestoreConvertor)
 
     useEffect(() => {

@@ -22,7 +22,7 @@ export default function SessionCreator() {
     function createSession({date, name}) {
         setLoading(true)
         addDoc(collection(
-            db, 'accounts', currentUser.uid, 'campaigns', campaignId, 'sessions')
+            db, 'accounts', currentUser.email, 'campaigns', campaignId, 'sessions')
                 .withConverter(Session.firestoreConvertor),
             new Session(date, {name}))
         .then(docRef => navigate(`/campaigns/${campaignId}/sessions/${docRef.id}`))

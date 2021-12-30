@@ -121,7 +121,7 @@ export default function SessionViewer() {
     const [error, setError] = useState()
 
     const getSessionRef = useCallback(() => doc(db,
-        'accounts', currentUser.uid,
+        'accounts', currentUser.email,
         'campaigns', campaignId,
         'sessions', sessionId
     ).withConverter(Session.firestoreConvertor),

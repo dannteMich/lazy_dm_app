@@ -27,7 +27,7 @@ export default function SessionSelector() {
     const [modalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
-        getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns', campaignId, 'sessions')
+        getDocs(collection(db, 'accounts', currentUser.email, 'campaigns', campaignId, 'sessions')
             .withConverter(Session.firestoreConvertor))
         .then(querySnapshot => setSessions(querySnapshot.docs.map(d => d.data())))
         .catch(e => setError(e))

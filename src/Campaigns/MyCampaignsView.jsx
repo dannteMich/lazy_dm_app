@@ -48,7 +48,7 @@ export default function MyCampaignsView() {
     const openModal = () => setModalVisible(true)
 
     useEffect(() => {
-        getDocs(collection(db, 'accounts', currentUser.uid, 'campaigns')
+        getDocs(collection(db, 'accounts', currentUser.email, 'campaigns')
             .withConverter(Campaign.firestoreConvertor))
         .then(querySnapshot => setData(querySnapshot.docs.map(d => d.data())))
         .catch(e => setError(e))
