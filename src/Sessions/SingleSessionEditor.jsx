@@ -175,7 +175,7 @@ export default function SingleSessionEditor() {
         return onSnapshot(getSessionRef(),
         doc => {
             const retrieved_session = doc.data()
-            const q = query(getAllSessionsRef(), where("date", "<", retrieved_session.date.toJSDate()), orderBy("date"), limit(1))
+            const q = query(getAllSessionsRef(), where("date", "<", retrieved_session.date.toJSDate()), orderBy("date", "desc"), limit(1))
             getDocs(q).then(snapshot => !snapshot.empty && setPrevSession(snapshot.docs[0].data()))
             setSession(retrieved_session)
         },
