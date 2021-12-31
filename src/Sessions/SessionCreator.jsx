@@ -19,12 +19,12 @@ export default function SessionCreator() {
     const {campaignId} = useParams()
     const navigate = useNavigate()
 
-    function createSession({date, name}) {
+    function createSession({date, name, description}) {
         setLoading(true)
         addDoc(collection(
             db, 'accounts', currentUser.email, 'campaigns', campaignId, 'sessions')
                 .withConverter(Session.firestoreConvertor),
-            new Session(date, {name}))
+            new Session(date, {name, description}))
         .then(docRef => navigate(`/campaigns/${campaignId}/sessions/${docRef.id}`))
         .catch(e => {
             console.log(e);
@@ -40,9 +40,9 @@ export default function SessionCreator() {
 
 export function SessionCreatorForm({handleCreate, loading, style}) {
     
-    const onFinish = ({name, date}) => {
+    const onFinish = ({name, date, description}) => {
         const luxon_date = DateTime.fromJSDate(date.toDate())
-        handleCreate({name, date: luxon_date})
+        handleCreate({name, date: luxon_date, description})
     }
     
     return <div style={{maxWidth: "800px", ...style}}>
@@ -58,6 +58,10 @@ export function SessionCreatorForm({handleCreate, loading, style}) {
 
             <Form.Item label="שם לסשן (אם יש כזה)" name="name">
                 <Input placeholder=""/>
+            </Form.Item>
+
+            <Form.Item label="תיאור לסשן" name="description">
+                <Input.TextArea placeholder="" />
             </Form.Item>
 
             <Form.Item>

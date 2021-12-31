@@ -12,18 +12,24 @@ import Campaign from "./campaign";
 import SessionSelector from "../Sessions/SessionSelector";
 
 const { Title, Paragraph } = Typography
-export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate }) {
+
+export function EditCampaignDetials({ name, description, onNameUpdate, onDescriptionUpdate }) {
     const EditNameIcon = <span style={{ fontSize: "medium" }}><EditTwoTone /></span>
-    return <Row>
+    return <>
+        <Title level={2} editable={{ onChange: onNameUpdate, icon: EditNameIcon, tooltip: "שינוי שם משחק"}}>
+            {name}
+        </Title>
+        <Paragraph editable={{ onChange: onDescriptionUpdate, autoSize: { minRows: 3 }, tooltip: "שינוי תאור משחק"}}>
+            {description}
+        </Paragraph>
+    </>
+}
+
+export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate }) {
+    
+    return <Row gutter={24} style={{margin: "20px"}}>
         <Col span={24} lg={12}>
-            <div style={{ padding: "30px" }}>
-                <Title level={2} editable={{ onChange: onNameUpdate, icon: EditNameIcon, tooltip: "שינוי שם משחק"}}>
-                    {name}
-                </Title>
-                <Paragraph editable={{ onChange: onDescriptionUpdate, autoSize: { minRows: 3 }, tooltip: "שינוי תאור משחק"}}>
-                    {description}
-                </Paragraph>
-            </div>
+            <EditCampaignDetials {...{name, description, onNameUpdate, onDescriptionUpdate}}/>
         </Col>
         <Col span={24} lg={12}>
             <SessionSelector />

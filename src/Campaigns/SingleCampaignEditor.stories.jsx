@@ -1,17 +1,17 @@
 import React from "react";
 
-import {SingleCampaignDisplay} from './SingleCampaignEditor'
+import {EditCampaignDetials} from './SingleCampaignEditor'
 
 export default {
     title: 'Campaigns/SingleCampaignDisplay',
-    component: SingleCampaignDisplay,
+    component: EditCampaignDetials,
     argTypes: {
         onNameUpdate: {action: "name updated"},
         onDescriptionUpdate: {action: "description updated"},
     }
 }
 
-const Template = (args) => <SingleCampaignDisplay {...args} />
+const Template = (args) => <EditCampaignDetials {...args} />
 
 export const Basic = Template.bind({})
 Basic.args = {

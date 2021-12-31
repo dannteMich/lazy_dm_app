@@ -149,6 +149,7 @@ export function SingleSessionComponent({ session, updateSession }) {
 }
 SingleSessionComponent.propTypes = {
     session: PropTypes.instanceOf(Session).isRequired,
+    prevSession: PropTypes.instanceOf(Session),
     updateSession: PropTypes.func
 }
 
@@ -188,7 +189,7 @@ export default function SingleSessionEditor() {
 
     console.log(prevSession) // TODO: not the right usage
     return <div style={{padding: "15px"}}>
-        <SingleSessionComponent session={session} updateSession={d => updateDoc(getSessionRef(), d)} />
+        <SingleSessionComponent session={session} prevSession={prevSession} updateSession={d => updateDoc(getSessionRef(), d)} />
     </div>
 
 }
