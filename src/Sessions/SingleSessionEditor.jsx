@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from 'prop-types'
-import { doc, onSnapshot, updateDoc } from "@firebase/firestore";
+import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, getDocs } from "@firebase/firestore";
 
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
@@ -156,6 +156,7 @@ export default function SingleSessionEditor() {
     const { currentUser } = useAuth()
     const { campaignId, sessionId } = useParams()
     const [session, setSession] = useState()
+    const [prevSession, setPrevSession] = useState()
     const [error, setError] = useState()
 
     const getSessionRef = useCallback(() => doc(db,
@@ -165,19 +166,27 @@ export default function SingleSessionEditor() {
     ).withConverter(Session.firestoreConvertor),
     [currentUser, campaignId, sessionId]
     )
+    const getAllSessionsRef = useCallback(() => collection(db,
+        'accounts', currentUser.email, 'campaigns', campaignId,'sessions')
+            .withConverter(Session.firestoreConvertor), 
+        [currentUser, campaignId])
 
     useEffect(() => {
         return onSnapshot(getSessionRef(),
         doc => {
-            setSession(doc.data())
+            const retrieved_session = doc.data()
+            const q = query(getAllSessionsRef(), where("date", "<", retrieved_session.date.toJSDate()), orderBy("date"), limit(1))
+            getDocs(q).then(snapshot => !snapshot.empty && setPrevSession(snapshot.docs[0].data()))
+            setSession(retrieved_session)
         },
         e => setError(e))
-    }, [getSessionRef])
+    }, [getSessionRef, getAllSessionsRef])
     
 
     if (error) return JSON.stringify(error)
     if (!session) return <LoadingSpinner label="טוען" />
 
+    console.log(prevSession) // TODO: not the right usage
     return <div style={{padding: "15px"}}>
         <SingleSessionComponent session={session} updateSession={d => updateDoc(getSessionRef(), d)} />
     </div>
