@@ -1,8 +1,5 @@
 import React from "react";
 
-import {BrowserRouter as Router} from 'react-router-dom'
-
-
 import {NotAllowdNotice} from './ProtectedPath'
 
 export default {
@@ -10,9 +7,7 @@ export default {
     component: NotAllowdNotice,
 }
 
-const Template = (args) => <Router>
-    <NotAllowdNotice {...args} />
-    </Router>
+const Template = (args) => <NotAllowdNotice {...args} />
 
 export const Basic = Template.bind({})
 Basic.args = {

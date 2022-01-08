@@ -1,4 +1,4 @@
-import {ConfigProvider} from 'antd'
+import {ConfigProvider, Row, Col} from 'antd'
 import {BrowserRouter as Router} from 'react-router-dom'
 
 import 'antd/dist/antd.css'
@@ -16,7 +16,11 @@ export const parameters = {
 export const decorators = [
   Story => <Router>
     <ConfigProvider direction="rtl">
-      <Story />
+      <Row>
+        <Col span={24}>
+          <Story />
+        </Col>
+      </Row>
     </ConfigProvider>
   </Router>
 ];
