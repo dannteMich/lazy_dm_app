@@ -9,7 +9,7 @@ const DEFAULT_MAX_LENGTH = 240
 export function AdditionButton({onClick, caption}) {
     const inButton = [<PlusOutlined key="0"/>]
     if (caption) {
-        inButton.push(<span key="1">caption</span>, <PlusOutlined key="3"/>)
+        inButton.push(<span key="1">{caption}</span>, <PlusOutlined key="2"/>)
     }
 
     return <Button 
