@@ -4,7 +4,7 @@ import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, g
 
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
-import { Col, Collapse, Row, Typography } from "antd";
+import { Button, Col, Collapse, Row, Space, Typography } from "antd";
 
 import { db } from "../firebase/firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -35,22 +35,10 @@ SingleCollapsable.propTypes = {
     style: PropTypes.object
 }
 
-export function SingleSessionComponent({ session, updateSession }) {
-    const { date, name, description, npcs, locations, scenes, encounters, names, clues } = session
-
-    const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
-    let header_string = `מפגש ב-${date_in_format}`
-    if (name) {
-        header_string += `: ${name}`
-    }
-
-    return <div>
-        <Row>
-            <Col>
-                <Title level={2}>{header_string}</Title>
-            </Col>
-        </Row>
-        <Row>
+export function SessionInnerPopertiesEditor({session, updateSession}) {
+    const {name, date, description} = session
+    return <>
+        <Row gutter={8}>
             <Col>
                 תאריך:
                 <UpdateDate currentDate={date} updateDate={d => updateSession({date: d.toJSDate()})} />
@@ -78,9 +66,41 @@ export function SingleSessionComponent({ session, updateSession }) {
                 />
             </Col>
         </Row>
+    </>
+}
+SessionInnerPopertiesEditor.propTypes = {
+    session: PropTypes.instanceOf(Session).isRequired,
+    updateSession: PropTypes.func.isRequired,
+}
+
+export function SingleSessionComponent({ session, updateSession }) {
+    const { date, name, npcs, locations, scenes, encounters, names, clues } = session
+
+    const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
+    let header_string = `מפגש ב-${date_in_format}`
+    if (name) {
+        header_string += `: ${name}`
+    }
+
+    return <div>
         <Row>
             <Col>
-                <Link to="./view">צפייה</Link>
+                <Title level={2}>{header_string}</Title>
+            </Col>
+        </Row>
+        <Row>
+            <Col span={12}>
+                <SessionInnerPopertiesEditor {...{session, updateSession}}/>
+            </Col>
+            <Col span={12}>
+                <Space>
+                    <Link to="./view">
+                        <Button type="primary" size="large">צפיה</Button>
+                    </Link>
+                    <Link to="./../..">
+                        <Button type="primary" size="large">חזרה לרשימת מפגשים</Button>
+                    </Link>
+                </Space>
             </Col>
         </Row>
         <br/>

@@ -55,11 +55,15 @@ export function SessionViewerComponent({session}) {
     const names_data = process_names_to_name_descriptions(session.names)
     const clues_data = process_clues_to_node_list(session.clues)
     
-    return <Space direction="vertical" size={"middle"}>
-        <Row>
-            <Col span={24}>
-            Session Viewer Component {session.date.toLocaleString(DateTime.DATE_SHORT)}
-            <Link to="./..">עריכה</Link>
+    return <Space direction="vertical" size={"middle"} >
+        <Row gutter={16}>
+            <Col span={12}>
+                <Title level={5}>
+                    {session.date.toLocaleString(DateTime.DATE_SHORT)} {session.name}
+                </Title>
+            </Col>
+            <Col span={12}>
+                <Link to="./..">חזרה לעריכה</Link>
             </Col>
         </Row>
         
