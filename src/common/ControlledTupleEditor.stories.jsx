@@ -35,7 +35,7 @@ const fields = [
     {
         key: "name",
         label: "שם",
-        flexValues: "0",
+        flex: "0",
         maxLength: 100,
         minWidth: 240,
     },

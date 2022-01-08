@@ -53,7 +53,7 @@ export default function ControlledTupleEditor({
             />
         </Col>}
 
-        {fields.map((f, j) => <Col key={f.key} flex={f.flexValues || null}>
+        {fields.map((f, j) => <Col key={f.key} flex={f.flex || null}>
             <Input
                 style={{minWidth: f.minWidth, maxWidth: f.maxWdith}}
                 maxLength={f.maxLength || DEFAULT_MAX_LENGTH}
@@ -86,7 +86,7 @@ ControlledTupleEditor.propTypes = {
         maxLength: PropTypes.number,
         minWdith: PropTypes.number,
         maxWdith: PropTypes.number,
-        flexValues: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        flex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     })).isRequired,
     allowDeletion: PropTypes.bool,
     allowAddition: PropTypes.bool,
