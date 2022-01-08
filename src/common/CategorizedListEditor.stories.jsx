@@ -3,7 +3,7 @@ import React from 'react';
 import CategorizedListEditor from './CategorizedListEditor';
 
 export default {
-  title: 'Common/CategorizedListEditor',
+  title: 'Common/ComposedInput/CategorizedListEditor',
   component: CategorizedListEditor,
   args: {},
   argTypes: {

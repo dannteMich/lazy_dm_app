@@ -3,7 +3,7 @@ import React from 'react';
 import NameDescriptionEditor from './NameDescriptionEditor';
 
 export default {
-  title: 'Common/NameDescriptionEditor',
+  title: 'Common/ComposedInput/NameDescriptionEditor',
   component: NameDescriptionEditor,
   args: {},
   argTypes: {

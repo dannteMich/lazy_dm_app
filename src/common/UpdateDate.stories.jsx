@@ -4,7 +4,7 @@ import React from 'react';
 import UpdateDate from './UpdateDate';
 
 export default {
-  title: 'Common/UpdateDate',
+  title: 'Common/Inputs/UpdateDate',
   component: UpdateDate,
   args: {},
   argTypes: {

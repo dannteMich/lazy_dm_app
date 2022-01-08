@@ -45,7 +45,7 @@ export default function ControlledTupleEditor({
     }
 
     const linesOfData = data.map((d, i) => <Row key={i} gutter={16}>
-        {allowDeletion && <Col>
+        {allowDeletion && <Col flex="0">
             <Button
             type="text" tabIndex="-1"
             icon={<MinusCircleOutlined />}
@@ -53,7 +53,7 @@ export default function ControlledTupleEditor({
             />
         </Col>}
 
-        {fields.map((f, j) => <Col key={f.key} flex={f.flexValues || "1"}>
+        {fields.map((f, j) => <Col key={f.key} flex={f.flexValues || null}>
             <Input
                 style={{minWidth: f.minWidth, maxWidth: f.maxWdith}}
                 maxLength={f.maxLength || DEFAULT_MAX_LENGTH}

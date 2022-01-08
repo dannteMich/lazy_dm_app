@@ -3,7 +3,7 @@ import React from 'react';
 import ControlledTupleEditor from './ControlledTupleEditor';
 
 export default {
-  title: 'common/ControlledTupleEditor',
+  title: 'common/ComposedInput/ControlledTupleEditor',
   component: ControlledTupleEditor,
   argTypes: {
     onChange: {action: "data updated"}

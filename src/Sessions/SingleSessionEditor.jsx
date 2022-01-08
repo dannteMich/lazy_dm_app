@@ -97,7 +97,7 @@ export function SingleSessionComponent({ session, updateSession }) {
                     <Link to="./view">
                         <Button type="primary" size="large">צפיה</Button>
                     </Link>
-                    <Link to="./../..">
+                    <Link to="./..">
                         <Button type="primary" size="large">חזרה לרשימת מפגשים</Button>
                     </Link>
                 </Space>

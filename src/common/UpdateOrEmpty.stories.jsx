@@ -3,7 +3,7 @@ import React from 'react';
 import UpdateOrEmpty from './UpdateOrEmpty';
 
 export default {
-  title: 'Common/UpdateOrEmpty',
+  title: 'Common/Inputs/UpdateOrEmpty',
   component: UpdateOrEmpty,
   args: {},
   argTypes: {
