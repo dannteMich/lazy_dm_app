@@ -10,17 +10,18 @@ export default function ListOfActionsButton({
     ...buttonProps 
 }) {
     
-    const menu = <Menu>
-        {data.map((d, i) => <Menu.Item key={i} onClick={() => onDataClick(d)}>
-            {getLabelFromData(d)}
-        </Menu.Item>)}
+    const menuItems = data.map((d, i) => <Menu.Item key={i} onClick={() => onDataClick(d)}>
+        {getLabelFromData(d)}
+    </Menu.Item>)
 
-        {!_.isEmpty(allLabel) && onAllClick != null && <Menu.Item key="all" onClick={() => onAllClick(data)}>
-            {allLabel}            
-        </Menu.Item>}
-    </Menu>
+    if (!_.isEmpty(allLabel) && onAllClick != null) {
+        menuItems.push(
+            <Menu.Divider key="devider"/>,
+            <Menu.Item key="all" onClick={() => onAllClick(data)}>{allLabel}</Menu.Item>
+        )
+    }
     
-    return <Dropdown overlay={menu}>
+    return <Dropdown overlay={<Menu>{menuItems}</Menu>}>
         <Button {...buttonProps}>
             {children}
         </Button>

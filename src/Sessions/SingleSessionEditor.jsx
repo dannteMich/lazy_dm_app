@@ -5,6 +5,7 @@ import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, g
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
 import { Button, Col, Collapse, Row, Space, Typography } from "antd";
+import { Link } from "react-router-dom";
 
 import { db } from "../firebase/firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -12,10 +13,9 @@ import Session from "./session";
 import { LoadingSpinner } from "../common/Loading";
 import UpdateDate from '../common/UpdateDate'
 import UpdateOrEmpty from "../common/UpdateOrEmpty";
-import NameDescriptionEditor from "../common/NameDescriptionEditor";
 import CategorizedListEditor from "../common/CategorizedListEditor";
 import {SECTION_COLORS} from '../common/consts'
-import { Link } from "react-router-dom";
+import CollapsableElementEditor from './CollapsableElementEditor'
 
 const { Title } = Typography
 
@@ -73,7 +73,7 @@ SessionInnerPopertiesEditor.propTypes = {
     updateSession: PropTypes.func.isRequired,
 }
 
-export function SingleSessionComponent({ session, updateSession }) {
+export function SingleSessionComponent({ session, updateSession, prevSession }) {
     const { date, name, npcs, locations, scenes, encounters, names, clues } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
@@ -97,7 +97,7 @@ export function SingleSessionComponent({ session, updateSession }) {
                     <Link to="./view">
                         <Button type="primary" size="large">צפיה</Button>
                     </Link>
-                    <Link to="./..">
+                    <Link to="./../..">
                         <Button type="primary" size="large">חזרה לרשימת מפגשים</Button>
                     </Link>
                 </Space>
@@ -106,34 +106,28 @@ export function SingleSessionComponent({ session, updateSession }) {
         <br/>
         <Row gutter={8}>
             <Col xl={12} span={24}>
-                <SingleCollapsable ghost header={<b>דמויות</b>} style={{backgroundColor: SECTION_COLORS.npcs}}>
-                    <NameDescriptionEditor 
-                        initialData={npcs} onDataUpdate={npcs => updateSession({npcs})}
-                        placeHolders={["שם לדמות", "תיאור לדמות"]}
-                        additionButtonCaption="הוספת דמות"
-                    />
-                </SingleCollapsable>
+                <CollapsableElementEditor 
+                    header={<b>דמויות</b>} presetEntries={prevSession && prevSession.npcs}
+                    initialData={npcs} onSave={npcs => updateSession({npcs})}
+                    style={{backgroundColor: SECTION_COLORS.npcs}}
+                />
                 
             </Col>
             <Col xl={12} span={24}>
-                <SingleCollapsable ghost header={<b>מקומות</b>} style={{backgroundColor: SECTION_COLORS.locations}}>
-                    <NameDescriptionEditor 
-                        initialData={locations} onDataUpdate={locations => updateSession({locations})}
-                        placeHolders={["שם המקום", "תיאור המקום"]}
-                        additionButtonCaption="הוספת מיקום"
-                    />
-                </SingleCollapsable>
+                <CollapsableElementEditor 
+                    header={<b>מקומות</b>} presetEntries={prevSession && prevSession.locations}
+                    initialData={locations} onSave={locations => updateSession({locations})}
+                    style={{backgroundColor: SECTION_COLORS.locations}}
+                />
             </Col>
         </Row>
         <Row>
             <Col span={24}>
-                <SingleCollapsable ghost header={<b>סצנות</b>} style={{backgroundColor: SECTION_COLORS.scenes}}>
-                    <NameDescriptionEditor 
-                        initialData={scenes} onDataUpdate={scenes => updateSession({scenes})}
-                        placeHolders={["שם הסצינה", "פירוט קצר ודגשים"]}
-                        additionButtonCaption="הוספת סצינה"
-                    />
-                </SingleCollapsable>
+                <CollapsableElementEditor 
+                    header={<b>סצנות</b>}
+                    initialData={scenes} onSave={scenes => updateSession({scenes})}
+                    style={{backgroundColor: SECTION_COLORS.scenes}}
+                />
             </Col>
         </Row>
         <Row>
@@ -147,14 +141,23 @@ export function SingleSessionComponent({ session, updateSession }) {
             </Col>
         </Row>
         <Row gutter={8}>
-            <Col xl={12} span={24}>    
-                <SingleCollapsable ghost header={<b>Random Encounters</b>} style={{backgroundColor: SECTION_COLORS.encounters}}>
-                    <NameDescriptionEditor 
-                        initialData={encounters} onDataUpdate={encounters => updateSession({encounters})}
-                        labels={["תוצאת קוביה:", "אירוע:"]}
-                        placeHolders={["טווח בקוביה", "פירוט האירוע"]}
-                    />
-                </SingleCollapsable>
+            <Col xl={12} span={24}>
+                <CollapsableElementEditor 
+                    header={<b>Random Encounters</b>}
+                    initialData={encounters} onSave={encounters => updateSession({encounters})}
+                    style={{backgroundColor: SECTION_COLORS.encounters}} fields={[
+                        {
+                            key: "name",
+                            label: "תוצאות קוביה",
+                            placeholder: "טווח בקוביה"
+                        }, {
+                            key: "description",
+                            label: "אירוע",
+                            placeholder: "פירוט האירוע",
+                            flex: 1
+                        }
+                    ]}
+                />    
             </Col>
             <Col xl={12} span={24}>
                 <SingleCollapsable ghost header={<b>שמות</b>} style={{backgroundColor: SECTION_COLORS.names}}>
@@ -207,7 +210,6 @@ export default function SingleSessionEditor() {
     if (error) return JSON.stringify(error)
     if (!session) return <LoadingSpinner label="טוען" />
 
-    console.log(prevSession) // TODO: not the right usage
     return <div style={{padding: "15px"}}>
         <SingleSessionComponent session={session} prevSession={prevSession} updateSession={d => updateDoc(getSessionRef(), d)} />
     </div>

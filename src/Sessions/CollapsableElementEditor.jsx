@@ -6,32 +6,13 @@ import {Collapse, Row, Col, Button, Space} from 'antd'
 
 import ControlledTupleEditor from "../common/ControlledTupleEditor";
 import ListOfActionsButton from "../common/ListOfActionsButton";
+import {fields_propTypes} from '../common/ControlledTupleEditor'
 
 const PANEL_MARGIN = "4px 0"
 
-export function SingleCollapsable({
-    ghost=false, defaultActive=true, header=null, 
-    children, style={},
-}) {
-    return <Collapse ghost={ghost} defaultActiveKey={defaultActive ? 0 : null}>
-        <Collapse.Panel header={header}
-            style={{margin: PANEL_MARGIN, borderRadius: "4px", ...style}} 
-        >
-            {children}
-        </Collapse.Panel>
-    </Collapse>
-}
-SingleCollapsable.propTypes = {
-    ghost: PropTypes.bool,
-    defaultActive: PropTypes.bool,
-    header: PropTypes.node,
-    style: PropTypes.object,
-    
-}
-
 export default function CollapsableElementEditor({
-    initialData=[], onSave, presetEntries,
-    header, style,
+    initialData=[], onSave, presetEntries=[], fields,
+    header, addButtonCaption="הוספה", ghost=true, defaultActive=true, style
 }) {
     
     const [data, setData] = useState(initialData)
@@ -61,43 +42,49 @@ export default function CollapsableElementEditor({
         onDataClick={d => addEntry(d)} onAllClick={() => addEntries(availablePresets)}
     >מסשן קודם</ListOfActionsButton>
 
-    return <SingleCollapsable header={<b>{header}</b>} style={style}>
-        <ControlledTupleEditor 
-            data={data} onChange={setData}
-            fields={[
-                {
-                    key: "name",
-                    placeholder: "שם",
-                    minWdith: 150,
-                },{
-                    key: "description",
-                    placeholder: "תיאור",
-                    allowClear: true,
-                    flex: 1
-                }
-            ]}
-            addButtonCaption="הוספה"
-        />
+    const controlled_tuple_fields = fields || [
+        {
+            key: "name",
+            placeholder: "שם",
+            minWdith: 150,
+        },{
+            key: "description",
+            placeholder: "תיאור",
+            allowClear: true,
+            flex: 1
+        }
+    ]
 
-        <Row style={{padding: "10px 0 0 0"}}>
-            <Col flex="0">
-                <Space>
-                    <Button type="primary" onClick={validateAndSave} disabled={buttons_disabled}>
-                        שמירת שינויים
-                    </Button>
-                    <Button onClick={() => setData(initialData)} disabled={buttons_disabled}>
-                        ביטול שינויים
-                    </Button>
-                    {fromPrevButton}
-                </Space>
-            </Col>
-        </Row>
-    </SingleCollapsable>
+
+    return <Collapse ghost={ghost} defaultActiveKey={defaultActive ? 0 : null}>
+        <Collapse.Panel header={header} style={{margin: PANEL_MARGIN, borderRadius: "4px", ...style}} >
+            <ControlledTupleEditor data={data} onChange={setData} 
+                fields={controlled_tuple_fields} addButtonCaption={addButtonCaption} />
+
+            <Row style={{padding: "10px 0 0 0"}}>
+                <Col flex="0">
+                    <Space>
+                        <Button type="primary" onClick={validateAndSave} disabled={buttons_disabled}>
+                            שמירת שינויים
+                        </Button>
+                        <Button onClick={() => setData(initialData)} disabled={buttons_disabled}>
+                            ביטול שינויים
+                        </Button>
+                        {fromPrevButton}
+                    </Space>
+                </Col>
+            </Row>
+        </Collapse.Panel>
+    </Collapse>
 }
 CollapsableElementEditor.propTypes ={
     initialData: PropTypes.arrayOf(PropTypes.object),
     presetEntries: PropTypes.arrayOf(PropTypes.object),
     onSave: PropTypes.func.isRequired,
-    header: PropTypes.node,
+    header: PropTypes.node.isRequired,
     style: PropTypes.object,
+    ghost: PropTypes.bool,
+    addButtonCaption: PropTypes.string,
+    defaultActive: PropTypes.bool,
+    fields: fields_propTypes,
 }

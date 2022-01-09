@@ -6,6 +6,17 @@ import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 const DEFAULT_MAX_LENGTH = 240
 
+export const fields_propTypes = PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
+    allowClear: PropTypes.bool,
+    maxLength: PropTypes.number,
+    minWdith: PropTypes.number,
+    maxWdith: PropTypes.number,
+    flex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+}))
+
 export function AdditionButton({onClick, caption}) {
     const inButton = [<PlusOutlined key="0"/>]
     if (caption) {
@@ -78,17 +89,9 @@ export default function ControlledTupleEditor({
 }
 ControlledTupleEditor.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fields: PropTypes.arrayOf(PropTypes.shape({
-        key: PropTypes.string.isRequired,
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-        allowClear: PropTypes.bool,
-        maxLength: PropTypes.number,
-        minWdith: PropTypes.number,
-        maxWdith: PropTypes.number,
-        flex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    })).isRequired,
+    fields: fields_propTypes.isRequired,
     allowDeletion: PropTypes.bool,
     allowAddition: PropTypes.bool,
     addButtonCaption: PropTypes.node,
 }
+
