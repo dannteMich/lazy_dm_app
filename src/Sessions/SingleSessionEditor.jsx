@@ -4,7 +4,7 @@ import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, g
 
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
-import { Button, Col, Collapse, Row, Space, Typography } from "antd";
+import { Button, Col, Row, Space, Typography } from "antd";
 import { Link } from "react-router-dom";
 
 import { db } from "../firebase/firebase";
