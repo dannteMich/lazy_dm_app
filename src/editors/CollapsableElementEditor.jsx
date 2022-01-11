@@ -10,19 +10,27 @@ import {fields_propTypes} from '../common/ControlledTupleEditor'
 
 const PANEL_MARGIN = "4px 0"
 
+export function defaultValidationFunction(newData) {
+    if (newData.some(d => _.isEmpty(d.name))) {
+        throw Error("A required 'name' field should not be empty")
+    }
+}
+
 export default function CollapsableElementEditor({
-    initialData=[], onSave, presetEntries=[], fields,
-    header, addButtonCaption="הוספה", ghost=true, defaultActive=true, style
+    initialData=[], onSave, presetEntries=[], fields, header, 
+    validateDataFunction,
+    addButtonCaption="הוספה", ghost=true, defaultActive=true, style
 }) {
     
     const [data, setData] = useState(initialData)
     const buttons_disabled = _.isEqual(initialData,data)
 
     const validateAndSave = () => {
-        if (data.some(d => _.isEmpty(d.name))) {
-            alert("A required 'name' field should not be empty")
-        } else {
+        try {
+            (validateDataFunction || defaultValidationFunction)(data)
             onSave(data)
+        } catch (e) {
+            alert(e.message)
         }
     }
 
@@ -87,4 +95,5 @@ CollapsableElementEditor.propTypes ={
     addButtonCaption: PropTypes.string,
     defaultActive: PropTypes.bool,
     fields: fields_propTypes,
+    validateDataFunction: PropTypes.func,
 }

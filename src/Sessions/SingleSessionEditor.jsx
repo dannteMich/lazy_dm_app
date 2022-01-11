@@ -15,25 +15,11 @@ import UpdateDate from '../common/UpdateDate'
 import UpdateOrEmpty from "../common/UpdateOrEmpty";
 import CategorizedListEditor from "../common/CategorizedListEditor";
 import {SECTION_COLORS} from '../common/consts'
-import CollapsableElementEditor from './CollapsableElementEditor'
+import SingleCollapsable from '../common/SingleCollapsable'
+import CollapsableElementEditor from '../editors/CollapsableElementEditor'
+import NamesEditor from "../editors/NamesEditor";
 
 const { Title } = Typography
-
-const PANEL_MARGIN = "4px 0"
-
-export function SingleCollapsable({children, ghost=false, defaultActive=true, header=null, style={}}) {
-    return <Collapse ghost={ghost} defaultActiveKey={defaultActive ? 0 : null}>
-        <Collapse.Panel header={header} style={{margin: PANEL_MARGIN, borderRadius: "4px", ...style}}>
-            {children}
-        </Collapse.Panel>
-    </Collapse>
-}
-SingleCollapsable.propTypes = {
-    ghost: PropTypes.bool,
-    defaultActive: PropTypes.bool,
-    header: PropTypes.node,
-    style: PropTypes.object
-}
 
 export function SessionInnerPopertiesEditor({session, updateSession}) {
     const {name, date, description} = session
@@ -160,12 +146,7 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
                 />    
             </Col>
             <Col xl={12} span={24}>
-                <SingleCollapsable ghost header={<b>שמות</b>} style={{backgroundColor: SECTION_COLORS.names}}>
-                    <CategorizedListEditor 
-                        initialData={names}
-                        onDataUpdate={names => updateSession({names})}
-                    />    
-                </SingleCollapsable>
+                <NamesEditor names={names} saveNames={names => updateSession({names})}/>
             </Col>
         </Row>
     </div>
