@@ -10,6 +10,7 @@ import { Row, Col, Typography } from "antd";
 import { EditTwoTone } from '@ant-design/icons'
 import Campaign from "./campaign";
 import SessionSelector from "../Sessions/SessionSelector";
+import PlayersViewAndEditor from "./PlayersViewAndEditor";
 
 const { Title, Paragraph } = Typography
 
@@ -25,11 +26,12 @@ export function EditCampaignDetials({ name, description, onNameUpdate, onDescrip
     </>
 }
 
-export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate }) {
+export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescriptionUpdate, players, onPlayersUpdate }) {
     
     return <Row gutter={24} style={{margin: "20px"}}>
         <Col span={24} lg={12}>
             <EditCampaignDetials {...{name, description, onNameUpdate, onDescriptionUpdate}}/>
+            <PlayersViewAndEditor currentPlayers={players} updatePlayers={onPlayersUpdate}/>
         </Col>
         <Col span={24} lg={12}>
             <SessionSelector />
@@ -39,8 +41,10 @@ export function SingleCampaignDisplay({ name, description, onNameUpdate, onDescr
 SingleCampaignDisplay.propTypes = {
     name: PropTypes.string.isRequired,
     onNameUpdate: PropTypes.func.isRequired,
-    onDescriptionUpdate: PropTypes.func.isRequired,
     description: PropTypes.string,
+    onDescriptionUpdate: PropTypes.func.isRequired,
+    players: PropTypes.array,
+    onPlayersUpdate: PropTypes.func.isRequired,
 }
 
 export default function SingleCampaignEditor() {
@@ -66,7 +70,8 @@ export default function SingleCampaignEditor() {
     return <SingleCampaignDisplay {...{
         ...campaign,
         onNameUpdate: (name) => updateCampaignFields({name}),
-        onDescriptionUpdate: (description) => updateCampaignFields({description})
+        onDescriptionUpdate: (description) => updateCampaignFields({description}),
+        onPlayersUpdate: (players) => updateCampaignFields({players})
     }} />
 }
 
