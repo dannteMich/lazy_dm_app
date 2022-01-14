@@ -28,7 +28,13 @@ const playersData = [
 
 const Template = (args) => <PlayersViewAndEditor {...args} />;
 
-export const Story = Template.bind({});
-Story.args = {
+export const Basic = Template.bind({});
+Basic.args = {
     currentPlayers: playersData
 };
+
+export const EmptyPlayers = Template.bind({});
+EmptyPlayers.args = {
+    currentPlayers: []
+};
+

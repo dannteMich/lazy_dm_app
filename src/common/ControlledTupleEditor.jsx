@@ -13,7 +13,7 @@ export const fields_propTypes = PropTypes.arrayOf(PropTypes.shape({
     allowClear: PropTypes.bool,
     maxLength: PropTypes.number,
     minWdith: PropTypes.number,
-    maxWdith: PropTypes.number,
+    maxWidth: PropTypes.number,
     flex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }))
 
@@ -66,7 +66,7 @@ export default function ControlledTupleEditor({
 
         {fields.map((f, j) => <Col key={f.key} flex={f.flex || null}>
             <Input
-                style={{minWidth: f.minWidth, maxWidth: f.maxWdith}}
+                style={{minWidth: f.minWidth, maxWidth: f.maxWidth}}
                 maxLength={f.maxLength || DEFAULT_MAX_LENGTH}
                 onChange={e => updateFeiledInEntry(i, f.key, e.target.value)}
                 placeholder={f.placeholder || null}

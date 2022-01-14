@@ -39,7 +39,7 @@ export default function NamesEditor({names, saveNames}) {
                 key: "category",
                 label: "קטגוריה",
                 maxLength: 30,
-                maxWdith: 200
+                maxWidth: 200
             }, {
                 key: "items",
                 label: "שמות",
