@@ -18,7 +18,7 @@ const playersData = [
     }, {
         player_name: "Someone",
         character_name: "else",
-        description: "My description",
+        description: "My description ",
     }, {
         player_name: "Player 3",
         character_name: "",

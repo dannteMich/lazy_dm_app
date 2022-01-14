@@ -16,25 +16,20 @@ const {Title} = Typography
 export default function PlayersViewAndEditor({currentPlayers, updatePlayers}) {
     const [editMode, setEditMode] = useState(_.isEmpty(currentPlayers))
     
-    
-    const toggle_edit_mode = () => setEditMode(!editMode)
-
     return <>
         <Title level={4}>שחקנים</Title>
-        <Button onClick={toggle_edit_mode}>Toggle</Button>
-        <br/>
         {editMode ? 
             <PlayersEditor 
                 initialPlayers={currentPlayers} 
                 updatePlayers={updatePlayers}
                 finishEditing={() => setEditMode(false)}
             /> : 
-            <PlayersViewer players={currentPlayers}/>
+            <PlayersViewer players={currentPlayers} startEdit={() => setEditMode(true)}/>
         }
     </>
 }
 PlayersViewAndEditor.propTypes = {
-    players: PLAYERS_LIST_PROPTYPE.isRequired,
+    currentPlayers: PLAYERS_LIST_PROPTYPE.isRequired,
     updatePlayers: PropTypes.func.isRequired,
 }
 
@@ -79,19 +74,37 @@ export function PlayersEditor({initialPlayers, updatePlayers, finishEditing}) {
         
     </div>
 }
-PlayersViewAndEditor.propTypes = {
+PlayersEditor.propTypes = {
     initialPlayers: PLAYERS_LIST_PROPTYPE.isRequired,
     updatePlayers: PropTypes.func.isRequired,
     finishEditing: PropTypes.func,
 }
 
-export function PlayersViewer({players}) {
-    
-    
+export function PlayersViewer({players, startEdit}) {
+
+    function getLabel(player, character=null) {
+        let label = player
+        if (character) label += ` - ${character}`
+        return label
+    }
+
     return <>
-        Players View
+        <Descriptions column={1} size="small">
+            {players.map(({player_name, character_name, description}) => {
+            
+            return <Descriptions.Item 
+                    key={player_name} 
+                    label={<b>{getLabel(player_name, character_name)}</b>}
+                > 
+                {description || "אין תיאור"}
+            </Descriptions.Item>})}
+        </Descriptions>
+        <Button  onClick={startEdit} style={{margin: "10px 0"}}>
+            עריכה
+        </Button>
     </>
 }
 PlayersViewer.propTypes = {
-    players: PLAYERS_LIST_PROPTYPE.isRequired
+    players: PLAYERS_LIST_PROPTYPE.isRequired,
+    startEdit: PropTypes.func.isRequired,
 }
