@@ -13,6 +13,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { LoadingSpinner } from "../common/Loading";
 import { SECTION_COLORS } from "../common/consts";
 import { Link } from "react-router-dom";
+import ImageGrid from "../common/ImageGrid";
 
 const {Title} = Typography
 
@@ -109,6 +110,9 @@ export function SessionViewerComponent({session}) {
                         {item}
                     </List.Item>}
                 />
+            </Col>
+            <Col span={24}>
+                <ImageGrid media={session.media}/>
             </Col>
         </Row>
         

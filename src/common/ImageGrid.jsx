@@ -16,6 +16,7 @@ const MEDIA_ENTRY_PROPTYPE = PropTypes.oneOfType([
 
 export function InnerImageDisplay({height, width, media, style={}}) {
     const {url, title} = media
+
     return <div style={{display: "flex", flexDirection: "column", ...style}}>
             
     <img src={url} alt={title || ''} style={{objectFit: "cover", width: "100%", height: "100%"}}/>
@@ -26,10 +27,41 @@ export function InnerImageDisplay({height, width, media, style={}}) {
 }
 InnerImageDisplay.propTypes = {
     media: MEDIA_ENTRY_PROPTYPE.isRequired,
-    // height: PropTypes.number,
-    // width: PropTypes.number,
     onClick: PropTypes.func,
     style: PropTypes.object
+}
+
+
+function getImageWithDivider(imgWidth, imgHeight) {
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) * 0.82 // the modal starts a bit lower
+    return _.max([imgWidth/vw, imgHeight/vh, 1])
+}
+
+function callbackOnImageSize(imgUrl, callBack) {
+    var img = new Image();
+    img.src = imgUrl;
+    img.onload = function() { callBack(this.width, this.height); }
+}
+
+export function ViewModal({media, onClose}) {
+    const [imgSize, setImgSize] = useState([null, null])
+    callbackOnImageSize(media.url, (w, h) => setImgSize([w,h]))
+    
+    const [imgWidth, imgHeight] = imgSize
+    const divider = getImageWithDivider(imgWidth, imgHeight)
+    
+    return <Modal visible={media != null} footer={null} closable={false} 
+            onCancel={onClose} width={imgWidth / divider}>
+        {media && <InnerImageDisplay media={media} />}
+    </Modal>
+}
+ViewModal.propTypes = {
+    media: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        title: PropTypes.string,
+    }).isRequired,
+    onClose: PropTypes.func.isRequired
 }
 
 export default function ImageGrid({media=[], cardSize = [200, 200], gutter=16}) {
@@ -40,22 +72,20 @@ export default function ImageGrid({media=[], cardSize = [200, 200], gutter=16}) 
     const [height, width] = _.isArray(cardSize) ? cardSize : [cardSize, cardSize]
 
     return <>
-        <Modal visible={viewData != null} onCancel={() => setViewData(null)} footer={null} closable={false}>
-            {viewData && <InnerImageDisplay media={viewData} />}
-        </Modal>
-        
+        {viewData && <ViewModal media={viewData} onClose={() => setViewData(null)}/>}
         <Row gutter={[gutter, gutter]}>
-            {enriched_media.map((d) => <Col>
+            
+            {enriched_media.map((d, i) => <Col key={i}>
                 <Card bodyStyle={{padding: 12}} hoverable onClick={() => setViewData(d)}>
                     <InnerImageDisplay media={d} style={{height, width}}/>
                 </Card>
             </Col>)}
-            
+
         </Row>
     </>
 }
 ImageGrid.propTypes = {
-    links: PropTypes.arrayOf(MEDIA_ENTRY_PROPTYPE),
+    media: PropTypes.arrayOf(MEDIA_ENTRY_PROPTYPE),
     cardSize: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.arrayOf(PropTypes.number),

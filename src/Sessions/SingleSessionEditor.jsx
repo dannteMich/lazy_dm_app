@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from 'prop-types'
+
 import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, getDocs } from "@firebase/firestore";
 
+import _ from 'lodash'
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
 import { Button, Col, Row, Space, Typography } from "antd";
@@ -60,7 +62,7 @@ SessionInnerPopertiesEditor.propTypes = {
 }
 
 export function SingleSessionComponent({ session, updateSession, prevSession }) {
-    const { date, name, npcs, locations, scenes, encounters, names, clues } = session
+    const { date, name, npcs, locations, scenes, encounters, names, clues, media } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
     let header_string = `מפגש ב-${date_in_format}`
@@ -147,6 +149,28 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
             </Col>
             <Col xl={12} span={24}>
                 <NamesEditor names={names} saveNames={names => updateSession({names})}/>
+            </Col>
+        </Row>
+        <Row>
+            <Col span={24}>
+                <CollapsableElementEditor 
+                    header={<b>תמונות</b>}
+                    initialData={media} onSave={media => updateSession({media})}
+                    validateDataFunction={data => {
+                        if (data.some(d => _.isEmpty(d.url))) throw Error("Must provide URL")}
+                    } 
+                    style={{border: "solid 1px #c0c0c0"}} fields={[
+                        {
+                            key: "title",
+                            placeholder: "כותרת לתמונה"
+                        }, {
+                            key: "url",
+                            label: "קישור",
+                            placeholder: "קישור לתמונה: URL",
+                            flex: 1
+                        }
+                    ]}
+                />
             </Col>
         </Row>
     </div>

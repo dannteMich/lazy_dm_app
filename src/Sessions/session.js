@@ -7,7 +7,7 @@ const DEFAULT_CLUES = [{
 }]
 
 export default class Session {
-    constructor (date,{ name=null, description=null, npcs=[], locations=[], scenes=[], encounters=[], names=[], clues=DEFAULT_CLUES}) {
+    constructor (date,{ name=null, description=null, npcs=[], locations=[], scenes=[], encounters=[], names=[], clues=DEFAULT_CLUES, media=[]}) {
         this.date = date
         this.name = name
         this.description = description
@@ -17,6 +17,7 @@ export default class Session {
         this.encounters = encounters
         this.names = names
         this.clues = clues
+        this.media = media
     }
 
     toString() {
