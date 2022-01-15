@@ -72,7 +72,7 @@ export default function ControlledTupleEditor({
                 placeholder={f.placeholder || null}
                 addonBefore={f.label || null}
                 value={d[f.key] || ''}
-                autoFocus={j===0} // for first TODO: is this needed?
+                autoFocus={j===0}
                 allowClear={f.allowClear || false}
             />
         </Col>)}        

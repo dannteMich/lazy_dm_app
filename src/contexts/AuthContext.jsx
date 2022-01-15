@@ -6,7 +6,7 @@ import {getAuth,
     createUserWithEmailAndPassword} from 'firebase/auth'
 
 const AuthContext = React.createContext()
-// TODO: allow to auth with google
+
 export function useAuth() {
     return useContext(AuthContext)
 }
