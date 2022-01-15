@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ImageGrid from './MediaGrid';
+import ImageGrid from './ImageGrid';
 
 export default {
-  title: 'Common/displays/MediaGrid',
+  title: 'Common/displays/ImageGrid',
   component: ImageGrid,
   argTypess: {},
 }
