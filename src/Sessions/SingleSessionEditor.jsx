@@ -17,8 +17,8 @@ import UpdateOrEmpty from "../common/UpdateOrEmpty";
 import CategorizedListEditor from "../common/CategorizedListEditor";
 import {SECTION_COLORS} from '../common/consts'
 import SingleCollapsable from '../common/SingleCollapsable'
-import CollapsableElementEditor from '../editors/CollapsableElementEditor'
-import NamesEditor from "../editors/NamesEditor";
+import CollapsableElementEditor from './editors/CollapsableElementEditor'
+import NamesEditor from "./editors/NamesEditor";
 import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./ElementEditors";
 
 const { Title } = Typography
@@ -105,7 +105,7 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
         </Row>
         <Row>
             <Col span={24}>
-                <CollapsableElementEditor 
+                <CollapsableElementEditor  // TODO: should Extract it into the ElementEditors file
                     header={<b>סצנות</b>}
                     initialData={scenes} onSave={scenes => updateSession({scenes})}
                     style={{backgroundColor: SECTION_COLORS.scenes}}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import _ from 'lodash'
 
-import { SECTION_COLORS } from '../common/consts'
+import { SECTION_COLORS } from '../../common/consts'
 import CollapsableElementEditor from './CollapsableElementEditor'
 
 

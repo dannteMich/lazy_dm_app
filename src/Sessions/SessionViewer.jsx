@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 import { onSnapshot, doc } from "firebase/firestore";
 import { DateTime } from "luxon";
 
-import { Descriptions, Row, Col, Space, List, Typography } from 'antd'
+import { Row, Col, Space, List, Typography } from 'antd'
 
 import { db } from "../firebase/firebase";
 import Session from "./session";
@@ -15,30 +15,13 @@ import { LoadingSpinner } from "../common/Loading";
 import { SECTION_COLORS } from "../common/consts";
 import { Link } from "react-router-dom";
 import ImageGrid from "../common/ImageGrid";
+import { SessionPairDescription } from "./viewers/SessionPairDescription";
 
 const {Title} = Typography
 
-const DESCRIPTION_STYLE = {padding: "2px 10px", borderRadius: "10px"}
+export const DESCRIPTION_STYLE = {padding: "2px 10px", borderRadius: "10px"}
 
 
-export function SessionPairDescription({title, data, style={}}) {
-    
-    return <div style={{...DESCRIPTION_STYLE, ...style}}>
-        <Title level={4}>{title}</Title>
-        <Descriptions layout="horizontal" column={1}  size="small">
-            {data.map(({name, description}) => {
-                return <Descriptions.Item key={name} label={<b>{name}</b>}>
-                    {description}
-                </Descriptions.Item>
-            })}
-        </Descriptions>
-    </div>
-}
-SessionPairDescription.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    style: PropTypes.object,
-    title: PropTypes.node.isRequired
-}
 
 function process_names_to_name_descriptions(names) {
     return names.map(({category, items}) =>  {

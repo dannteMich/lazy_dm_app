@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {Collapse, Row, Col, Button, Space} from 'antd'
 
-import ControlledTupleEditor from "../common/ControlledTupleEditor";
-import ListOfActionsButton from "../common/ListOfActionsButton";
-import {fields_propTypes} from '../common/ControlledTupleEditor'
+import ControlledTupleEditor from "../../common/ControlledTupleEditor";
+import ListOfActionsButton from "../../common/ListOfActionsButton";
+import {fields_propTypes} from '../../common/ControlledTupleEditor'
 
 const PANEL_MARGIN = "4px 0"
 
