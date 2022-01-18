@@ -43,17 +43,11 @@ function App() {
                   <SingleCampaignEditor />
               </ProtctedPath>  
               }/>
-              <Route exact path="/campaigns/:campaignId/sessions/:sessionId" element={
+              <Route exact path="/campaigns/:campaignId/sessions/:sessionId/*" element={
                 <ProtctedPath>
                   <SingleSessionEditor />
               </ProtctedPath>  
               }/>
-              <Route exact path="/campaigns/:campaignId/sessions/:sessionId/view" element={
-                <ProtctedPath>
-                  <SessionViewer />
-              </ProtctedPath>  
-              }/>
-
             
               <Route path="/" element={<div>This is the main Page</div>} />
             </Routes>
