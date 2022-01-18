@@ -20,7 +20,7 @@ import SingleCollapsable from '../common/SingleCollapsable'
 import CollapsableElementEditor from './editors/CollapsableElementEditor'
 import NamesEditor from "./editors/NamesEditor";
 import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./ElementEditors";
-import { SessionViewerComponent } from "./SessionViewer";
+import SessionViewer from "./SessionViewer";
 
 const { Title } = Typography
 
@@ -144,7 +144,7 @@ SingleSessionComponent.propTypes = {
     updateSession: PropTypes.func
 }
 
-export default function SingleSessionEditor() {
+export default function SingleSessionEditor() { // TODO: move this to a separate file
     const { currentUser } = useAuth()
     const { campaignId, sessionId } = useParams()
     
@@ -181,7 +181,7 @@ export default function SingleSessionEditor() {
 
     return <div style={{padding: "15px"}}>
         <Routes>
-            <Route exact path="/" element={<SessionViewerComponent session={session}/>} />
+            <Route exact path="/" element={<SessionViewer session={session}/>} />
             <Route path="/edit" element={<SingleSessionComponent session={session} prevSession={prevSession} updateSession={d => updateDoc(getSessionRef(), d)} />}/>
         </Routes>
         

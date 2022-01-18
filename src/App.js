@@ -16,7 +16,6 @@ import SignupView from './AuthComponents/Signup';
 import ProtctedPath from './AuthComponents/ProtectedPath'
 import SingleCampaignEditor from './Campaigns/SingleCampaignEditor';
 import SingleSessionEditor from './Sessions/SingleSessionEditor';
-import SessionViewer from './Sessions/SessionViewer';
 
 function App() {
 

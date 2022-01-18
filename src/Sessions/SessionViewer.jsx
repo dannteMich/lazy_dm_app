@@ -1,17 +1,12 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React from "react";
 import PropTypes from 'prop-types'
 
 import _ from 'lodash'
-import { useParams } from "react-router";
-import { onSnapshot, doc } from "firebase/firestore";
 import { DateTime } from "luxon";
 
 import { Row, Col, Space, List, Typography } from 'antd'
 
-import { db } from "../firebase/firebase";
 import Session from "./session";
-import { useAuth } from "../contexts/AuthContext";
-import { LoadingSpinner } from "../common/Loading";
 import { SECTION_COLORS } from "../common/consts";
 import { Link } from "react-router-dom";
 import ImageGrid from "../common/ImageGrid";
@@ -50,7 +45,7 @@ function parse_media_from_session(session) {
     )
 }
 
-export function SessionViewerComponent({session}) {
+export default function SessionViewer({session}) {
     const names_data = process_names_to_name_descriptions(session.names)
     const clues_data = process_clues_to_node_list(session.clues)
 
@@ -116,37 +111,6 @@ export function SessionViewerComponent({session}) {
         
     </Space>
 }
-SessionViewerComponent.propTypes = {
+SessionViewer.propTypes = {
     session: PropTypes.instanceOf(Session)
-}
-
-export default function SessionViewer() {
-    const { currentUser } = useAuth()
-    const { campaignId, sessionId } = useParams()
-    const [session, setSession] = useState()
-    const [error, setError] = useState()
-
-    const getSessionRef = useCallback(() => doc(db,
-        'accounts', currentUser.email,
-        'campaigns', campaignId,
-        'sessions', sessionId
-    ).withConverter(Session.firestoreConvertor),
-    [currentUser, campaignId, sessionId]
-    )
-
-    useEffect(() => {
-        return onSnapshot(getSessionRef(),
-        doc => {
-            setSession(doc.data())
-        },
-        e => setError(e))
-    }, [getSessionRef])
-    
-
-    if (error) return JSON.stringify(error)
-    if (!session) return <LoadingSpinner label="טוען" />
-    
-    return <div style={{padding: "15px"}}>
-        <SessionViewerComponent session={session}/>
-    </div>
 }
