@@ -22,11 +22,17 @@ const DESCRIPTION_STYLE = {padding: "2px 10px", borderRadius: "10px"}
 
 
 export function SessionPairDescription({title, data, style={}}) {
-    return <Descriptions title={<Title level={4}>{title}</Title>} layout="horizontal" column={1} style={{...DESCRIPTION_STYLE, ...style}} size="small">
-    {data.map(({name, description}) => <Descriptions.Item key={name} label={<b>{name}</b>}>
-        {description}
-    </Descriptions.Item>)}
-</Descriptions>
+    
+    return <div style={{...DESCRIPTION_STYLE, ...style}}>
+        <Title level={4}>{title}</Title>
+        <Descriptions layout="horizontal" column={1}  size="small">
+            {data.map(({name, description}) => {
+                return <Descriptions.Item key={name} label={<b>{name}</b>}>
+                    {description}
+                </Descriptions.Item>
+            })}
+        </Descriptions>
+    </div>
 }
 SessionPairDescription.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
