@@ -44,10 +44,11 @@ function callbackOnImageSize(imgUrl, callBack) {
     img.onload = function() { callBack(this.width, this.height); }
 }
 
-export function ViewModal({media, onClose}) {
+export function MediaModal({media, onClose}) {
     const [imgSize, setImgSize] = useState([null, null])
-    callbackOnImageSize(media.url, (w, h) => setImgSize([w,h]))
+    if (media == null) return null
     
+    callbackOnImageSize(media.url, (w, h) => setImgSize([w,h]))
     const [imgWidth, imgHeight] = imgSize
     const divider = getImageWithDivider(imgWidth, imgHeight)
     
@@ -56,11 +57,11 @@ export function ViewModal({media, onClose}) {
         {media && <InnerImageDisplay media={media} />}
     </Modal>
 }
-ViewModal.propTypes = {
+MediaModal.propTypes = {
     media: PropTypes.shape({
         url: PropTypes.string.isRequired,
         title: PropTypes.string,
-    }).isRequired,
+    }),
     onClose: PropTypes.func.isRequired
 }
 
@@ -72,7 +73,7 @@ export default function ImageGrid({media=[], cardSize = [200, 200], gutter=16}) 
     const [height, width] = _.isArray(cardSize) ? cardSize : [cardSize, cardSize]
 
     return <>
-        {viewData && <ViewModal media={viewData} onClose={() => setViewData(null)}/>}
+        <MediaModal media={viewData} onClose={() => setViewData(null)}/>
         <Row gutter={[gutter, gutter]}>
             
             {enriched_media.map((d, i) => <Col key={i}>

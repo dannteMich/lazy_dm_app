@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useCallback} from "react";
 import PropTypes from 'prop-types'
 
+import _ from 'lodash'
 import { useParams } from "react-router";
 import { onSnapshot, doc } from "firebase/firestore";
 import { DateTime } from "luxon";
@@ -52,10 +53,18 @@ function process_clues_to_node_list(clues) {
 
 }
 
+function parse_media_from_session(session) {
+    return _.concat([],
+        session.npcs.filter(x => _.has(x, 'mediaUrl')).map(x => ({title: x.name, url: x.mediaUrl})),
+        session.locations.filter(x => _.has(x, 'mediaUrl')).map(x => ({title: x.name, url: x.mediaUrl})),
+        session.media,
+    )
+}
+
 export function SessionViewerComponent({session}) {
     const names_data = process_names_to_name_descriptions(session.names)
     const clues_data = process_clues_to_node_list(session.clues)
-    
+
     return <Space direction="vertical" size={"middle"} >
         <Row gutter={16}>
             <Col span={12}>
@@ -112,7 +121,7 @@ export function SessionViewerComponent({session}) {
                 />
             </Col>
             <Col span={24}>
-                <ImageGrid media={session.media}/>
+                <ImageGrid media={parse_media_from_session(session)}/>
             </Col>
         </Row>
         

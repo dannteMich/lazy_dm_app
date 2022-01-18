@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, getDocs } from "@firebase/firestore";
 
-import _ from 'lodash'
 import { useParams } from "react-router";
 import { DateTime } from "luxon";
 import { Button, Col, Row, Space, Typography } from "antd";
@@ -20,6 +19,7 @@ import {SECTION_COLORS} from '../common/consts'
 import SingleCollapsable from '../common/SingleCollapsable'
 import CollapsableElementEditor from '../editors/CollapsableElementEditor'
 import NamesEditor from "../editors/NamesEditor";
+import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./ElementEditors";
 
 const { Title } = Typography
 
@@ -61,6 +61,7 @@ SessionInnerPopertiesEditor.propTypes = {
     updateSession: PropTypes.func.isRequired,
 }
 
+
 export function SingleSessionComponent({ session, updateSession, prevSession }) {
     const { date, name, npcs, locations, scenes, encounters, names, clues, media } = session
 
@@ -94,19 +95,12 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
         <br/>
         <Row gutter={8}>
             <Col xl={12} span={24}>
-                <CollapsableElementEditor 
-                    header={<b>דמויות</b>} presetEntries={prevSession && prevSession.npcs}
-                    initialData={npcs} onSave={npcs => updateSession({npcs})}
-                    style={{backgroundColor: SECTION_COLORS.npcs}}
-                />
-                
+                <NpcsEditor npcs={npcs} updateNpcs={npcs => updateSession({npcs})}
+                    prevNpcs={prevSession && prevSession.npcs}/>                
             </Col>
             <Col xl={12} span={24}>
-                <CollapsableElementEditor 
-                    header={<b>מקומות</b>} presetEntries={prevSession && prevSession.locations}
-                    initialData={locations} onSave={locations => updateSession({locations})}
-                    style={{backgroundColor: SECTION_COLORS.locations}}
-                />
+                <LocationsEditor locations={locations} updateLocations={locations => updateSession({locations})} 
+                    prevLocation={prevSession && prevSession.locations}/>
             </Col>
         </Row>
         <Row>
@@ -130,22 +124,7 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
         </Row>
         <Row gutter={8}>
             <Col xl={12} span={24}>
-                <CollapsableElementEditor 
-                    header={<b>Random Encounters</b>}
-                    initialData={encounters} onSave={encounters => updateSession({encounters})}
-                    style={{backgroundColor: SECTION_COLORS.encounters}} fields={[
-                        {
-                            key: "name",
-                            label: "תוצאות קוביה",
-                            placeholder: "טווח בקוביה"
-                        }, {
-                            key: "description",
-                            label: "אירוע",
-                            placeholder: "פירוט האירוע",
-                            flex: 1
-                        }
-                    ]}
-                />    
+                <RnadomEncountersEditor encounters={encounters} updateEncounters={encounters => updateSession({encounters})}/>
             </Col>
             <Col xl={12} span={24}>
                 <NamesEditor names={names} saveNames={names => updateSession({names})}/>
@@ -153,24 +132,7 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
         </Row>
         <Row>
             <Col span={24}>
-                <CollapsableElementEditor 
-                    header={<b>תמונות</b>}
-                    initialData={media} onSave={media => updateSession({media})}
-                    validateDataFunction={data => {
-                        if (data.some(d => _.isEmpty(d.url))) throw Error("Must provide URL")}
-                    } 
-                    style={{border: "solid 1px #c0c0c0"}} fields={[
-                        {
-                            key: "title",
-                            placeholder: "כותרת לתמונה"
-                        }, {
-                            key: "url",
-                            label: "קישור",
-                            placeholder: "קישור לתמונה: URL",
-                            flex: 1
-                        }
-                    ]}
-                />
+                <ExtraMediaEditor media={media} updateMedia={media => updateSession({media})}/>
             </Col>
         </Row>
     </div>
