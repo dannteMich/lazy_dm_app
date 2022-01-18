@@ -15,7 +15,7 @@ import 'antd/dist/antd.css';
 import SignupView from './AuthComponents/Signup';
 import ProtctedPath from './AuthComponents/ProtectedPath'
 import SingleCampaignEditor from './Campaigns/SingleCampaignEditor';
-import SingleSessionEditor from './Sessions/SingleSessionEditor';
+import SingleSessionContainer from "./Sessions/SingleSessionContainer";
 
 function App() {
 
@@ -44,7 +44,7 @@ function App() {
               }/>
               <Route exact path="/campaigns/:campaignId/sessions/:sessionId/*" element={
                 <ProtctedPath>
-                  <SingleSessionEditor />
+                  <SingleSessionContainer />
               </ProtctedPath>  
               }/>
             

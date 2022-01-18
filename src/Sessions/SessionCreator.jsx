@@ -25,7 +25,7 @@ export default function SessionCreator() {
             db, 'accounts', currentUser.email, 'campaigns', campaignId, 'sessions')
                 .withConverter(Session.firestoreConvertor),
             new Session(date, {name, description}))
-        .then(docRef => navigate(`/campaigns/${campaignId}/sessions/${docRef.id}`))
+        .then(docRef => navigate(`/campaigns/${campaignId}/sessions/${docRef.id}/edit`))
         .catch(e => {
             console.log(e);
             alert(`Error: ${JSON.stringify(e)}`)

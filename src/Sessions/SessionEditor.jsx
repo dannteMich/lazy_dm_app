@@ -1,17 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import PropTypes from 'prop-types'
 
-import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, getDocs } from "@firebase/firestore";
-
-// import {  } from "react-router";
 import { DateTime } from "luxon";
 import { Button, Col, Row, Space, Typography } from "antd";
-import { Link, useParams, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { db } from "../firebase/firebase";
-import { useAuth } from "../contexts/AuthContext";
 import Session from "./session";
-import { LoadingSpinner } from "../common/Loading";
 import UpdateDate from '../common/UpdateDate'
 import UpdateOrEmpty from "../common/UpdateOrEmpty";
 import CategorizedListEditor from "../common/CategorizedListEditor";
@@ -20,11 +14,10 @@ import SingleCollapsable from '../common/SingleCollapsable'
 import CollapsableElementEditor from './editors/CollapsableElementEditor'
 import NamesEditor from "./editors/NamesEditor";
 import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./ElementEditors";
-import SessionViewer from "./SessionViewer";
 
 const { Title } = Typography
 
-export function SessionInnerPopertiesEditor({session, updateSession}) {
+export function SessionInnerPropertiesEditor({session, updateSession}) {
     const {name, date, description} = session
     return <>
         <Row gutter={8}>
@@ -57,13 +50,13 @@ export function SessionInnerPopertiesEditor({session, updateSession}) {
         </Row>
     </>
 }
-SessionInnerPopertiesEditor.propTypes = {
+SessionInnerPropertiesEditor.propTypes = {
     session: PropTypes.instanceOf(Session).isRequired,
     updateSession: PropTypes.func.isRequired,
 }
 
 
-export function SingleSessionComponent({ session, updateSession, prevSession }) {
+export default function SessionEditor({ session, updateSession, prevSession }) {
     const { date, name, npcs, locations, scenes, encounters, names, clues, media } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
@@ -80,7 +73,7 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
         </Row>
         <Row>
             <Col span={12}>
-                <SessionInnerPopertiesEditor {...{session, updateSession}}/>
+                <SessionInnerPropertiesEditor {...{session, updateSession}}/>
             </Col>
             <Col span={12}>
                 <Space>
@@ -138,53 +131,9 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
         </Row>
     </div>
 }
-SingleSessionComponent.propTypes = {
+SessionEditor.propTypes = {
     session: PropTypes.instanceOf(Session).isRequired,
     prevSession: PropTypes.instanceOf(Session),
     updateSession: PropTypes.func
 }
 
-export default function SingleSessionEditor() { // TODO: move this to a separate file
-    const { currentUser } = useAuth()
-    const { campaignId, sessionId } = useParams()
-    
-    const [session, setSession] = useState()
-    const [prevSession, setPrevSession] = useState()
-    const [error, setError] = useState()
-
-    const getSessionRef = useCallback(() => doc(db,
-        'accounts', currentUser.email,
-        'campaigns', campaignId,
-        'sessions', sessionId
-    ).withConverter(Session.firestoreConvertor),
-    [currentUser, campaignId, sessionId]
-    )
-    const getAllSessionsRef = useCallback(() => collection(db,
-        'accounts', currentUser.email, 'campaigns', campaignId,'sessions')
-            .withConverter(Session.firestoreConvertor), 
-        [currentUser, campaignId])
-
-    useEffect(() => {
-        return onSnapshot(getSessionRef(),
-        doc => {
-            const retrieved_session = doc.data()
-            const q = query(getAllSessionsRef(), where("date", "<", retrieved_session.date.toJSDate()), orderBy("date", "desc"), limit(1))
-            getDocs(q).then(snapshot => !snapshot.empty && setPrevSession(snapshot.docs[0].data()))
-            setSession(retrieved_session)
-        },
-        e => setError(e))
-    }, [getSessionRef, getAllSessionsRef])
-    
-
-    if (error) return JSON.stringify(error)
-    if (!session) return <LoadingSpinner label="טוען" />
-
-    return <div style={{padding: "15px"}}>
-        <Routes>
-            <Route exact path="/" element={<SessionViewer session={session}/>} />
-            <Route path="/edit" element={<SingleSessionComponent session={session} prevSession={prevSession} updateSession={d => updateDoc(getSessionRef(), d)} />}/>
-        </Routes>
-        
-    </div>
-
-}
