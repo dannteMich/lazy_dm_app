@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import { doc, onSnapshot, updateDoc, query, orderBy, where, limit, collection, getDocs } from "@firebase/firestore";
 
-import { useParams } from "react-router";
+// import {  } from "react-router";
 import { DateTime } from "luxon";
 import { Button, Col, Row, Space, Typography } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useParams, Routes, Route } from "react-router-dom";
 
 import { db } from "../firebase/firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -20,6 +20,7 @@ import SingleCollapsable from '../common/SingleCollapsable'
 import CollapsableElementEditor from './editors/CollapsableElementEditor'
 import NamesEditor from "./editors/NamesEditor";
 import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./ElementEditors";
+import { SessionViewerComponent } from "./SessionViewer";
 
 const { Title } = Typography
 
@@ -83,8 +84,8 @@ export function SingleSessionComponent({ session, updateSession, prevSession }) 
             </Col>
             <Col span={12}>
                 <Space>
-                    <Link to="./view">
-                        <Button type="primary" size="large">צפיה</Button>
+                    <Link to="..">
+                        <Button type="primary" size="large">חזרה לצפיה</Button>
                     </Link>
                     <Link to="./../..">
                         <Button type="primary" size="large">חזרה לרשימת מפגשים</Button>
@@ -146,6 +147,7 @@ SingleSessionComponent.propTypes = {
 export default function SingleSessionEditor() {
     const { currentUser } = useAuth()
     const { campaignId, sessionId } = useParams()
+    
     const [session, setSession] = useState()
     const [prevSession, setPrevSession] = useState()
     const [error, setError] = useState()
@@ -178,7 +180,11 @@ export default function SingleSessionEditor() {
     if (!session) return <LoadingSpinner label="טוען" />
 
     return <div style={{padding: "15px"}}>
-        <SingleSessionComponent session={session} prevSession={prevSession} updateSession={d => updateDoc(getSessionRef(), d)} />
+        <Routes>
+            <Route exact path="/" element={<SessionViewerComponent session={session}/>} />
+            <Route path="/edit" element={<SingleSessionComponent session={session} prevSession={prevSession} updateSession={d => updateDoc(getSessionRef(), d)} />}/>
+        </Routes>
+        
     </div>
 
 }

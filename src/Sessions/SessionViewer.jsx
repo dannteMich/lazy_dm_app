@@ -62,7 +62,7 @@ export function SessionViewerComponent({session}) {
                 </Title>
             </Col>
             <Col span={12}>
-                <Link to="./..">חזרה לעריכה</Link>
+                <Link to="./edit">עריכה</Link>
             </Col>
         </Row>
         
