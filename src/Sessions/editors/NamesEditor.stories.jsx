@@ -3,7 +3,7 @@ import React from 'react';
 import NamesEditor from './NamesEditor';
 
 export default {
-  title: 'Sessions/Editors/NamesEditor',
+  title: 'Sessions/Special Editors/NamesEditor',
   component: NamesEditor,
   argTypes: {
     saveNames: {action: "new names"}

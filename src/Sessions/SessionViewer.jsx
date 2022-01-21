@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import { DateTime } from "luxon";
 
-import { Row, Col, Space, List, Typography } from 'antd'
+import { Row, Col, Space, Typography } from 'antd'
 
 import Session from "./session";
 import { SECTION_COLORS } from "../common/consts";
 import { Link } from "react-router-dom";
 import ImageGrid from "../common/ImageGrid";
 import { SessionPairDescription } from "./viewers/SessionPairDescription";
+import CluesView from "./viewers/CluesView";
 
 const {Title} = Typography
 
@@ -27,15 +28,6 @@ function process_names_to_name_descriptions(names) {
     })
 }
 
-function process_clues_to_node_list(clues) {
-    let res = []
-    clues.forEach(({category, items}) => {
-        res.push(<b>{category}</b>)
-        items.forEach(e => res.push(e))
-    })
-    return res
-
-}
 
 function parse_media_from_session(session) {
     return _.concat([],
@@ -47,7 +39,6 @@ function parse_media_from_session(session) {
 
 export default function SessionViewer({session}) {
     const names_data = process_names_to_name_descriptions(session.names)
-    const clues_data = process_clues_to_node_list(session.clues)
 
     return <Space direction="vertical" size={"middle"} >
         <Row gutter={16}>
@@ -93,16 +84,7 @@ export default function SessionViewer({session}) {
                 />
             </Col>
             <Col span={12}>
-                <List 
-                    header={<Title level={4}>רמזים ומידע</Title>}
-                    style={{backgroundColor: SECTION_COLORS.clues, borderRadius: "10px"}}
-                    size="small"    
-                    bordered
-                    dataSource={clues_data}
-                    renderItem={item => <List.Item>
-                        {item}
-                    </List.Item>}
-                />
+                <CluesView clues={session.clues} />
             </Col>
             <Col span={24}>
                 <ImageGrid media={parse_media_from_session(session)}/>

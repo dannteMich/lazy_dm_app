@@ -17,7 +17,7 @@ export function defaultValidationFunction(newData) {
 }
 
 export default function CollapsableElementEditor({
-    initialData=[], onSave, presetEntries=[], fields, header, 
+    initialData=[], onSave, presetEntries=[], fields, header, extra,
     validateDataFunction,
     addButtonCaption="הוספה", ghost=true, defaultActive=true, style
 }) {
@@ -64,8 +64,8 @@ export default function CollapsableElementEditor({
     ]
 
 
-    return <Collapse ghost={ghost} defaultActiveKey={defaultActive ? 0 : null}>
-        <Collapse.Panel header={header} style={{margin: PANEL_MARGIN, borderRadius: "4px", ...style}} >
+    return <Collapse ghost={ghost} defaultActiveKey={defaultActive ? 0 : null} collapsible="header">
+        <Collapse.Panel {...{header, extra}} style={{margin: PANEL_MARGIN, borderRadius: "4px", ...style}}>
             <ControlledTupleEditor data={data} onChange={setData} 
                 fields={controlled_tuple_fields} addButtonCaption={addButtonCaption} />
 
@@ -96,4 +96,5 @@ CollapsableElementEditor.propTypes ={
     defaultActive: PropTypes.bool,
     fields: fields_propTypes,
     validateDataFunction: PropTypes.func,
+    extra: PropTypes.node,
 }

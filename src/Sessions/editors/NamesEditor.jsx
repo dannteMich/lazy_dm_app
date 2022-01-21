@@ -47,6 +47,9 @@ export default function NamesEditor({names, saveNames}) {
                 flex: 1
             }
         ]}
+        extra={<a href="https://www.fantasynamegenerators.com/" target="_blank" rel='noreferrer'>
+            Fantasy Name Generator
+        </a>}
     />    
 }
 NamesEditor.propTypes = {

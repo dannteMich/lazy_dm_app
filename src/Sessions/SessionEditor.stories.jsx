@@ -2,11 +2,12 @@ import { DateTime } from 'luxon';
 import React from 'react';
 
 import Session from './session';
-import { SingleSessionComponent } from './SingleSessionEditor';
+import SessionEditor from './SessionEditor';
+
 
 export default {
-  title: 'Sessions/SingleSessionComponent',
-  component: SingleSessionComponent,
+  title: 'Sessions/SessionEditor',
+  component: SessionEditor,
   args: {},
   argTypes: {}
 }
@@ -14,7 +15,7 @@ export default {
 const Template = (args) => {
   const {date, ...rest} = args
 
-  return <SingleSessionComponent session={new Session(date, rest)} />
+  return <SessionEditor session={new Session(date, rest)} />
 };
 
 export const Basic = Template.bind({});
