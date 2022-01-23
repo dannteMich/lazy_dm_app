@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from 'prop-types'
 
-import _ from 'lodash'
+// import _ from 'lodash'  TODO: use or delete
 import {List, Typography, Checkbox} from 'antd'
 import { SECTION_COLORS } from "../../common/consts";
 
@@ -10,7 +10,7 @@ const {Title} = Typography
 
 export default function CluesView({clues}) {
 
-    const [cluesState, setCluesState] = useState(clues)
+    // const [cluesState, setCluesState] = useState(clues) TODO: use or delete
 
     function process_clues_to_node_list(clues) {
         let res = []
@@ -35,7 +35,7 @@ export default function CluesView({clues}) {
         style={{backgroundColor: SECTION_COLORS.clues, borderRadius: "10px"}}
         size="small"    
         bordered
-        dataSource={process_clues_to_node_list(cluesState)}
+        dataSource={process_clues_to_node_list(clues)} // TODO: should use cluesState
         renderItem={item => <List.Item>
             {item}
         </List.Item>}
