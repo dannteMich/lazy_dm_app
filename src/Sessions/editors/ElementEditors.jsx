@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from 'prop-types'
 
 import _ from 'lodash'
-import { SECTION_COLORS } from "../common/consts";
+import { SECTION_COLORS } from "../../common/consts";
 
-import CollapsableElementEditor from "./editors/CollapsableElementEditor";
+import CollapsableElementEditor from "./CollapsableElementEditor";
 
 const NAME_DESC_MEDIA_PROPTYPE = PropTypes.shape({
     name: PropTypes.string.isRequired,

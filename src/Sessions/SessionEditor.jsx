@@ -8,12 +8,11 @@ import { Link } from "react-router-dom";
 import Session from "./session";
 import UpdateDate from '../common/UpdateDate'
 import UpdateOrEmpty from "../common/UpdateOrEmpty";
-import CategorizedListEditor from "../common/CategorizedListEditor";
 import {SECTION_COLORS} from '../common/consts'
-import SingleCollapsable from '../common/SingleCollapsable'
 import CollapsableElementEditor from './editors/CollapsableElementEditor'
 import NamesEditor from "./editors/NamesEditor";
-import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./ElementEditors";
+import CluesEditor from "./editors/CluesEditor";
+import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./editors/ElementEditors";
 
 const { Title } = Typography
 
@@ -108,12 +107,7 @@ export default function SessionEditor({ session, updateSession, prevSession }) {
         </Row>
         <Row>
             <Col span={24}>
-            <SingleCollapsable ghost header={<b>רמזים ומידע</b>} style={{backgroundColor: SECTION_COLORS.clues, border: "solid 1px #c0c0c0"}}>
-                <CategorizedListEditor 
-                    initialData={clues}
-                    onDataUpdate={clues => updateSession({clues})}
-                />    
-            </SingleCollapsable>
+                <CluesEditor clues={clues} updateClues={clues => updateSession({clues})}/>
             </Col>
         </Row>
         <Row gutter={8}>
