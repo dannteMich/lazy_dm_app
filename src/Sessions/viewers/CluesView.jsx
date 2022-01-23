@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types'
 
+import _ from 'lodash'
 import {List, Typography, Checkbox} from 'antd'
 import { SECTION_COLORS } from "../../common/consts";
 

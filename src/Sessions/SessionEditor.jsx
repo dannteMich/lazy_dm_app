@@ -80,7 +80,7 @@ export default function SessionEditor({ session, updateSession, prevSession }) {
                     <Link to="..">
                         <Button type="primary" size="large">חזרה לצפיה</Button>
                     </Link>
-                    <Link to="./../..">
+                    <Link to="./../../..">
                         <Button type="primary" size="large">חזרה לרשימת מפגשים</Button>
                     </Link>
                 </Space>
