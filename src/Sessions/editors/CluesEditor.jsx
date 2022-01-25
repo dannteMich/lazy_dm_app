@@ -75,8 +75,6 @@ CluesEditor.propTypes = {
                 used: PropTypes.bool.isRequired
             })
         ),
-    })),
-    
-    
+    })),  
     updateClues: PropTypes.func.isRequired
 }

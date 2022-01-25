@@ -7,13 +7,14 @@ import { clues_data_sample } from '../test_data_samples';
 export default {
   title: 'Sessions/Special views/CluesView',
   component: CluesView,
-  args: {},
+  argTypes: {
+      updateClues: {action: "new clues"}
+  },
 }
 
-// TODO: this is not working
 const Template = (args) => <CluesView {...args} />;
 
 export const Story = Template.bind({});
 Story.args = {
-    clues: clues_data_sample
+    initialClues: clues_data_sample
 };
