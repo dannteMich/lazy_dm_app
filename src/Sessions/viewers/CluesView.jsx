@@ -14,17 +14,18 @@ export default function CluesView({clues}) {
 
     function process_clues_to_node_list(clues) {
         let res = []
-        clues.forEach(({category, items, used}) => {
+        clues.forEach(({category, items}) => {
             
-            const mapped_items = items ? items.map(i => <Checkbox>
-                {i}
-            </Checkbox>) : []
+
+            const unused_items = items.filter(i => !i.used).map(i => <Checkbox>
+                {i.text}
+            </Checkbox>)
             
-            const mapped_used = used ? used.map(u => <Checkbox checked>
-                <span style={{color: "grey", textDecoration: "line-through"}}>{u}</span>
-            </Checkbox>) : []
+            const mapped_used = items.filter(i => i.used).map(u => <Checkbox checked>
+                <span style={{color: "grey", textDecoration: "line-through"}}>{u.text}</span>
+            </Checkbox>)
             
-            res = res.concat(<b>{category}</b>,mapped_items,mapped_used)
+            res = res.concat(<b>{category}</b>,unused_items,mapped_used)
             })
         return res
     
