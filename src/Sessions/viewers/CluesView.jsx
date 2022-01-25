@@ -16,13 +16,13 @@ const panel_style = {
     backgroundColor: SECTION_COLORS.clues, 
 }
 
-export default function CluesView({initialClues, updateClues}) {
+export default function CluesView({clues, updateClues}) {
 
-    const [cluesState, setCluesState] = useState(initialClues)
+    const [cluesState, setCluesState] = useState(clues)
 
     function toggle_clue(category_index, item_index) {
         const newClues = cluesState.slice()
-        newClues[category_index] = Object.assign({}, newClues[category_index].items)
+        newClues[category_index] = Object.assign({}, newClues[category_index], {items: newClues[category_index].items})
         newClues[category_index].items = cluesState[category_index].items.slice()
         const item = newClues[category_index].items[item_index]
 
@@ -53,7 +53,7 @@ export default function CluesView({initialClues, updateClues}) {
         <div style={{display: "flex"}}>
             <Title level={4} style={{flex: 1}}>רמזים ומידע</Title>
             <Button size="small" style={{flex: 0, margin: 6}} 
-                disabled={_.isEqual(cluesState, initialClues)}
+                disabled={_.isEqual(cluesState, clues)}
             >
                 Save
             </Button>
@@ -69,7 +69,7 @@ export default function CluesView({initialClues, updateClues}) {
     </div>
 }
 CluesView.propTypes = {
-    initialClues: PropTypes.arrayOf(PropTypes.shape({
+    clues: PropTypes.arrayOf(PropTypes.shape({
         category: PropTypes.string.isRequired,
         items: PropTypes.arrayOf(
             PropTypes.shape({

@@ -16,5 +16,5 @@ const Template = (args) => <CluesView {...args} />;
 
 export const Story = Template.bind({});
 Story.args = {
-    initialClues: clues_data_sample
+    clues: clues_data_sample
 };
