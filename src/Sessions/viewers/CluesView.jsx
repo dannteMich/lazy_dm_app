@@ -55,7 +55,7 @@ export default function CluesView({clues, updateClues}) {
             <Button size="small" style={{flex: 0, margin: 6}} 
                 disabled={_.isEqual(cluesState, clues)}
             >
-                Save
+                שמירה
             </Button>
         </div>
 
