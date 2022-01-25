@@ -52,11 +52,12 @@ export default function CluesView({clues, updateClues}) {
     return <div style={panel_style}>
         <div style={{display: "flex"}}>
             <Title level={4} style={{flex: 1}}>רמזים ומידע</Title>
-            <Button size="small" style={{flex: 0, margin: 6}} 
+            {updateClues && <Button size="small" style={{flex: 0, margin: 6}} 
                 disabled={_.isEqual(cluesState, clues)}
+                onClick={() => updateClues(cluesState)}
             >
                 שמירה
-            </Button>
+            </Button>}
         </div>
 
         <List             

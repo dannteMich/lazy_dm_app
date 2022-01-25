@@ -14,7 +14,13 @@ export default {
 
 const Template = (args) => <CluesView {...args} />;
 
-export const Story = Template.bind({});
-Story.args = {
+export const WithUpdateCallback = Template.bind({});
+WithUpdateCallback.args = {
     clues: clues_data_sample
+};
+
+export const WitouthUpdateCallback = Template.bind({});
+WitouthUpdateCallback.args = {
+    clues: clues_data_sample,
+    updateClues: null,
 };

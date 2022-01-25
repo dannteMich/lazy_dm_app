@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 
 import _ from 'lodash'
 import { DateTime } from "luxon";
-
-import { Row, Col, Space, Typography } from 'antd'
+import { Row, Col, Space, Typography, Button } from 'antd'
 
 import Session from "./session";
 import { SECTION_COLORS } from "../common/consts";
@@ -37,7 +36,7 @@ function parse_media_from_session(session) {
     )
 }
 
-export default function SessionViewer({session}) {
+export default function SessionViewer({session, updateClues}) {
     const names_data = process_names_to_name_descriptions(session.names)
 
     return <Space direction="vertical" size={"middle"} >
@@ -48,7 +47,14 @@ export default function SessionViewer({session}) {
                 </Title>
             </Col>
             <Col span={12}>
-                <Link to="./edit">עריכה</Link>
+                <Space>
+                    <Link to="./edit">
+                        <Button type="primary">עריכה</Button>
+                    </Link>
+                    <Link to="./../..">
+                        <Button type="primary">חזרה לרשימת מפגשים</Button>
+                    </Link>
+                </Space>
             </Col>
         </Row>
         
@@ -84,7 +90,7 @@ export default function SessionViewer({session}) {
                 />
             </Col>
             <Col span={12}>
-                <CluesView clues={session.clues} />
+                <CluesView clues={session.clues} updateClues={updateClues}/>
             </Col>
             <Col span={24}>
                 <ImageGrid media={parse_media_from_session(session)}/>

@@ -48,10 +48,12 @@ export default function SingleSessionContainer() {
     if (!session)
         return <LoadingSpinner label="טוען" />;
 
+    const update_session = d => updateDoc(getSessionRef(), d)
+
     return <div style={{ padding: "15px" }}>
         <Routes>
-            <Route exact path="/" element={<SessionViewer session={session} />} />
-            <Route path="/edit" element={<SessionEditor session={session} prevSession={prevSession} updateSession={d => updateDoc(getSessionRef(), d)} />} />
+            <Route exact path="/" element={<SessionViewer session={session} updateClues={clues => update_session({clues})}/>} />
+            <Route path="/edit" element={<SessionEditor session={session} prevSession={prevSession} updateSession={update_session} />} />
         </Routes>
 
     </div>;

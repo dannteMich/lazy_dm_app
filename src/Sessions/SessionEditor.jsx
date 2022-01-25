@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types'
 
 import { DateTime } from "luxon";
-import { Button, Col, Row, Space, Typography } from "antd";
+import { Button, Col, Row, Typography } from "antd";
 import { Link } from "react-router-dom";
 
 import Session from "./session";
@@ -55,6 +55,27 @@ SessionInnerPropertiesEditor.propTypes = {
 }
 
 
+export function ButtonRow() {
+    return <Row gutter={16}>
+        <Col>
+            <Link to="..">
+                <Button type="primary" size="large">חזרה לצפיה</Button>
+            </Link>
+        </Col>
+        <Col>
+            <Link to="./../../..">
+                <Button type="primary" size="large">חזרה לרשימת מפגשים</Button>
+            </Link>
+        </Col>
+        <Col flex="1" />
+        {/* <Col> TODO: allow deletion
+            <Button size="large" style={{backgroundColor: "red", color: "white"}}>
+                מחיקת סשן
+            </Button>
+        </Col> */}
+    </Row>
+}
+
 export default function SessionEditor({ session, updateSession, prevSession }) {
     const { date, name, npcs, locations, scenes, encounters, names, clues, media } = session
 
@@ -75,14 +96,7 @@ export default function SessionEditor({ session, updateSession, prevSession }) {
                 <SessionInnerPropertiesEditor {...{session, updateSession}}/>
             </Col>
             <Col span={12}>
-                <Space>
-                    <Link to="..">
-                        <Button type="primary" size="large">חזרה לצפיה</Button>
-                    </Link>
-                    <Link to="./../../..">
-                        <Button type="primary" size="large">חזרה לרשימת מפגשים</Button>
-                    </Link>
-                </Space>
+                <ButtonRow />
             </Col>
         </Row>
         <br/>
