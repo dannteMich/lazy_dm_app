@@ -14,8 +14,8 @@ export default {
 
 const Template = (args) => <CluesEditor {...args} />;
 
-export const Story = Template.bind({});
-Story.args = {
+export const WithMixedData = Template.bind({});
+WithMixedData.args = {
     clues: clues_data_sample
 };
 
