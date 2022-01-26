@@ -121,16 +121,17 @@ export default function CategorizedListEditor({
             </Col>
         </Row>
         
-        <Row>
+        <Row gutter={16}>
         <Col flex="0">
-          <Space>
+          
           <Button type="primary" onClick={tryToUpdate} disabled={buttons_disabled}>
             שמירת שינויים
           </Button>
+          </Col>
+          <Col>
           <Button onClick={() => setData(initialData)} disabled={buttons_disabled}>
               ביטול שינויים
             </Button>
-          </Space>
         </Col>
       </Row>
     </Space>
