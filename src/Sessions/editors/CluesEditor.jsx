@@ -39,10 +39,7 @@ export function parse_clues_to_used_and_unused(clues) {
 }
 
 export default function CluesEditor({clues=[], updateClues}) {
-
-    
-    const {unused_clues} = parse_clues_to_used_and_unused(clues)
-    // TODO: need to add the used ones before continuing
+    const {unused_clues, used_clues} = parse_clues_to_used_and_unused(clues)
     
     const saveClues = clues => {
         const new_clues = clues.map(({category, items}) => {
@@ -50,14 +47,19 @@ export default function CluesEditor({clues=[], updateClues}) {
                 category,
                 items: items.map(i => ({text: i, used: false}))
             }
-            
             return clues_group
         })
-        
+        used_clues.forEach(({category, items}) => {
+            let category_index = _.findIndex(new_clues, c => c.category === category)
+            if (category_index === -1) {
+                new_clues.push({category, items: []})
+                category_index = new_clues.length - 1
+            }
+            items.forEach(text => new_clues[category_index].items.push({text, used: true}))
+        })
         
         updateClues(new_clues)
     }
-    
     
     return <SingleCollapsable ghost header={<b>רמזים ומידע</b>} style={{backgroundColor: SECTION_COLORS.clues, border: "solid 1px #c0c0c0"}}>
         <CategorizedListEditor 
