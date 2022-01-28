@@ -9,18 +9,20 @@ export default {
   title: 'Sessions/SessionEditor',
   component: SessionEditor,
   args: {},
-  argTypes: {}
+  argTypes: {
+    deleteSession: {action: "delete session"}
+  }
 }
 
 const Template = (args) => {
-  const {date, ...rest} = args
-
-  return <SessionEditor session={new Session(date, rest)} />
+  const {date, deleteSession, updateSession, ...rest} = args
+  const session = new Session(date, rest)
+  return <SessionEditor {...{session, updateSession, deleteSession}} />
 };
 
 export const Basic = Template.bind({});
 Basic.args = {
     name: "שם של מפגש",
     date: DateTime.now(),
-    description: "תיאור של מפגש"
+    description: "תיאור של מפגש",
 };

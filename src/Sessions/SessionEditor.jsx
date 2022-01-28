@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types'
 
 import { DateTime } from "luxon";
@@ -13,6 +13,7 @@ import CollapsableElementEditor from './editors/CollapsableElementEditor'
 import NamesEditor from "./editors/NamesEditor";
 import CluesEditor from "./editors/CluesEditor";
 import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./editors/ElementEditors";
+import Modal from "antd/lib/modal/Modal";
 
 const { Title } = Typography
 
@@ -55,8 +56,20 @@ SessionInnerPropertiesEditor.propTypes = {
 }
 
 
-export function ButtonRow() {
-    return <Row gutter={16}>
+export function ButtonRow({onDelete}) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const showModal = () => setModalVisible(true)
+    const hideModal = () => setModalVisible(false)
+    // TODO: function to delete and navigate to session list
+
+    return <>
+    <Modal title="מחיקת הפגישה" visible={modalVisible} 
+        onCancel={hideModal}
+        onOk={onDelete}
+    >
+        <Title level={3}>בטוח שאתה שרוצה למחוק?</Title>
+    </Modal>
+    <Row gutter={16}>
         <Col>
             <Link to="..">
                 <Button type="primary" size="large">חזרה לצפיה</Button>
@@ -68,15 +81,19 @@ export function ButtonRow() {
             </Link>
         </Col>
         <Col flex="1" />
-        {/* <Col> TODO: allow deletion
-            <Button size="large" style={{backgroundColor: "red", color: "white"}}>
+        {onDelete && <Col> 
+            <Button size="large" style={{backgroundColor: "red", color: "white"}} onClick={showModal}>
                 מחיקת סשן
             </Button>
-        </Col> */}
+        </Col>}
     </Row>
+    </>
+}
+ButtonRow.propTypes = {
+    onDelete: PropTypes.func,
 }
 
-export default function SessionEditor({ session, updateSession, prevSession }) {
+export default function SessionEditor({ session, updateSession, prevSession, deleteSession }) {
     const { date, name, npcs, locations, scenes, encounters, names, clues, media } = session
 
     const date_in_format = date.toLocaleString(DateTime.DATE_SHORT)
@@ -96,7 +113,7 @@ export default function SessionEditor({ session, updateSession, prevSession }) {
                 <SessionInnerPropertiesEditor {...{session, updateSession}}/>
             </Col>
             <Col span={12}>
-                <ButtonRow />
+                <ButtonRow onDelete={deleteSession}/>
             </Col>
         </Row>
         <br/>
@@ -142,6 +159,7 @@ export default function SessionEditor({ session, updateSession, prevSession }) {
 SessionEditor.propTypes = {
     session: PropTypes.instanceOf(Session).isRequired,
     prevSession: PropTypes.instanceOf(Session),
-    updateSession: PropTypes.func
+    updateSession: PropTypes.func,
+    deleteSession: PropTypes.func,
 }
 
