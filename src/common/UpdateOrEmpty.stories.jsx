@@ -28,3 +28,24 @@ WithNull.args = {
     emptyLabel: "כרגע אין תיאור",
     createLabel: "הוסף תיאור",
 };
+
+export const AutoSizeBool = Template.bind({});
+AutoSizeBool.args = {
+    label: "תיאור",
+    value: "ערך כלשהו",
+    emptyLabel: "כרגע אין תיאור",
+    createLabel: "הוסף תיאור",
+    autoSize: false
+};
+
+export const AutoSizeObj = Template.bind({});
+AutoSizeObj.args = {
+    label: "תיאור",
+    value: "ערך כלשהו",
+    emptyLabel: "כרגע אין תיאור",
+    createLabel: "הוסף תיאור",
+    autoSize: {
+        minRows: 2,
+        maxRows: 10,
+    }
+};

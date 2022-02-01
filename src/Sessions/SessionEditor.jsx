@@ -39,13 +39,14 @@ export function SessionInnerPropertiesEditor({session, updateSession}) {
             </Col>
         </Row>
         <Row gutter={8}>
-            <Col flex="0">תיאור:</Col>
+            <Col flex="0">סיכום:</Col>
             <Col flex="1">
-                <UpdateOrEmpty 
+                <UpdateOrEmpty
+                    autoSize={false}
                     value={description} 
                     updateValue={d => updateSession({description: d})}
-                    createLabel="צור תיאור"
-                    emptyLabel="כרגע אין תיאור"
+                    createLabel="כתיבת סיכום"
+                    emptyLabel="כרגע אין סיכום"
                 />
             </Col>
         </Row>
