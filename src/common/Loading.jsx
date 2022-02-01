@@ -26,5 +26,5 @@ LoadingSpinner.propTypes = {
     label: PropTypes.string,
     style: PropTypes.object,
     aboveNode: PropTypes.node,
-    BellowNode: PropTypes.node,
+    bellowNode: PropTypes.node,
 }

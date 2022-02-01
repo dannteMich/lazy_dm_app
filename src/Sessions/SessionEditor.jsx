@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { DateTime } from "luxon";
 import { Button, Col, Row, Typography } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Session from "./session";
 import UpdateDate from '../common/UpdateDate'
@@ -14,6 +14,7 @@ import NamesEditor from "./editors/NamesEditor";
 import CluesEditor from "./editors/CluesEditor";
 import { ExtraMediaEditor, LocationsEditor, NpcsEditor, RnadomEncountersEditor } from "./editors/ElementEditors";
 import Modal from "antd/lib/modal/Modal";
+import { LoadingSpinner } from "../common/Loading";
 
 const { Title } = Typography
 
@@ -56,11 +57,21 @@ SessionInnerPropertiesEditor.propTypes = {
 }
 
 
-export function ButtonRow({onDelete}) {
+export function ButtonRow({deleteSession}) {
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalLoading, setModalLoading] = useState(false) 
     const showModal = () => setModalVisible(true)
     const hideModal = () => setModalVisible(false)
-    // TODO: function to delete and navigate to session list
+    const navigate = useNavigate()
+
+    const onDelete = () => {
+        setModalLoading(true)
+        navigate('./../../../')
+        deleteSession().catch(e => {
+            alert(`An error accured: ${e}`)
+            setModalLoading(false)
+        })
+    }
 
     return <>
     <Modal title="מחיקת הפגישה" visible={modalVisible} 
@@ -68,6 +79,7 @@ export function ButtonRow({onDelete}) {
         onOk={onDelete}
     >
         <Title level={3}>בטוח שאתה שרוצה למחוק?</Title>
+        {modalLoading && <LoadingSpinner bellowNode="מוחק...."/>}
     </Modal>
     <Row gutter={16}>
         <Col>
@@ -81,7 +93,7 @@ export function ButtonRow({onDelete}) {
             </Link>
         </Col>
         <Col flex="1" />
-        {onDelete && <Col> 
+        {deleteSession && <Col> 
             <Button size="large" style={{backgroundColor: "red", color: "white"}} onClick={showModal}>
                 מחיקת סשן
             </Button>
@@ -90,7 +102,7 @@ export function ButtonRow({onDelete}) {
     </>
 }
 ButtonRow.propTypes = {
-    onDelete: PropTypes.func,
+    deleteSession: PropTypes.func,
 }
 
 export default function SessionEditor({ session, updateSession, prevSession, deleteSession }) {
@@ -113,7 +125,7 @@ export default function SessionEditor({ session, updateSession, prevSession, del
                 <SessionInnerPropertiesEditor {...{session, updateSession}}/>
             </Col>
             <Col span={12}>
-                <ButtonRow onDelete={deleteSession}/>
+                <ButtonRow deleteSession={deleteSession}/>
             </Col>
         </Row>
         <br/>
