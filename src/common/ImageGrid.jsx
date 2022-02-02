@@ -6,7 +6,7 @@ import {Row, Col, Card} from 'antd'
 import { useState } from 'react'
 import Modal from 'antd/lib/modal/Modal'
 
-const MEDIA_ENTRY_PROPTYPE = PropTypes.oneOfType([
+const MEDIA_ENTRY_PROPTYPE = PropTypes.oneOfType([ // TODO: should be only the shape
     PropTypes.string,
     PropTypes.shape({
         url: PropTypes.string.isRequired,
