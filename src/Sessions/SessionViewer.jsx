@@ -29,9 +29,10 @@ function process_names_to_name_descriptions(names) {
 
 
 function parse_media_from_session(session) {
+    
     return _.concat([],
-        session.npcs.filter(x => _.has(x, 'mediaUrl')).map(x => ({title: x.name, url: x.mediaUrl})),
-        session.locations.filter(x => _.has(x, 'mediaUrl')).map(x => ({title: x.name, url: x.mediaUrl})),
+        session.npcs.filter(x => _.has(x, 'mediaUrl') && !_.isEmpty(x.mediaUrl)).map(x => ({title: x.name, url: x.mediaUrl})),
+        session.locations.filter(x => _.has(x, 'mediaUrl') && !_.isEmpty(x.mediaUrl)).map(x => ({title: x.name, url: x.mediaUrl})),
         session.media,
     )
 }
