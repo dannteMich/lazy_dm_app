@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {SECTION_COLORS} from '../../common/consts'
 import SingleCollapsable from '../../common/SingleCollapsable'
-import CategorizedListEditor from "../../common/CategorizedListEditor";
+import CategorizedListEditor from "../../common/CategorisedListEditor/CategorizedListEditor";
 
 /**
  * Chages the category_list IN PLACE and adds the item to the right category (creates it if needed)
