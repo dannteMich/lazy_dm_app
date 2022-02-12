@@ -8,7 +8,7 @@ import { DESCRIPTION_STYLE } from "../SessionViewer";
 
 const {Title} = Typography
 
-export function SessionPairDescription({ title, data, style = {} }) {
+export default function SessionPairDescription({ title, data, style = {} }) {
 
     const title_element = _.isString(title) ? <Title level={4}>{title}</Title> : title;
 

@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types'
 
 import {Space, Input, Col, Row, Button} from 'antd'
-import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
+import MinusButtton from "./MinusButton";
 
 const DEFAULT_MAX_LENGTH = 240
 
@@ -57,11 +58,7 @@ export default function ControlledTupleEditor({
 
     const linesOfData = data.map((d, i) => <Row key={i} gutter={16}>
         {allowDeletion && <Col flex="0">
-            <Button
-            type="text" tabIndex="-1"
-            icon={<MinusCircleOutlined />}
-            onClick={() => deleteEntry(i)}
-            />
+            <MinusButtton onClick={() => deleteEntry(i)}/>
         </Col>}
 
         {fields.map((f, j) => <Col key={f.key} flex={f.flex || null}>

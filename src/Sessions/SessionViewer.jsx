@@ -9,7 +9,7 @@ import Session from "./session";
 import { SECTION_COLORS } from "../common/consts";
 import { Link } from "react-router-dom";
 import ImageGrid from "../common/ImageGrid";
-import { SessionPairDescription } from "./viewers/SessionPairDescription";
+import SessionPairDescription from "./viewers/SessionPairDescription";
 import CluesView from "./viewers/CluesView";
 
 const {Title} = Typography

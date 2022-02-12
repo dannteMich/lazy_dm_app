@@ -54,6 +54,7 @@ export function LocationsEditor({locations, updateLocations, prevLocation}) {
                 key: "description",
                 flex: 1,
                 placeholder: "תיאור",
+                maxLength: 500,
             }, {
                 key: "mediaUrl",
                 placeholder: "קישור לתמונה",
