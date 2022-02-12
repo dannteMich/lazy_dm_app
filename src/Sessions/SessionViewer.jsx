@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import ImageGrid from "../common/ImageGrid";
 import SessionPairDescription from "./viewers/SessionPairDescription";
 import CluesView from "./viewers/CluesView";
+import LocationsView from "./viewers/LocationsView";
 
 const {Title} = Typography
 
@@ -67,10 +68,7 @@ export default function SessionViewer({session, updateClues}) {
                 />
             </Col>
             <Col span={12}>
-                <SessionPairDescription 
-                    title="מקומות" data={session.locations} 
-                    style={{backgroundColor: SECTION_COLORS.locations}}
-                />
+                <LocationsView locations={session.locations} />
             </Col>
             <Col span={12}>
                 <SessionPairDescription 
